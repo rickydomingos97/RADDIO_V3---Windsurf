@@ -3143,6 +3143,19 @@
             </select>
           </div>
           <div class="form-row" style="margin:0">
+            <label class="form-label">Categoria</label>
+            <select class="form-input" id="relCategoria">
+              <option value="">Todas as Categorias</option>
+              <option value="Empresas Vigentes">Empresas Vigentes</option>
+              <option value="Terceirizados">Terceirizados</option>
+              <option value="Permutas">Permutas</option>
+              <option value="Funcionários">Funcionários</option>
+              <option value="Infraestrutura">Infraestrutura</option>
+              <option value="Despesas Fixas">Despesas Fixas</option>
+              <option value="Despesas Extras">Despesas Extras</option>
+            </select>
+          </div>
+          <div class="form-row" style="margin:0">
             <label class="form-label">Ano</label>
             <select class="form-input" id="relAno">
               <option>2026</option>
@@ -6829,31 +6842,41 @@ function populateAllSelects() {
     // ═══════════════════════════════════════════════
     function gerarRelatorio() {
       const radioF = document.getElementById('relRadio').value || null;
+      const categoriaF = document.getElementById('relCategoria').value || null;
       const ano = document.getElementById('relAno').value;
       const mi = parseInt(document.getElementById('relMesIni').value);
       const mf = parseInt(document.getElementById('relMesFim').value);
       const mesRange = MESES.slice(Math.min(mi, mf), Math.max(mi, mf) + 1);
 
-      const ent = getLancamentos({ tipo: 'entrada', radio: radioF, ano }).filter(l => mesRange.includes(l.mes));
-      const des = getLancamentos({ tipo: 'despesa', radio: radioF, ano }).filter(l => mesRange.includes(l.mes));
+      // Filtrar por categoria se selecionada
+      let ent = getLancamentos({ tipo: 'entrada', radio: radioF, ano }).filter(l => mesRange.includes(l.mes));
+      let des = getLancamentos({ tipo: 'despesa', radio: radioF, ano }).filter(l => mesRange.includes(l.mes));
+      
+      if (categoriaF) {
+        ent = ent.filter(l => l.cat === categoriaF);
+        des = des.filter(l => l.cat === categoriaF);
+      }
+      
       const totalEnt = ent.reduce((s, l) => s + l.valor, 0);
       const totalDes = des.reduce((s, l) => s + l.valor, 0);
       const saldo = totalEnt - totalDes;
 
       const radioNome = radioF ? getRadioNome(radioF) : 'Rede Completa';
+      const categoriaNome = categoriaF ? categoriaF : 'Todas as Categorias';
 
       document.getElementById('relOutput').innerHTML = `
     <div style="padding:14px 18px;background:var(--accent-lt);border:1px solid var(--accent-md);border-radius:var(--radius-sm);margin-bottom:18px;display:flex;align-items:center;gap:10px">
       <span><i class="ph ph-clipboard-text" style="font-size:24px;color:var(--accent)"></i></span>
       <div>
-        <div style="font-weight:800;font-size:14px">${radioNome} · ${mesRange[0]} – ${mesRange[mesRange.length - 1]} · ${ano}</div>
+        <div style="font-weight:800;font-size:14px">${radioNome} · ${categoriaNome} · ${mesRange[0]} – ${mesRange[mesRange.length - 1]} · ${ano}</div>
         <div style="font-size:12px;color:var(--muted)">Relatório gerado em ${new Date().toLocaleDateString('pt-BR')}</div>
       </div>
     </div>
     ${summaryBox([
         { label: 'Período', val: mesRange[0] + ' – ' + mesRange[mesRange.length - 1], color: 'var(--accent)' },
+        { label: 'Categoria', val: categoriaNome, color: 'var(--accent)' },
         { label: 'Entradas', val: fmt(totalEnt), color: 'var(--green)' },
-        { label: 'despesas', val: fmt(totalDes), color: 'var(--red)' },
+        { label: 'Despesas', val: fmt(totalDes), color: 'var(--red)' },
         { label: 'Saldo', val: fmt(saldo), color: saldo >= 0 ? 'var(--green)' : 'var(--red)' },
       ])}
     ${ent.length ? `
@@ -6871,7 +6894,13 @@ function populateAllSelects() {
         <thead><tr><th>Descrição</th><th>Emissora</th><th>Categoria</th><th>Mês</th><th>Valor</th></tr></thead>
         <tbody>${des.map(l => `<tr><td class="td-name">${l.desc}</td><td style="font-size:12px;color:var(--muted)">${getRadioNome(l.radio)}</td><td><span class="chip chip-red">${l.cat}</span></td><td class="td-mono">${l.mes}</td><td class="td-mono" style="color:var(--red);font-weight:700">-${fmt(l.valor)}</td></tr>`).join('')}</tbody>
       </table></div>
-    </div>`: ''}`;
+    </div>`: ''}
+    ${!ent.length && !des.length ? `
+    <div class="empty-state">
+      <span class="es-icon"><i class="ph ph-clipboard-text"></i></span>
+      <h3>Nenhum lançamento encontrado</h3>
+      <p>Não há lançamentos para os filtros selecionados</p>
+    </div>` : ''}`;
       showToast('Relatório gerado!', 'ok');
     }
 
@@ -6880,15 +6909,27 @@ function populateAllSelects() {
     // ═══════════════════════════════════════════════
     function gerarRelatorioImpressao() {
       const radioF = document.getElementById('relRadio').value || null;
+      const categoriaF = document.getElementById('relCategoria').value || null;
       const ano = document.getElementById('relAno').value;
       const mi = parseInt(document.getElementById('relMesIni').value);
       const mf = parseInt(document.getElementById('relMesFim').value);
       const mesRange = MESES.slice(Math.min(mi, mf), Math.max(mi, mf) + 1);
 
-      const ent = getLancamentos({ tipo: 'entrada', radio: radioF, ano }).filter(l => mesRange.includes(l.mes));
+      // Filtrar por categoria se selecionada
+      let ent = getLancamentos({ tipo: 'entrada', radio: radioF, ano }).filter(l => mesRange.includes(l.mes));
+      let des = getLancamentos({ tipo: 'despesa', radio: radioF, ano }).filter(l => mesRange.includes(l.mes));
+      
+      if (categoriaF) {
+        ent = ent.filter(l => l.cat === categoriaF);
+        des = des.filter(l => l.cat === categoriaF);
+      }
+      
       const totalEnt = ent.reduce((s, l) => s + l.valor, 0);
+      const totalDes = des.reduce((s, l) => s + l.valor, 0);
+      const saldo = totalEnt - totalDes;
 
       const radioNome = radioF ? getRadioNome(radioF) : 'Rede Completa';
+      const categoriaNome = categoriaF ? categoriaF : 'Todas as Categorias';
       const dataGeracao = new Date().toLocaleDateString('pt-BR');
       const horaGeracao = new Date().toLocaleTimeString('pt-BR');
 
