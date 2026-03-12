@@ -5908,7 +5908,17 @@ function populateAllSelects() {
     </div>`).join('') : '<div class="empty-state"><span class="es-icon"><i class="ph ph-tray"></i></span><h3>Sem dados</h3></div>';
 
       // Recent transactions
-      const recent = [...data].sort(() => Math.random() - .5).slice(0, 8);
+      const recent = [...data].sort((a, b) => {
+        // Mapeamento de nomes de meses para números
+        const MESES_MAP = {
+          'Janeiro': 1, 'Fevereiro': 2, 'Março': 3, 'Abril': 4, 'Maio': 5, 'Junho': 6,
+          'Julho': 7, 'Agosto': 8, 'Setembro': 9, 'Outubro': 10, 'Novembro': 11, 'Dezembro': 12
+        };
+        // Criar data completa para ordenação correta
+        const dateA = new Date(`${a.ano}-${MESES_MAP[a.mes]}-01`);
+        const dateB = new Date(`${b.ano}-${MESES_MAP[b.mes]}-01`);
+        return dateB - dateA; // Mais recente primeiro
+      }).slice(0, 8);
       document.getElementById('recentTbody').innerHTML = recent.map(l => `
     <tr>
       <td class="td-name">${l.desc}</td>
