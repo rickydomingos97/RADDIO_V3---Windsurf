@@ -3099,7 +3099,7 @@
           <table>
             <thead>
               <tr>
-                <th>Cliente</th>
+                <th>Empresa</th>
                 <th>Emissora</th>
                 <th>Agente</th>
                 <th>Mês</th>
@@ -4731,6 +4731,23 @@
           <input class="form-input" id="lancObs" placeholder="Opcional">
         </div>
         <button class="btn btn-primary" style="width:100%" onclick="salvarLancamento()">Salvar Lançamento</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+     MODAL: DETALHES CLIENTE TERCEIRIZADO
+     ══════════════════════════════════════════ -->
+  <div class="modal-overlay" id="modalDetalhesTerceirizado" role="dialog" aria-modal="true" aria-labelledby="modalDetalhesTerceirizado-title">
+    <div class="modal" style="max-width:680px">
+      <div class="modal-head">
+        <div class="modal-title" id="modalDetalhesTerceirizado-title">Detalhes do Cliente</div>
+        <button class="modal-close" onclick="closeModal('modalDetalhesTerceirizado')" aria-label="Fechar">
+          <i class="ph ph-x" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="modal-body" id="modalDetalhesTerceirizadoBody">
+        <!-- Conteúdo será preenchido dinamicamente -->
       </div>
     </div>
   </div>
@@ -6497,11 +6514,23 @@ function populateAllSelects() {
         // Remove duplicatas e ordena usando o mapeamento
         const mesesUnicos = [...new Set(c.meses)].sort((a, b) => MESES_MAP[a] - MESES_MAP[b]);
         const anosUnicos = [...new Set(c.anos)].sort((a, b) => a - b);
+        // Formatar meses: mostrar apenas o mais recente seguido de "..." se houver mais de um
+        let mesesFormatados = '—';
+        if (mesesUnicos.length > 0) {
+          if (mesesUnicos.length === 1) {
+            mesesFormatados = mesesUnicos[0];
+          } else {
+            // Ordenar meses e pegar apenas o mais recente
+            const mesesOrdenados = [...mesesUnicos].sort((a, b) => MESES_MAP[a] - MESES_MAP[b]);
+            mesesFormatados = mesesOrdenados[mesesOrdenados.length - 1] + ', ...';
+          }
+        }
+        
         rows += `<tr>
-          <td class="td-name" style="${state.config.capsLock ? 'text-transform:uppercase;letter-spacing:.4px' : 'text-transform:none'}">${c.nome}</td>
+          <td class="td-name" style="${state.config.capsLock ? 'text-transform:uppercase;letter-spacing:.4px' : 'text-transform:none'};cursor:pointer;color:var(--accent)" onclick="mostrarDetalhesTerceirizado('${c.nome}', '${c.radio}')" title="Clique para ver detalhes">${c.nome}</td>
           <td style="font-size:12px;color:var(--muted)">${getRadioNome(c.radio)}</td>
           <td style="font-size:12px;color:var(--text2)">${agenteNome}</td>
-          <td class="td-mono">${mesesUnicos.join(', ') || '—'}</td>
+          <td class="td-mono">${mesesFormatados}</td>
           <td class="td-mono">${anosUnicos.join(', ') || '—'}</td>
           <td class="td-mono" style="font-weight:700;color:var(--green)">${fmt(c.totalBruto)}</td>
           <td class="td-mono">${taxa}%</td>
@@ -6523,7 +6552,152 @@ function populateAllSelects() {
       }
     }
 
-    // ═══════════════════════════════════════════════
+    function mostrarDetalhesTerceirizado(nomeCliente, radioId) {
+      // Filtrar todos os lançamentos deste cliente terceirizado
+      const lancamentos = getLancamentos({ tipo: 'entrada' })
+        .filter(l => l.cat === 'Terceirizados' && l.desc === nomeCliente && l.radio === radioId);
+      
+      if (lancamentos.length === 0) {
+        showToast('Nenhum lançamento encontrado para este cliente', 'err');
+        return;
+      }
+
+      // Agrupar dados do cliente
+      const cliente = {
+        nome: nomeCliente,
+        radio: radioId,
+        radioNome: getRadioNome(radioId),
+        totalBruto: lancamentos.reduce((s, l) => s + l.valor, 0),
+        totalLiquido: lancamentos.reduce((s, l) => s + (l.liquido || l.valor), 0),
+        totalComissao: lancamentos.reduce((s, l) => s + ((l.valor - (l.liquido || l.valor)) || 0), 0),
+        meses: [...new Set(lancamentos.map(l => l.mes))],
+        anos: [...new Set(lancamentos.map(l => l.ano))],
+        status: lancamentos[0].status || 'Em dia',
+        agente: lancamentos[0].agente || '',
+        lancamentos: lancamentos
+      };
+
+      // Ordenar lançamentos por data (mais recente primeiro)
+      const MESES_MAP = {
+        'Janeiro': 1, 'Fevereiro': 2, 'Março': 3, 'Abril': 4, 'Maio': 5, 'Junho': 6,
+        'Julho': 7, 'Agosto': 8, 'Setembro': 9, 'Outubro': 10, 'Novembro': 11, 'Dezembro': 12
+      };
+      
+      cliente.lancamentos.sort((a, b) => {
+        const dateA = new Date(`${a.ano}-${MESES_MAP[a.mes]}-01`);
+        const dateB = new Date(`${b.ano}-${MESES_MAP[b.mes]}-01`);
+        return dateB - dateA;
+      });
+
+      // Formatar meses ordenados
+      cliente.meses.sort((a, b) => MESES_MAP[a] - MESES_MAP[b]);
+      cliente.anos.sort((a, b) => a - b);
+
+      const agenteNome = cliente.agente
+        ? (state.agentes.find(a => a.id == cliente.agente)?.nome || cliente.agente) : '—';
+      
+      const taxaMedia = cliente.totalBruto > 0 ? 
+        ((cliente.totalBruto - cliente.totalLiquido) / cliente.totalBruto * 100).toFixed(1) : 0;
+
+      // Preencher o modal com os detalhes
+      document.getElementById('modalDetalhesTerceirizado-title').textContent = `Detalhes: ${cliente.nome}`;
+      document.getElementById('modalDetalhesTerceirizadoBody').innerHTML = `
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px">
+          <!-- Informações Principais -->
+          <div>
+            <h3 style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:16px;display:flex;align-items:center;gap:8px">
+              <i class="ph ph-buildings" style="color:var(--accent)"></i>
+              Informações Principais
+            </h3>
+            <div style="background:var(--surface2);border-radius:var(--radius-sm);padding:16px">
+              <div style="display:flex;justify-content:space-between;margin-bottom:12px">
+                <span style="color:var(--text2);font-size:13px">Emissora:</span>
+                <span style="font-weight:600;color:var(--text)">${cliente.radioNome}</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:12px">
+                <span style="color:var(--text2);font-size:13px">Agente:</span>
+                <span style="font-weight:600;color:var(--text)">${agenteNome}</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:12px">
+                <span style="color:var(--text2);font-size:13px">Status:</span>
+                ${statusChip(cliente.status)}
+              </div>
+              <div style="display:flex;justify-content:space-between">
+                <span style="color:var(--text2);font-size:13px">Períodos:</span>
+                <span style="font-weight:600;color:var(--text)">${cliente.meses.join(', ')} / ${cliente.anos.join(', ')}</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Resumo Financeiro -->
+          <div>
+            <h3 style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:16px;display:flex;align-items:center;gap:8px">
+              <i class="ph ph-currency-dollar" style="color:var(--green)"></i>
+              Resumo Financeiro
+            </h3>
+            <div style="background:var(--surface2);border-radius:var(--radius-sm);padding:16px">
+              <div style="display:flex;justify-content:space-between;margin-bottom:12px">
+                <span style="color:var(--text2);font-size:13px">Total Bruto:</span>
+                <span style="font-weight:700;color:var(--green);font-family:var(--mono)">${fmt(cliente.totalBruto)}</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:12px">
+                <span style="color:var(--text2);font-size:13px">Total Comissões:</span>
+                <span style="font-weight:700;color:var(--yellow);font-family:var(--mono)">${fmt(cliente.totalComissao)}</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:12px">
+                <span style="color:var(--text2);font-size:13px">Taxa Média:</span>
+                <span style="font-weight:700;color:var(--text);font-family:var(--mono)">${taxaMedia}%</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;padding-top:12px;border-top:1px solid var(--border)">
+                <span style="color:var(--text2);font-size:13px">Total Líquido:</span>
+                <span style="font-weight:700;color:var(--blue);font-family:var(--mono)">${fmt(cliente.totalLiquido)}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tabela de Lançamentos -->
+        <div>
+          <h3 style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:16px;display:flex;align-items:center;gap:8px">
+            <i class="ph ph-list" style="color:var(--accent)"></i>
+            Histórico de Lançamentos (${cliente.lancamentos.length})
+          </h3>
+          <div class="tbl-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Mês/Ano</th>
+                  <th>Valor Bruto</th>
+                  <th>Comissão</th>
+                  <th>Valor Líquido</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${cliente.lancamentos.map(l => {
+                  const comissao = l.valor - (l.liquido || l.valor);
+                  const taxa = l.valor > 0 ? ((comissao / l.valor) * 100).toFixed(1) : 0;
+                  return `
+                    <tr>
+                      <td class="td-mono">${l.mes}/${l.ano}</td>
+                      <td class="td-mono" style="color:var(--green);font-weight:700">${fmt(l.valor)}</td>
+                      <td class="td-mono" style="color:var(--yellow)">${fmt(comissao)} (${taxa}%)</td>
+                      <td class="td-mono" style="color:var(--blue);font-weight:700">${fmt(l.liquido || l.valor)}</td>
+                      <td>${statusChip(l.status)}</td>
+                    </tr>
+                  `;
+                }).join('')}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+
+      // Abrir o modal
+      openModal('modalDetalhesTerceirizado');
+    }
+
+    // ═════════════════════════════════════════════
     //  VENDAS
     // ═══════════════════════════════════════════════
     function renderVendas() {
@@ -6692,7 +6866,7 @@ function populateAllSelects() {
     </div>`: ''}
     ${des.length ? `
     <div class="card">
-      <div class="card-head"><div class="card-title">despesas do Período <span style="font-size:12px;color:var(--muted);font-weight:400">(${des.length})</span></div></div>
+      <div class="card-head"><div class="card-title">Despesas do Período <span style="font-size:12px;color:var(--muted);font-weight:400">(${des.length})</span></div></div>
       <div class="tbl-wrap"><table>
         <thead><tr><th>Descrição</th><th>Emissora</th><th>Categoria</th><th>Mês</th><th>Valor</th></tr></thead>
         <tbody>${des.map(l => `<tr><td class="td-name">${l.desc}</td><td style="font-size:12px;color:var(--muted)">${getRadioNome(l.radio)}</td><td><span class="chip chip-red">${l.cat}</span></td><td class="td-mono">${l.mes}</td><td class="td-mono" style="color:var(--red);font-weight:700">-${fmt(l.valor)}</td></tr>`).join('')}</tbody>
