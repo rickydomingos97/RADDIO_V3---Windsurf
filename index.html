@@ -2921,6 +2921,15 @@
         <select class="fsel" id="fDesAno" onchange="renderDespesas()">
           <option value="">Todos os anos</option>
         </select>
+        <select class="fsel" id="fDesStatus" onchange="renderDespesas()">
+          <option value="">Todos os status</option>
+          <option value="Em dia">Em dia</option>
+          <option value="Inadimplente">Inadimplente</option>
+          <option value="Permuta">Permuta</option>
+          <option value="Pago">Pago</option>
+          <option value="A VENCER">A Vencer</option>
+          <option value="VENCIDA">Vencido</option>
+        </select>
         <input class="finput" id="fDesBusca" placeholder="Buscar despesa..." oninput="renderDespesas()">
       </div>
       <div id="desSummary" style="margin-bottom:16px"></div>
@@ -6555,6 +6564,7 @@ function populateAllSelects() {
         cat: document.getElementById('fDesCat').value,
         mes: document.getElementById('fDesMes').value,
         ano: document.getElementById('fDesAno').value,
+        status: document.getElementById('fDesStatus').value || null,
         busca: document.getElementById('fDesBusca').value,
       };
       
@@ -6577,6 +6587,7 @@ function populateAllSelects() {
           if (inst.status === 'Recorrente') return false;
           
           if (filters.radio && inst.radio !== filters.radio) return false;
+          if (filters.status && inst.status !== filters.status) return false;
           if (filters.busca) {
             const term = filters.busca.toLowerCase();
             if (!inst.desc.toLowerCase().includes(term) && 
@@ -8001,6 +8012,7 @@ function populateAllSelects() {
       document.getElementById('fDesMes').value = '';
       document.getElementById('fDesAno').value = '';
       document.getElementById('fDesCat').value = '';
+      document.getElementById('fDesStatus').value = '';
       document.getElementById('fDesBusca').value = '';
       renderDashboard(); renderEntradas(); renderDespesas(); renderContasInvestimento(); updateContasKPIs();
     }
