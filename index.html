@@ -701,6 +701,11 @@
       color: var(--muted);
     }
 
+    .chip-blue {
+      background: #3b82f6;
+      color: white;
+    }
+
     .grid-2 {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -1609,7 +1614,8 @@
     [data-theme="dark"] .btn-ghost{color:var(--text);border-color:var(--border2)}
     [data-theme="dark"] .btn-ghost:hover{background:var(--surface2)}
     [data-theme="dark"] .chip{background:var(--surface2);color:var(--text2);border-color:var(--border)}
-    [data-theme="dark"] .chip-green{background:var(--green-lt);color:var(--green)}
+    [data-theme="dark"] .chip-blue { background: #3b82f6; color: white; }
+    .chip-gray { background: #6b7280; color: white; }
     [data-theme="dark"] .chip-red{background:var(--red-lt);color:var(--red)}
     [data-theme="dark"] .chip-orange{background:var(--surface3);color:var(--orange)}
     [data-theme="dark"] .comissao-card,[data-theme="dark"] .taxa-info-box{background:var(--surface2);border-color:var(--border2)}
@@ -4866,6 +4872,62 @@
   </div>
 
   <!-- ══════════════════════════════════════════
+     MODAL: DESPESA FIXA - MARCAR COMO PAGO
+     ══════════════════════════════════════════ -->
+  <div class="modal-overlay" id="modalDespesaFixa">
+    <div class="modal" style="max-width:500px">
+      <div class="modal-head">
+        <div class="modal-title">Despesa Fixa</div>
+        <button class="modal-close" onclick="closeModal('modalDespesaFixa')"><i class="ph ph-x"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="card" style="background:var(--bg2);border:1px solid var(--border2)">
+          <div class="card-head" style="padding-bottom:12px">
+            <div class="card-title" id="despesaFixaDescricao">Carregando...</div>
+          </div>
+          <div class="card-body" style="padding-top:0">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:13px">
+              <div>
+                <div style="color:var(--muted);font-size:11px;margin-bottom:4px">Emissora</div>
+                <div id="despesaFixaEmissora">-</div>
+              </div>
+              <div>
+                <div style="color:var(--muted);font-size:11px;margin-bottom:4px">Valor</div>
+                <div id="despesaFixaValor" style="font-weight:700;color:var(--red)">-</div>
+              </div>
+              <div>
+                <div style="color:var(--muted);font-size:11px;margin-bottom:4px">Dia de Vencimento</div>
+                <div id="despesaFixaDiaVenc">-</div>
+              </div>
+              <div>
+                <div style="color:var(--muted);font-size:11px;margin-bottom:4px">Referência</div>
+                <div id="despesaFixaReferencia">-</div>
+              </div>
+            </div>
+            <div style="margin-top:12px">
+              <div style="color:var(--muted);font-size:11px;margin-bottom:4px">Status Atual</div>
+              <div id="despesaFixaStatus">-</div>
+            </div>
+            <div style="margin-top:12px" id="despesaFixaObsContainer">
+              <div style="color:var(--muted);font-size:11px;margin-bottom:4px">Observação</div>
+              <div id="despesaFixaObs">-</div>
+            </div>
+          </div>
+        </div>
+        
+        <div style="margin-top:20px;display:flex;gap:12px">
+          <button class="btn btn-primary" style="flex:1" onclick="marcarDespesaFixaComoPaga()">
+            <i class="ph ph-check-circle"></i> Marcar como Pago
+          </button>
+          <button class="btn btn-secondary" style="flex:1" onclick="closeModal('modalDespesaFixa')">
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
      MODAL: DETALHES CLIENTE TERCEIRIZADO
      ══════════════════════════════════════════ -->
   <div class="modal-overlay" id="modalDetalhesTerceirizado" role="dialog" aria-modal="true" aria-labelledby="modalDetalhesTerceirizado-title">
@@ -5459,6 +5521,7 @@
       agentes: [],
       contasInvestimento: [],
       infraestrutura: [],
+      pagamentosDespesasFixas: {},
       _cacheToken: 0,
       filtroRadio: '__all__',
       filtroAno: '2026',
@@ -5477,6 +5540,7 @@
       state.agentes     = [];
       state.contasInvestimento = [];
       state.infraestrutura = [];
+      state.pagamentosDespesasFixas = {};
       state._cacheToken = 0;
     }
 
@@ -5833,6 +5897,146 @@
       return DataAccessLayer.getLancamentos(filters);
     }
 
+    // Função para calcular status dinâmico de despesas fixas
+    function calcularStatusDespesaFixa(diaVencimento, mesReferencia, anoReferencia) {
+      if (!diaVencimento || !mesReferencia || !anoReferencia) return 'Recorrente';
+      
+      const hoje = new Date();
+      const diaVenc = parseInt(diaVencimento);
+      
+      // Mapear nome do mês para número
+      const mesesMap = {
+        'Janeiro': 0, 'Fevereiro': 1, 'Março': 2, 'Abril': 3, 'Maio': 4, 'Junho': 5,
+        'Julho': 6, 'Agosto': 7, 'Setembro': 8, 'Outubro': 9, 'Novembro': 10, 'Dezembro': 11
+      };
+      
+      const mesNum = mesesMap[mesReferencia];
+      const anoNum = parseInt(anoReferencia);
+      
+      // Criar data de vencimento
+      const dataVencimento = new Date(anoNum, mesNum, diaVenc);
+      
+      // Verificar se a despesa está paga (verificar no histórico de pagamentos)
+      const chavePagamento = `despesa_fixa_${diaVencimento}_${mesReferencia}_${anoReferencia}`;
+      const estaPago = state.pagamentosDespesasFixas && state.pagamentosDespesasFixas[chavePagamento];
+      
+      if (estaPago) return 'PAGO';
+      
+      // Se não está pago, verificar se está vencido ou a vencer
+      if (hoje > dataVencimento) {
+        return 'VENCIDA';
+      } else {
+        // Verificar se está próximo do vencimento (até 3 dias antes)
+        const diasDiff = Math.ceil((dataVencimento - hoje) / (1000 * 60 * 60 * 24));
+        return diasDiff <= 3 ? 'A VENCER' : 'A VENCER';
+      }
+    }
+
+    // Função para gerar instâncias mensais de despesas fixas
+    function gerarInstanciasDespesasFixas(filters = {}) {
+      const despesasFixas = state.lancamentos.filter(l => 
+        l.tipo === 'despesa' && l.cat === 'Despesas Fixas'
+      );
+      
+      const instancias = [];
+      const hoje = new Date();
+      const mesAtual = hoje.getMonth();
+      const anoAtual = hoje.getFullYear();
+      
+      // Se não há filtro de mês/ano, mostrar apenas o mês atual
+      const mesFiltro = filters.mes || MESES[mesAtual];
+      const anoFiltro = filters.ano || anoAtual.toString();
+      
+      despesasFixas.forEach(despesa => {
+        // Gerar instância apenas para o mês/ano filtrado
+        const instancia = {
+          ...despesa,
+          mes: mesFiltro,
+          ano: anoFiltro,
+          status: calcularStatusDespesaFixa(despesa.diaVencimento, mesFiltro, anoFiltro),
+          idOriginal: despesa.id,
+          ehInstancia: true
+        };
+        instancias.push(instancia);
+      });
+      
+      return instancias;
+    }
+
+    // Variável global para armazenar dados da despesa fixa atual
+    let despesaFixaAtual = null;
+
+    // Função para abrir modal de despesa fixa
+    function abrirModalDespesaFixa(idOriginal, mes, ano, diaVencimento) {
+      const despesa = state.lancamentos.find(l => l.id === idOriginal);
+      if (!despesa) return;
+      
+      despesaFixaAtual = {
+        idOriginal,
+        mes,
+        ano,
+        diaVencimento,
+        despesa
+      };
+      
+      // Preencher dados no modal
+      document.getElementById('despesaFixaDescricao').textContent = despesa.desc;
+      document.getElementById('despesaFixaEmissora').textContent = getRadioNome(despesa.radio);
+      document.getElementById('despesaFixaValor').textContent = `-R$ ${fmt(despesa.valor)}`;
+      document.getElementById('despesaFixaDiaVenc').textContent = `${diaVencimento} de ${mes}`;
+      document.getElementById('despesaFixaReferencia').textContent = `${mes} ${ano}`;
+      
+      const status = calcularStatusDespesaFixa(diaVencimento, mes, ano);
+      document.getElementById('despesaFixaStatus').innerHTML = statusChip(status);
+      
+      if (despesa.obs) {
+        document.getElementById('despesaFixaObsContainer').style.display = 'block';
+        document.getElementById('despesaFixaObs').textContent = despesa.obs;
+      } else {
+        document.getElementById('despesaFixaObsContainer').style.display = 'none';
+      }
+      
+      openModal('modalDespesaFixa');
+    }
+
+    // Função para marcar despesa fixa como paga
+    function marcarDespesaFixaComoPaga() {
+      if (!despesaFixaAtual) return;
+      
+      const { idOriginal, mes, ano, diaVencimento } = despesaFixaAtual;
+      const chavePagamento = `despesa_fixa_${diaVencimento}_${mes}_${ano}`;
+      
+      // Inicializar objeto de pagamentos se não existir
+      if (!state.pagamentosDespesasFixas) {
+        state.pagamentosDespesasFixas = {};
+      }
+      
+      // Marcar como pago
+      state.pagamentosDespesasFixas[chavePagamento] = {
+        dataPagamento: new Date().toISOString(),
+        idDespesaOriginal: idOriginal,
+        mes,
+        ano,
+        diaVencimento
+      };
+      
+      // Salvar no storage
+      saveToStorage();
+      
+      // Atualizar a lista de despesas
+      renderDespesas();
+      
+      // Fechar modal
+      closeModal('modalDespesaFixa');
+      
+      // Mostrar confirmação
+      showToast('Despesa marcada como paga!', 'ok');
+      addLog('PAGAR_DEPESA_FIXA', `Despesa fixa marcada como paga: ${despesaFixaAtual.despesa.desc} - ${mes}/${ano}`);
+      
+      // Limpar variável global
+      despesaFixaAtual = null;
+    }
+
     function getRadioNome(id) {
       const r = state.emissoras.find(x => x.id === id);
       return r ? r.nome : id;
@@ -5840,7 +6044,17 @@
 
     function statusChip(s) {
       if (!s) return '';
-      const map = { 'Em dia': 'chip-green', 'Inadimplente': 'chip-red', 'Permuta': 'chip-yellow', 'Pago': 'chip-green', 'Pendente': 'chip-yellow', 'Atrasado': 'chip-red' };
+      const map = { 
+        'Em dia': 'chip-green', 
+        'Inadimplente': 'chip-red', 
+        'Permuta': 'chip-yellow', 
+        'Pago': 'chip-green', 
+        'Pendente': 'chip-yellow', 
+        'Atrasado': 'chip-red',
+        'VENCIDA': 'chip-red',
+        'A VENCER': 'chip-yellow',
+        'Recorrente': 'chip-blue'
+      };
       return `<span class="chip ${map[s] || 'chip-gray'}">${s}</span>`;
     }
 
@@ -6343,7 +6557,37 @@ function populateAllSelects() {
         ano: document.getElementById('fDesAno').value,
         busca: document.getElementById('fDesBusca').value,
       };
-      const data = getLancamentos(filters);
+      
+      // Obter despesas normais, mas excluir completamente despesas fixas originais
+      let data = getLancamentos(filters).filter(l => {
+        // Remover completamente despesas fixas originais (não-instâncias)
+        if (l.tipo === 'despesa' && l.cat === 'Despesas Fixas' && !l.ehInstancia) {
+          return false;
+        }
+        return true;
+      });
+      
+      // Adicionar instâncias de despesas fixas se o filtro permitir
+      if (!filters.cat || filters.cat === 'Despesas Fixas') {
+        const instanciasFixas = gerarInstanciasDespesasFixas(filters);
+        
+        // Filtrar instâncias se houver filtros específicos
+        const instanciasFiltradas = instanciasFixas.filter(inst => {
+          // Remover instâncias com status "RECORRENTE" da visualização
+          if (inst.status === 'Recorrente') return false;
+          
+          if (filters.radio && inst.radio !== filters.radio) return false;
+          if (filters.busca) {
+            const term = filters.busca.toLowerCase();
+            if (!inst.desc.toLowerCase().includes(term) && 
+                !inst.obs.toLowerCase().includes(term)) return false;
+          }
+          return true;
+        });
+        
+        data = [...data, ...instanciasFiltradas];
+      }
+      
       const total = data.reduce((s, l) => s + l.valor, 0);
       document.getElementById('desCount').textContent = `(${data.length} registros)`;
       document.getElementById('desSummary').innerHTML = summaryBox([
@@ -6351,18 +6595,29 @@ function populateAllSelects() {
         { label: 'Total', val: fmt(total), color: 'var(--red)' },
         { label: 'Média', val: fmt(data.length ? total / data.length : 0), color: 'var(--yellow)' },
       ]);
-      document.getElementById('desTbody').innerHTML = data.map(l => `
-    <tr>
+      
+      document.getElementById('desTbody').innerHTML = data.map(l => {
+        const onclickRow = l.ehInstancia && l.cat === 'Despesas Fixas' && (l.status === 'VENCIDA' || l.status === 'A VENCER') 
+          ? `onclick="abrirModalDespesaFixa(${l.idOriginal}, '${l.mes}', '${l.ano}', '${l.diaVencimento}')"` 
+          : '';
+        
+        return `
+    <tr ${onclickRow ? `style="cursor: pointer;" ${onclickRow}` : ''}>
       <td class="td-name">${l.desc}</td>
       <td style="font-size:12px;color:var(--muted)">${getRadioNome(l.radio)}</td>
       <td><span class="chip chip-red">${l.cat}</span></td>
       <td class="td-mono">${l.mes}</td>
       <td class="td-mono">${l.ano}</td>
       <td class="td-mono" style="font-weight:700;color:var(--red)">-${fmt(l.valor)}</td>
-      <td>${statusChip(l.status)}</td>
-      <td><button class="icon-btn" onclick="editLanc(${l.id})" title="Editar"><i class="ph ph-pencil-simple"></i></button></td>
-      <td><button class="icon-btn-delete" onclick="deleteLanc(${l.id})" title="Remover"><i class="ph ph-trash"></i></button></td>
-    </tr>`).join('') || emptyState('Nenhuma despesa encontrada com os filtros selecionados.');
+      <td>${l.status === 'Recorrente' ? '' : statusChip(l.status)}</td>
+      <td>
+        <div style="display: flex; gap: 6px;">
+          <button class="icon-btn" onclick="event.stopPropagation(); editLanc(${l.id})" title="Editar"><i class="ph ph-pencil-simple"></i></button>
+          <button class="icon-btn-delete" onclick="event.stopPropagation(); deleteLanc(${l.id})" title="Remover"><i class="ph ph-trash"></i></button>
+        </div>
+      </td>
+    </tr>`;
+      }).join('') || emptyState('Nenhuma despesa encontrada com os filtros selecionados.');
     }
 
     // ═══════════════════════════════════════════════
