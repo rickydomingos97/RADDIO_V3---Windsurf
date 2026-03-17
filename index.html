@@ -975,6 +975,14 @@
       padding-right: 38px; cursor: pointer;
     }
 
+    select.form-input:disabled {
+      background-image: none;
+      cursor: not-allowed;
+      opacity: 0.6;
+      background-color: var(--surface);
+      border-color: var(--border2);
+    }
+
 
     .form-input:focus {
       border-color: var(--focus-color);
@@ -4702,7 +4710,7 @@
       <div class="modal-body">
         <div class="form-row">
           <label class="form-label">Tipo *</label>
-          <select class="form-input" id="lancTipo" onchange="updateLancForm()">
+          <select class="form-input" id="lancTipo" disabled>
             <option value="entrada">Entrada (Receita)</option>
             <option value="despesa">Despesa (Custo)</option>
           </select>
@@ -7519,7 +7527,7 @@ function populateAllSelects() {
       document.getElementById('lancValor').value=lanc.valor;
       document.getElementById('lancStatus').value=lanc.status;
       document.getElementById('lancObs').value=lanc.obs||'';
-      document.getElementById('lancModalTitle').textContent=lanc.tipo==='entrada'?'Editar Entrada':'Editar despesa';
+      document.getElementById('lancModalTitle').textContent=lanc.tipo==='entrada'?'Editar Entrada':'Editar Despesa';
       toggleCamposVigentes();
       if(lanc.cat==='Empresas Vigentes'){
         document.getElementById('lancTaxaComissao').value=lanc.taxaComissao||'';
