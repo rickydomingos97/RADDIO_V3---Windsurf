@@ -983,6 +983,35 @@
       border-color: var(--border2);
     }
 
+    .campos-especificos {
+      display: none;
+      animation: slideDown 0.3s ease-out;
+    }
+
+    .campos-especificos.show {
+      display: block;
+    }
+
+    .campos-mes-ano {
+      display: block;
+      transition: opacity 0.3s ease-out;
+    }
+
+    .campos-mes-ano.hide {
+      display: none;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
 
     .form-input:focus {
       border-color: var(--focus-color);
@@ -4726,7 +4755,7 @@
         <div class="form-grid-2">
           <div class="form-row">
             <label class="form-label">Categoria *</label>
-            <select class="form-input" id="lancCat">
+            <select class="form-input" id="lancCat" onchange="toggleCamposEspecificos()">
               <option>Empresas Vigentes</option>
               <option>Terceirizados</option>
               <option>Permutas</option>
@@ -4736,7 +4765,7 @@
               <option>Despesas Extras</option>
             </select>
           </div>
-          <div class="form-row">
+          <div class="form-row campos-mes-ano" id="campoStatus">
             <label class="form-label">Status</label>
             <select class="form-input" id="lancStatus">
               <option>Em dia</option>
@@ -4747,7 +4776,11 @@
             </select>
           </div>
         </div>
-        <div class="form-grid-2">
+        <div class="form-row campos-especificos" id="campoDiaVencimento">
+          <label class="form-label">Dia de Vencimento</label>
+          <input class="form-input" type="number" id="lancDiaVencimento" min="1" max="31" placeholder="Ex: 15">
+        </div>
+        <div class="form-grid-2 campos-mes-ano" id="campoMesAno">
           <div class="form-row">
             <label class="form-label">Mês *</label>
             <select class="form-input" id="lancMes">
@@ -7525,10 +7558,11 @@ function populateAllSelects() {
       document.getElementById('lancMes').value = lanc.mes;
       document.getElementById('lancAno').value = lanc.ano;
       document.getElementById('lancValor').value=lanc.valor;
-      document.getElementById('lancStatus').value=lanc.status;
+      document.getElementById('lancStatus').value=lanc.status||'';
       document.getElementById('lancObs').value=lanc.obs||'';
       document.getElementById('lancModalTitle').textContent=lanc.tipo==='entrada'?'Editar Entrada':'Editar Despesa';
       toggleCamposVigentes();
+      toggleCamposEspecificos();
       if(lanc.cat==='Empresas Vigentes'){
         document.getElementById('lancTaxaComissao').value=lanc.taxaComissao||'';
         document.getElementById('lancPI').value=lanc.pi||'';
@@ -7537,6 +7571,14 @@ function populateAllSelects() {
         document.getElementById('lancPago').value=lanc.pago||'';
         document.getElementById('lancAReceber').value=lanc.aReceber||'';
         calcLiquido();
+      }
+      // Carregar dia de vencimento para despesas fixas
+      if(lanc.tipo === 'despesa' && lanc.cat === 'Despesas Fixas') {
+        document.getElementById('lancDiaVencimento').value = lanc.diaVencimento || '';
+      } else {
+        // Carregar mês/ano apenas para não despesas fixas
+        document.getElementById('lancMes').value = lanc.mes || '';
+        document.getElementById('lancAno').value = lanc.ano || '';
       }
     }
 
@@ -7550,6 +7592,7 @@ function populateAllSelects() {
         catEl.innerHTML = '<option>Funcionários</option><option>Infraestrutura</option><option>Despesas Fixas</option><option>Despesas Extras</option>';
       }
       toggleCamposVigentes();
+      toggleCamposEspecificos();
     }
     function toggleCamposVigentes() {
       const tipo = document.getElementById('lancTipo').value;
@@ -7563,6 +7606,32 @@ function populateAllSelects() {
         if (!taxaEl.value && taxaPad !== null) taxaEl.value = taxaPad;
         aviso.style.display = (taxaPad === null && !taxaEl.value) ? 'flex' : 'none';
         calcLiquido();
+      }
+    }
+
+    function toggleCamposEspecificos() {
+      const tipo = document.getElementById('lancTipo').value;
+      const cat  = document.getElementById('lancCat').value;
+      const campoDiaVenc = document.getElementById('campoDiaVencimento');
+      const campoStatus = document.getElementById('campoStatus');
+      const campoMesAno = document.getElementById('campoMesAno');
+      
+      // Mostrar campo de dia de vencimento apenas para despesas fixas
+      const isDespesaFixa = (tipo === 'despesa' && cat === 'Despesas Fixas');
+      campoDiaVenc.classList.toggle('show', isDespesaFixa);
+      
+      // Ocultar campos de Status, Mês e Ano para despesas fixas
+      if (isDespesaFixa) {
+        campoStatus.classList.add('hide');
+        campoMesAno.classList.add('hide');
+      } else {
+        campoStatus.classList.remove('hide');
+        campoMesAno.classList.remove('hide');
+      }
+      
+      if (!isDespesaFixa) {
+        // Limpar campo quando não for despesa fixa
+        document.getElementById('lancDiaVencimento').value = '';
       }
     }
     function calcLiquido() {
@@ -7604,10 +7673,22 @@ function populateAllSelects() {
         if (lanc) {
           const _ec=document.getElementById('lancCat').value;
           const _eVig=(document.getElementById('lancTipo').value==='entrada'&&_ec==='Empresas Vigentes');
+          const _eDespesaFixa=(document.getElementById('lancTipo').value==='despesa'&&_ec==='Despesas Fixas');
           const _et=_eVig?(parseFloat(document.getElementById('lancTaxaComissao').value)||0):0;
           lanc.radio=radEl.value;lanc.tipo=document.getElementById('lancTipo').value;
           lanc.desc=desc;lanc.cat=_ec;
-          lanc.mes=document.getElementById('lancMes').value;lanc.ano=document.getElementById('lancAno').value;
+          
+          // Para despesas fixas, não usar mês/ano específicos (será recorrente)
+          if (_eDespesaFixa) {
+            lanc.mes = '';
+            lanc.ano = '';
+            lanc.status = 'Recorrente';
+          } else {
+            lanc.mes=document.getElementById('lancMes').value;
+            lanc.ano=document.getElementById('lancAno').value;
+            lanc.status=document.getElementById('lancStatus').value;
+          }
+          
           lanc.valor=valor;lanc.taxaComissao=_et;
           lanc.liquido=_eVig?(parseFloat(document.getElementById('lancLiquido').value)||valor):valor;
           lanc.pi=_eVig?document.getElementById('lancPI').value:'';
@@ -7615,7 +7696,13 @@ function populateAllSelects() {
           lanc.periodo=_eVig?document.getElementById('lancPeriodo').value:'';
           lanc.pago=_eVig?document.getElementById('lancPago').value:'';
           lanc.aReceber=_eVig?document.getElementById('lancAReceber').value:'';
-          lanc.status=document.getElementById('lancStatus').value;lanc.obs=document.getElementById('lancObs').value;
+          lanc.obs=document.getElementById('lancObs').value;
+          // Salvar dia de vencimento para despesas fixas
+          if (lanc.tipo === 'despesa' && lanc.cat === 'Despesas Fixas') {
+            lanc.diaVencimento = document.getElementById('lancDiaVencimento').value || '';
+          } else {
+            lanc.diaVencimento = '';
+          }
         }
         editingLanc = null;
         showToast('Lançamento atualizado!', 'ok');
@@ -7624,18 +7711,28 @@ function populateAllSelects() {
         const _cat=document.getElementById('lancCat').value;
         const _tipo=document.getElementById('lancTipo').value;
         const _isVig=(_tipo==='entrada'&&_cat==='Empresas Vigentes');
+        const _isDespesaFixa=(_tipo==='despesa'&&_cat==='Despesas Fixas');
         const _taxa=_isVig?(parseFloat(document.getElementById('lancTaxaComissao').value)||0):0;
         const _liq=_isVig?(parseFloat(document.getElementById('lancLiquido').value)||valor):valor;
+        
+        // Para despesas fixas, não usar mês/ano específicos (será recorrente)
+        const mes = _isDespesaFixa ? '' : document.getElementById('lancMes').value;
+        const ano = _isDespesaFixa ? '' : document.getElementById('lancAno').value;
+        const status = _isDespesaFixa ? 'Recorrente' : document.getElementById('lancStatus').value;
+        
         state.lancamentos.push({id:genId(),radio:radEl.value,tipo:_tipo,desc,cat:_cat,
-          mes:document.getElementById('lancMes').value,ano:document.getElementById('lancAno').value,
+          mes,ano,
           valor,liquido:_liq,taxaComissao:_taxa,
           pi:_isVig?document.getElementById('lancPI').value:'',
           agente:document.getElementById('lancAgente')?.value||'',
           periodo:_isVig?document.getElementById('lancPeriodo').value:'',
           pago:_isVig?document.getElementById('lancPago').value:'',
           aReceber:_isVig?document.getElementById('lancAReceber').value:'',
-          status:document.getElementById('lancStatus').value,
-          obs:document.getElementById('lancObs').value});
+          status,
+          obs:document.getElementById('lancObs').value,
+          // Salvar dia de vencimento para despesas fixas
+          diaVencimento: _isDespesaFixa ? 
+            (document.getElementById('lancDiaVencimento').value || '') : ''});
         showToast('Lançamento salvo!', 'ok');
         addLog('CREATE_LANCAMENTO', `Novo lançamento: ${desc} - R$ ${fmt(valor)}`);
       }
