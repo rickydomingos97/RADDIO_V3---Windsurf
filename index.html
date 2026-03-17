@@ -242,7 +242,6 @@
       font-weight: 500;
       color: rgba(255,255,255,0.8);
       transition: background .12s, color .12s;
-      cursor: pointer;
     }
     .nav-item .nav-icon { font-size: 15px; width: 16px; text-align: center; flex-shrink: 0; color: inherit; transition: color .12s; }
     .nav-item:hover { background: rgba(255,255,255,0.1); color: var(--bg); }
@@ -1357,46 +1356,46 @@
 
     :root{
       /* Core Colors */
-      --bg:#f9fafb;
-      --surface:#fff;
-      --surface2:#f1f5f9;
-      --surface-alt:#f8fafc;
-      --border:#e2e8f0;
-      --border2:#cbd5e1;
-      
+      --bg:#f4f4f4;
+      --surface:#ffffff;
+      --surface2:#eeeeee;
+      --surface-alt:#f9f9f9;
+      --border:#e5e5e5;
+      --border2:#d4d4d4;
+
       /* Brand Colors */
-      --accent:#DD0A32;
-      --accent-lt:#e2e8f0;
-      --accent-md:#4b5563;
-      --btn-hover: #B91F3C;
-      
+      --accent:#fb923c;
+      --accent-lt:#fff4ec;
+      --accent-md:#ea6e0a;
+      --btn-hover:#ea6e0a;
+
       /* Text Colors */
-      --text:#4c263f;
-      --text2:#4b5563;
-      --text-muted:#6b7280;
+      --text:#0f172a;
+      --text2:#334155;
+      --text-muted:#64748b;
       --muted:#94a3b8;
-      
+
       /* Semantic Colors */
-      --green:#05cd99;
-      --green-lt:#d1fae5;
-      --green-border:#065f46;
-      --green-dark:#064e3b;
-      --red:#dc2626;
+      --green:#22c55e;
+      --green-lt:#dcfce7;
+      --green-border:#86efac;
+      --green-dark:#14532d;
+      --red:#ef4444;
       --red-lt:#fee2e2;
-      --red-border:#7f1d1d;
-      --red-dark:#991b1b;
+      --red-border:#fca5a5;
+      --red-dark:#7f1d1d;
       --yellow:#f59e0b;
       --yellow-lt:#fef3c7;
-      --yellow-border:#713f12;
-      --yellow-dark:#f2c464;
+      --yellow-border:#fcd34d;
+      --yellow-dark:#b45309;
       --blue:#3b82f6;
       --blue-lt:#dbeafe;
       --blue-dark:#1e3a5f;
-      
+
       /* Shadows */
-      --shadow:0 1px 4px rgba(0,0,0,.05);
-      --shadow-md:0 4px 20px rgba(0,0,0,.1);
-      --shadow-lg:0 8px 40px rgba(0,0,0,.15);
+      --shadow:0 1px 4px rgba(15,23,42,.05);
+      --shadow-md:0 4px 20px rgba(15,23,42,.1);
+      --shadow-lg:0 8px 40px rgba(15,23,42,.15);
     }
     [data-theme="dark"]{
       /* Core Colors */
@@ -1408,11 +1407,11 @@
       --border2:#3f3f46;
       
       /* Brand Colors */
-      --accent:#fafafa;
-      --accent-lt:#3B3B58;
-      --accent-md:#52525b;
-      --accent-dark:#d1d5db;
-      --btn-hover: #B91F3C;
+      --accent:#fb923c;
+      --accent-lt:#431407;
+      --accent-md:#ea6e0a;
+      --accent-dark:#fdba74;
+      --btn-hover:#ea6e0a;
       
       /* Text Colors */
       --text:#fafafa;
@@ -2554,7 +2553,7 @@
           <div style="display:flex;align-items:center;gap:12px">
             <div class="period-dropdown">
               <button class="dropdown-trigger" onclick="togglePeriodDropdown()" id="periodDropdownTrigger" style="display:flex;align-items:center;gap:8px;font-weight:700;color:var(--text);background:var(--surface2);border:1.5px solid var(--border);border-radius:8px;padding:8px 12px;cursor:pointer;transition:all .2s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
-                Período: <span id="currentPeriodLabel">Anual</span> <i class="ph ph-caret-down"></i>
+                Período: <span id="currentPeriodLabel">Anual</span> <i class="ph ph-caret-down" style="font-size:12px;"></i>
               </button>
               <div class="dropdown-menu" id="periodDropdownMenu">
                 <div class="dropdown-item" onclick="setPeriodFromDropdown(this, 'all', 'Anual')">Anual</div>
@@ -5645,8 +5644,57 @@
       addLog('CHANGE_PERIOD', `Período alterado: ${p}`);
     }
 
-    
-    
+    // Funções para o dropdown - mantendo a lógica original da setPeriod
+    function togglePeriodDropdown() {
+      const menu = document.getElementById('periodDropdownMenu');
+      menu.classList.toggle('show');
+      
+      // Fecha o dropdown se clicar fora
+      if (menu.classList.contains('show')) {
+        setTimeout(() => {
+          document.addEventListener('click', closePeriodDropdownOutside);
+        }, 100);
+      } else {
+        document.removeEventListener('click', closePeriodDropdownOutside);
+      }
+    }
+
+    function closePeriodDropdownOutside(event) {
+      const menu = document.getElementById('periodDropdownMenu');
+      const trigger = document.getElementById('periodDropdownTrigger');
+      
+      if (!menu.contains(event.target) && !trigger.contains(event.target)) {
+        menu.classList.remove('show');
+        document.removeEventListener('click', closePeriodDropdownOutside);
+      }
+    }
+
+    function setPeriodFromDropdown(el, p, label) {
+      // Remove classe active de todos os itens
+      document.querySelectorAll('.dropdown-item').forEach(item => {
+        item.classList.remove('active');
+        item.style.background = 'none';
+        item.style.color = 'var(--text)';
+      });
+      
+      // Adiciona classe active no item selecionado
+      el.classList.add('active');
+      el.style.background = 'var(--surface2)';
+      el.style.color = 'var(--accent)';
+      
+      // Usa a lógica ORIGINAL da setPeriod
+      state.periodo = p;
+      renderDashboard();
+      addLog('CHANGE_PERIOD', `Período alterado: ${p}`);
+      
+      // Atualiza o label do dropdown
+      document.getElementById('currentPeriodLabel').textContent = label;
+      
+      // Fecha o dropdown
+      document.getElementById('periodDropdownMenu').classList.remove('show');
+      document.removeEventListener('click', closePeriodDropdownOutside);
+    }
+
     function applyGlobalFilters() {
       state.filtroAno = document.getElementById('anoFiltro').value;
       state._cacheToken++; // invalidate filter cache
@@ -10480,14 +10528,14 @@ function populateAllSelects() {
               {
                 label: 'Custos Operacionais',
                 data: dadosCustos,
-                borderColor: '#dc2626',
-                backgroundColor: 'rgba(220, 38, 38, 0.08)',
+                borderColor: '#ef4444',
+                backgroundColor: 'rgba(239, 68, 68, 0.08)',
                 borderWidth: 1.5,
                 tension: 0.4,
                 fill: true,
                 pointRadius: 3,
                 pointHoverRadius: 5,
-                pointBackgroundColor: '#dc2626',
+                pointBackgroundColor: '#ef4444',
                 pointBorderColor: '#fff',
                 pointBorderWidth: 1
               },
@@ -10611,7 +10659,7 @@ function populateAllSelects() {
                 labels: {
                   padding: 15,
                   usePointStyle: true,
-                  color: '#4c263f'
+                  color: '#0f172a'
                 }
               }
             }
