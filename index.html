@@ -2733,6 +2733,42 @@
   </div>
 
   <!-- ══════════════════════════════════════════
+     MODAL: CONFIRMAR PAGAMENTO DESPESA FIXA
+     ══════════════════════════════════════════ -->
+  <div class="modal-overlay" id="modalPagamentoDespesaFixa" role="dialog" aria-modal="true" aria-labelledby="modalPagamentoDespesaFixa-title">
+    <div class="modal" style="max-width:480px">
+      <div class="modal-head">
+        <div class="modal-title" id="modalPagamentoDespesaFixa-title">Confirmar Pagamento</div>
+        <button class="modal-close" onclick="closeModal('modalPagamentoDespesaFixa')"><i class="ph ph-x"></i></button>
+      </div>
+      <div class="modal-body">
+        <div style="margin-bottom:20px">
+          <div style="color:var(--muted);font-size:12px;margin-bottom:4px">Despesa</div>
+          <div id="pagamentoDespesaDescricao" style="font-weight:600;color:var(--text)">-</div>
+        </div>
+        
+        <div style="margin-bottom:20px">
+          <div style="color:var(--muted);font-size:12px;margin-bottom:4px">Valor Original</div>
+          <div id="pagamentoDespesaValorOriginal" style="font-weight:600;color:var(--text)">-</div>
+        </div>
+        
+        <div class="form-row">
+          <label class="form-label">Valor Pago *</label>
+          <input class="form-input" id="pagamentoDespesaValorPago" type="number" step="0.01" min="0.01" placeholder="Digite o valor pago">
+        </div>
+      </div>
+      <div class="modal-foot" style="padding:20px 24px;border-top:1px solid var(--border);display:flex;gap:12px">
+        <button class="btn btn-primary" style="flex:1" onclick="confirmarPagamentoDespesaFixa()">
+          <i class="ph ph-check-circle"></i> Confirmar Pagamento
+        </button>
+        <button class="btn btn-ghost" style="flex:1" onclick="closeModal('modalPagamentoDespesaFixa')">
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
      MODAL: DETALHES CLIENTE TERCEIRIZADO
      ══════════════════════════════════════════ -->
   <div class="modal-overlay" id="modalDetalhesTerceirizado" role="dialog" aria-modal="true" aria-labelledby="modalDetalhesTerceirizado-title">
@@ -3754,13 +3790,18 @@
       
       despesasFixas.forEach(despesa => {
         // Gerar instância apenas para o mês/ano filtrado
+        const chavePagamento = `despesa_fixa_${despesa.diaVencimento}_${mesFiltro}_${anoFiltro}`;
+        const pagamento = state.pagamentosDespesasFixas?.[chavePagamento];
+        
         const instancia = {
           ...despesa,
           mes: mesFiltro,
           ano: anoFiltro,
-          status: calcularStatusDespesaFixa(despesa.diaVencimento, mesFiltro, anoFiltro),
+          status: pagamento ? 'Pago' : calcularStatusDespesaFixa(despesa.diaVencimento, mesFiltro, anoFiltro),
           idOriginal: despesa.id,
-          ehInstancia: true
+          ehInstancia: true,
+          valorPago: pagamento?.valorPago || null,
+          dataPagamento: pagamento?.dataPagamento || null
         };
         instancias.push(instancia);
       });
@@ -3808,6 +3849,34 @@
     function marcarDespesaFixaComoPaga() {
       if (!despesaFixaAtual) return;
       
+      // Abrir modal de confirmação de pagamento
+      openModalPagamentoDespesaFixa();
+    }
+
+    // Função para abrir modal de pagamento de despesa fixa
+    function openModalPagamentoDespesaFixa() {
+      if (!despesaFixaAtual) return;
+      
+      // Preencher informações no modal
+      document.getElementById('pagamentoDespesaDescricao').textContent = despesaFixaAtual.despesa.desc;
+      document.getElementById('pagamentoDespesaValorOriginal').textContent = BusinessLogicLayer.formatCurrency(despesaFixaAtual.despesa.valor);
+      document.getElementById('pagamentoDespesaValorPago').value = despesaFixaAtual.despesa.valor;
+      
+      // Abrir modal
+      openModal('modalPagamentoDespesaFixa');
+    }
+
+    // Função para confirmar pagamento de despesa fixa
+    function confirmarPagamentoDespesaFixa() {
+      if (!despesaFixaAtual) return;
+      
+      const valorPago = parseFloat(document.getElementById('pagamentoDespesaValorPago').value);
+      
+      if (!valorPago || valorPago <= 0) {
+        showToast('Informe um valor válido maior que zero!', 'err');
+        return;
+      }
+      
       const { idOriginal, mes, ano, diaVencimento } = despesaFixaAtual;
       const chavePagamento = `despesa_fixa_${diaVencimento}_${mes}_${ano}`;
       
@@ -3816,13 +3885,14 @@
         state.pagamentosDespesasFixas = {};
       }
       
-      // Marcar como pago
+      // Marcar como pago com valor
       state.pagamentosDespesasFixas[chavePagamento] = {
         dataPagamento: new Date().toISOString(),
         idDespesaOriginal: idOriginal,
         mes,
         ano,
-        diaVencimento
+        diaVencimento,
+        valorPago: valorPago
       };
       
       // Salvar no storage
@@ -3831,12 +3901,13 @@
       // Atualizar a lista de despesas
       renderDespesas();
       
-      // Fechar modal
+      // Fechar modais
+      closeModal('modalPagamentoDespesaFixa');
       closeModal('modalDespesaFixa');
       
       // Mostrar confirmação
       showToast('Despesa marcada como paga!', 'ok');
-      addLog('PAGAR_DEPESA_FIXA', `Despesa fixa marcada como paga: ${despesaFixaAtual.despesa.desc} - ${mes}/${ano}`);
+      addLog('PAGAR_DEPESA_FIXA', `Despesa fixa marcada como paga: ${despesaFixaAtual.despesa.desc} - ${mes}/${ano} - Valor: R$ ${valorPago.toFixed(2)}`);
       
       // Limpar variável global
       despesaFixaAtual = null;
@@ -4104,7 +4175,7 @@ function populateAllSelects() {
       });
 
       // Anos nos filtros
-      const anos = [...new Set(state.lancamentos.map(l => l.ano))].sort().reverse();
+      const anos = [...new Set(state.lancamentos.map(l => l.ano).filter(a => a))].sort().reverse();
       const anoOpts = ['<option value="">Todos os anos</option>', ...anos.map(a => `<option>${a}</option>`)].join('');
       ['fEntAno', 'fDesAno', 'fTerAno', 'fVenAno'].forEach(id => {
         const el = document.getElementById(id);
@@ -4408,6 +4479,11 @@ function populateAllSelects() {
           ? `onclick="abrirModalDespesaFixa(${l.idOriginal}, '${l.mes}', '${l.ano}', '${l.diaVencimento}')"` 
           : '';
         
+        // Exibir valor pago se existir, senão exibir valor original
+        const valorExibir = l.valorPago || l.valor;
+        const valorFormatado = l.valorPago ? fmt(l.valorPago) : `-${fmt(l.valor)}`;
+        const corValor = l.valorPago ? 'var(--green)' : 'var(--red)';
+        
         return `
     <tr ${onclickRow ? `style="cursor: pointer;" ${onclickRow}` : ''}>
       <td class="td-name">${l.desc}</td>
@@ -4415,7 +4491,7 @@ function populateAllSelects() {
       <td><span class="chip chip-red">${l.cat}</span></td>
       <td class="td-mono">${l.mes}</td>
       <td class="td-mono">${l.ano}</td>
-      <td class="td-mono" style="font-weight:700;color:var(--red)">-${fmt(l.valor)}</td>
+      <td class="td-mono" style="font-weight:700;color:${corValor}">${valorFormatado}</td>
       <td>${l.status === 'Recorrente' ? '' : statusChip(l.status)}</td>
       <td>
         <div style="display: flex; gap: 6px;">
