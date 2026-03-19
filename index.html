@@ -2616,7 +2616,7 @@
         </div>
         <div class="form-row">
           <label class="form-label">Valor Bruto (R$) *</label>
-          <input class="form-input" id="lancValor" type="number" min="0" step="0.01" placeholder="0,00" oninput="calcLiquido()">
+          <input class="form-input" id="lancValor" type="text" min="0" step="0.01" placeholder="0,00" oninput="formatValor(this); calcLiquido()">
         </div>
         <div class="campos-vigentes" id="camposVigentes">
           <div id="avisoTaxa" class="tag-aviso-taxa" style="display:none">
@@ -2754,7 +2754,7 @@
         
         <div class="form-row">
           <label class="form-label">Valor Pago *</label>
-          <input class="form-input" id="pagamentoDespesaValorPago" type="number" step="0.01" min="0.01" placeholder="Digite o valor pago">
+          <input class="form-input" id="pagamentoDespesaValorPago" type="text" step="0.01" min="0.01" placeholder="0,00" oninput="formatValor(this)">
         </div>
       </div>
       <div class="modal-foot" style="padding:20px 24px;border-top:1px solid var(--border);display:flex;gap:12px">
@@ -2991,7 +2991,7 @@
         </div>
         <div class="form-row">
           <label class="form-label">Valor (R$) *</label>
-          <input class="form-input" id="infraValor" type="number" min="0" step="0.01" placeholder="0,00">
+          <input class="form-input" id="infraValor" type="text" min="0" step="0.01" placeholder="0,00" oninput="formatValor(this)">
         </div>
         <div class="form-row">
           <label class="form-label">Status</label>
@@ -3860,7 +3860,7 @@
       // Preencher informações no modal
       document.getElementById('pagamentoDespesaDescricao').textContent = despesaFixaAtual.despesa.desc;
       document.getElementById('pagamentoDespesaValorOriginal').textContent = BusinessLogicLayer.formatCurrency(despesaFixaAtual.despesa.valor);
-      document.getElementById('pagamentoDespesaValorPago').value = despesaFixaAtual.despesa.valor;
+      document.getElementById('pagamentoDespesaValorPago').value = despesaFixaAtual.despesa.valor.toFixed(2).replace('.', ',');
       
       // Abrir modal
       openModal('modalPagamentoDespesaFixa');
@@ -3870,7 +3870,7 @@
     function confirmarPagamentoDespesaFixa() {
       if (!despesaFixaAtual) return;
       
-      const valorPago = parseFloat(document.getElementById('pagamentoDespesaValorPago').value);
+      const valorPago = parseValor(document.getElementById('pagamentoDespesaValorPago').value);
       
       if (!valorPago || valorPago <= 0) {
         showToast('Informe um valor válido maior que zero!', 'err');
@@ -5695,7 +5695,7 @@ function populateAllSelects() {
       document.getElementById('lancCat').value = lanc.cat;
       document.getElementById('lancMes').value = lanc.mes;
       document.getElementById('lancAno').value = lanc.ano;
-      document.getElementById('lancValor').value=lanc.valor;
+      document.getElementById('lancValor').value=lanc.valor.toFixed(2).replace('.', ',');
       document.getElementById('lancStatus').value=lanc.status||'';
       document.getElementById('lancObs').value=lanc.obs||'';
       document.getElementById('lancModalTitle').textContent=lanc.tipo==='entrada'?'Editar Entrada':'Editar Despesa';
@@ -5772,6 +5772,36 @@ function populateAllSelects() {
         document.getElementById('lancDiaVencimento').value = '';
       }
     }
+    // Função para formatar valor com duas casas decimais
+    function formatValor(input) {
+      let valor = input.value.replace(/\D/g, '');
+      if (valor === '') return;
+      
+      // Adicionar zeros para ter pelo menos 3 dígitos (para poder separar casas decimais)
+      while (valor.length < 3) {
+        valor = '0' + valor;
+      }
+      
+      // Separar parte inteira e decimal
+      const parteInteira = valor.slice(0, -2);
+      const parteDecimal = valor.slice(-2);
+      
+      // Montar valor formatado
+      valor = parteInteira + ',' + parteDecimal;
+      
+      // Remover zeros desnecessários no início
+      valor = valor.replace(/^0+([1-9])/, '$1');
+      if (valor.startsWith('0,')) valor = '0' + valor.substring(1);
+      
+      input.value = valor;
+    }
+
+    // Função para converter valor formatado para número
+    function parseValor(valorFormatado) {
+      if (!valorFormatado) return 0;
+      return parseFloat(valorFormatado.replace(/\./g, '').replace(',', '.').replace(/[^\d.-]/g, '')) || 0;
+    }
+
     function calcLiquido() {
       try {
         const brutoInput = document.getElementById('lancValor');
@@ -5784,7 +5814,7 @@ function populateAllSelects() {
           return;
         }
         
-        const bruto = parseFloat(brutoInput.value) || 0;
+        const bruto = parseValor(brutoInput.value);
         const taxa = parseFloat(taxaInput.value) || 0;
         
         const liquido = BusinessLogicLayer.calculateLiquido(bruto, taxa);
@@ -5799,7 +5829,7 @@ function populateAllSelects() {
 
     function salvarLancamento() {
       const desc = document.getElementById('lancDesc').value.trim();
-      const valor = parseFloat(document.getElementById('lancValor').value);
+      const valor = parseValor(document.getElementById('lancValor').value);
       if (!desc) { showToast('Informe a descrição', 'err'); return; }
       if (!valor || valor <= 0) { showToast('Informe um valor válido', 'err'); return; }
       const radEl = document.getElementById('lancRadio');
@@ -8944,7 +8974,7 @@ function populateAllSelects() {
       const descricao = document.getElementById('infraDesc').value.trim();
       const mes = document.getElementById('infraMes').value;
       const ano = document.getElementById('infraAno').value;
-      const valor = parseFloat(document.getElementById('infraValor').value);
+      const valor = parseValor(document.getElementById('infraValor').value);
       const status = document.getElementById('infraStatus').value;
       const obs = document.getElementById('infraObs').value.trim();
 
@@ -9349,7 +9379,7 @@ function populateAllSelects() {
       document.getElementById('infraDesc').value = item.descricao;
       document.getElementById('infraMes').value = item.mes;
       document.getElementById('infraAno').value = item.ano;
-      document.getElementById('infraValor').value = item.valor;
+      document.getElementById('infraValor').value = item.valor.toFixed(2).replace('.', ',');
       document.getElementById('infraStatus').value = item.status;
       document.getElementById('infraObs').value = item.obs || '';
 
