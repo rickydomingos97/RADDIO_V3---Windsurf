@@ -1,54 +1,61 @@
-/* ── Design Tokens Zinc Theme ──────────────────── */
+/* ── Design Tokens Gray Theme ──────────────────── */
 :root {
-  /* CORE ZINC PALETTE */
-  --zinc-50: #fafafa;
-  --zinc-100: #f4f4f5;
-  --zinc-200: #e4e4e7;
-  --zinc-300: #d4d4d8;
-  --zinc-400: #a1a1aa;
-  --zinc-500: #71717a;
-  --zinc-600: #52525b;
-  --zinc-700: #3f3f46;
-  --zinc-800: #27272a;
-  --zinc-900: #18181b;
-  --zinc-950: #09090b;
+  /* CORE GRAY PALETTE */
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5dc;
+  --gray-400: #99a1af;
+  --gray-500: #6a7282;
+  --gray-600: #4a5565;
+  --gray-700: #364153;
+  --gray-800: #1e2939;
+  --gray-900: #101828;
+  --gray-950: #030712;
 
-  /* CORE COLORS - ZINC SYSTEM */
-  --bg: #fafafa;                    /* Background principal */
-  --bg-sidebar-nav: #f9fafb;         /* Background sidebar */
+  /* CORE COLORS - GRAY SYSTEM */
+  --bg: #f9fafb;                    /* Background principal (gray-50) */
+  --bg-sidebar-nav: #f8fafc;         /* Background sidebar */
   --surface: #ffffff;               /* Superfícies cards */
-  --surface2: #f9fafb;             /* Superfície secundária */
+  --surface2: #f3f4f6;             /* Superfície secundária (gray-100) */
   --surface-alt: #ffffff;            /* Superfície alternativa */
-  --border: #e4e4e7;               /* Bordas principais */
-  --border2: #d4d4d8;              /* Bordas secundárias */
+  --border: #e5e7eb;               /* Bordas principais (gray-200) */
+  --border2: #d1d5dc;              /* Bordas secundárias (gray-300) */
 
-  /* BRAND COLORS - ZINC ACCENT */
-  --accent: #09090b;               /* Accent principal (zinc-950) */
-  --accent-lt: #f4f4f5;            /* Accent light (zinc-100) */
-  --accent-md: #52525b;             /* Accent medium (zinc-600) */
-  --accent-dark: #3f3f46;           /* Accent dark (zinc-700) */
+  /* BRAND COLORS - GRAY ACCENT */
+  --accent: #030712;               /* Accent principal (gray-950) */
+  --accent-lt: #f3f4f6;            /* Accent light (gray-100) */
+  --accent-md: #6a7282;             /* Accent medium (gray-500) */
+  --accent-dark: #4a5565;           /* Accent dark (gray-600) */
+
+  /* PRIMARY SYSTEM - Cyan como no Shadcn */
+  --primary: #0ea5e9;              /* Primary cyan */
+  --primary-hover: #0284c7;          /* Primary hover */
+  --primary-light: #e0f2fe;          /* Primary light */
 
   /* BUTTON STATES */
-  --btn-hover: #52525b;             /* Hover state */
+  --btn-hover: #364153;             /* Hover state (gray-700) */
 
-  /* PRIMARY SYSTEM (ZINC) */
-  --primary-red: #71717a;          /* Primary zinc */
-  --primary-red-hover: #52525b;      /* Primary hover */
+  /* LEGACY: manter compatibilidade */
+  --primary-red: #6a7282;          /* Gray-500 para compatibilidade */
+  --primary-red-hover: #4a5565;      /* Gray-600 para compatibilidade */
 
   /* DANGER SYSTEM */
-  --danger-red: #ef4444;           /* Danger red */
-  --danger-red-hover: #dc2626;       /* Danger red hover */
+  --danger: #ef4444;               /* Danger red */
+  --danger-hover: #dc2626;           /* Danger hover */
+  --danger-red: #ef4444;             /* Legacy compat */
+  --danger-red-hover: #dc2626;       /* Legacy compat */
 
   /* FOCUS STATES */
-  --focus-color: #71717a;           /* Focus ring color */
+  --focus-color: #0ea5e9;           /* Focus ring color (primary) */
 
   /* TYPOGRAPHY COLORS */
-  --text: #18181b;                 /* Texto principal */
-  --text2: #27272a;                /* Texto secundário */
-  --text-muted: #52525b;            /* Texto mutado */
-  --muted: #a1a1aa;                /* Texto silenciado */
+  --text: #101828;                 /* Texto principal (gray-900) */
+  --text2: #1e2939;                /* Texto secundário (gray-800) */
+  --text-muted: #4a5565;            /* Texto mutado (gray-600) */
+  --muted: #6a7282;                /* Texto silenciado (gray-500) */
 
-  /* SEMANTIC COLORS - ZINC STYLE */
+  /* SEMANTIC COLORS - Mantendo funcionais */
   --green: #22c55e;
   --green-lt: #f0fdf4;
   --green-border: #86efac;
@@ -59,7 +66,8 @@
   --red-border: #fca5a5;
   --red-dark: #991b1b;
 
-  --yellow: #eab308;
+  /* REMOVIDO: Yellow como cor primária - agora usando Gray */
+  --yellow: #eab308;               /* Mantido apenas para warnings */
   --yellow-lt: #fef9c3;
   --yellow-border: #fde047;
   --yellow-dark: #854d0e;
@@ -77,61 +85,76 @@
   --cyan: #06b6d4;
   --cyan-lt: #ecfeff;
 
-  /* SHADOWS - iOS STYLE */
-  --shadow: 0 1px 3px rgba(0,0,0,.04), 0 1px 2px rgba(0,0,0,.06);
-  --shadow-md: 0 4px 16px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.04);
-  --shadow-lg: 0 10px 40px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.08);
-  --shadow-card: 0 2px 8px rgba(0,0,0,.04), 0 1px 2px rgba(0,0,0,.06);
+  /* SHADOWS - Shadcn Style */
+  --shadow: 0 1px 2px rgba(0,0,0,.05);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.05);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -2px rgba(0,0,0,.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -4px rgba(0,0,0,.1);
+  --shadow-card: 0 1px 3px rgba(0,0,0,.1), 0 1px 2px rgba(0,0,0,.06);
 
   /* BORDER RADIUS */
-  --radius: 12px;
-  --radius-xs: 6px;
-  --radius-sm: 8px;
-  --radius-lg: 16px;
-  --radius-full: 50px;
+  --radius: 0.5rem;                  /* 8px */
+  --radius-xs: 0.25rem;             /* 4px */
+  --radius-sm: 0.375rem;            /* 6px */
+  --radius-lg: 0.75rem;             /* 12px */
+  --radius-full: 9999px;
 
   /* TYPOGRAPHY */
-  --font: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --mono: 'Geist Mono', 'SF Mono', Monaco, monospace;
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --mono: 'JetBrains Mono', 'SF Mono', Monaco, monospace;
 
-  /* SPACING */
-  --space-xs: 4px;
-  --space-sm: 8px;
-  --space-md: 16px;
-  --space-lg: 24px;
-  --space-xl: 32px;
-  --space-2xl: 48px;
-  --space-3xl: 64px;
+  /* SPACING - Shadcn scale */
+  --space-1: 0.25rem;   /* 4px */
+  --space-xs: 0.25rem;   /* 4px legacy */
+  --space-2: 0.5rem;    /* 8px */
+  --space-sm: 0.5rem;    /* 8px legacy */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-md: 1rem;      /* 16px legacy */
+  --space-5: 1.25rem;   /* 20px */
+  --space-6: 1.5rem;    /* 24px */
+  --space-lg: 1.5rem;    /* 24px legacy */
+  --space-8: 2rem;      /* 32px */
+  --space-xl: 2rem;      /* 32px legacy */
+  --space-10: 2.5rem;   /* 40px */
+  --space-12: 3rem;     /* 48px */
+  --space-2xl: 3rem;     /* 48px legacy */
+  --space-3xl: 4rem;     /* 64px legacy */
 }
 
-/* DARK MODE - ZINC THEME */
+/* DARK MODE - GRAY THEME */
 [data-theme="dark"] {
   /* Dark mode inverte a lógica */
-  --bg: #09090b;                    /* Background escuro */
-  --bg-sidebar-nav: #18181b;         /* Sidebar escuro */
-  --surface: #18181b;               /* Superfícies escuras */
-  --surface2: #27272a;             /* Superfície secundária escura */
-  --surface-alt: #18181b;            /* Superfície alternativa escura */
-  --border: #3f3f46;               /* Bordas escuras */
-  --border2: #52525b;              /* Bordas secundárias escuras */
+  --bg: #030712;                    /* Background escuro (gray-950) */
+  --bg-sidebar-nav: #101828;         /* Sidebar escuro (gray-900) */
+  --surface: #101828;               /* Superfícies escuras (gray-900) */
+  --surface2: #1e2939;             /* Superfície secundária escura (gray-800) */
+  --surface-alt: #101828;            /* Superfície alternativa escura */
+  --border: #364153;               /* Bordas escuras (gray-700) */
+  --border2: #4a5565;              /* Bordas secundárias escuras (gray-600) */
 
   /* Textos claros no dark mode */
-  --text: #fafafa;                 /* Texto principal claro */
-  --text2: #f4f4f5;                /* Texto secundário claro */
-  --text-muted: #a1a1aa;            /* Texto mutado claro */
-  --muted: #71717a;                /* Texto silenciado claro */
+  --text: #f9fafb;                 /* Texto principal claro (gray-50) */
+  --text2: #f3f4f6;                /* Texto secundário claro (gray-100) */
+  --text-muted: #99a1af;            /* Texto mutado claro (gray-400) */
+  --muted: #6a7282;                /* Texto silenciado (gray-500) */
 
   /* Accent adaptado para dark */
-  --accent: #fafafa;               /* Accent claro no dark */
-  --accent-lt: #27272a;            /* Accent light escuro */
-  --accent-md: #a1a1aa;             /* Accent medium escuro */
-  --accent-dark: #d4d4d8;           /* Accent dark escuro */
+  --accent: #f9fafb;               /* Accent claro no dark */
+  --accent-lt: #1e2939;            /* Accent light escuro (gray-800) */
+  --accent-md: #99a1af;             /* Accent medium escuro (gray-400) */
+  --accent-dark: #d1d5dc;           /* Accent dark escuro (gray-300) */
 
   /* Botões adaptados */
-  --btn-hover: #71717a;             /* Hover state claro */
-  --primary-red: #a1a1aa;          /* Primary claro */
-  --primary-red-hover: #d4d4d8;      /* Primary hover claro */
-  --focus-color: #a1a1aa;           /* Focus claro */
+  --btn-hover: #6a7282;             /* Hover state claro */
+  --primary: #38bdf8;              /* Primary mais claro no dark */
+  --primary-hover: #7dd3fc;          /* Primary hover claro */
+  --primary-light: #0c4a6e;          /* Primary light escuro */
+  
+  /* Legacy compatibility */
+  --primary-red: #99a1af;          /* Gray-400 para compatibilidade */
+  --primary-red-hover: #d1d5dc;      /* Gray-300 para compatibilidade */
+  --focus-color: #38bdf8;           /* Focus claro */
 }
 
 /* ── Font Overrides ───────────────────────────────── */
@@ -443,11 +466,11 @@ body {
 }
 /* estados de cor — fundo muito sutil */
 .backup-banner-wrap.ok     { background: rgba(16,185,129,.06); border-color: rgba(16,185,129,.25); color: var(--text); }
-.backup-banner-wrap.warn   { background: rgba(245,158,11,.07); border-color: rgba(245,158,11,.3);  color: var(--text); }
+.backup-banner-wrap.warn   { background: rgba(106,114,130,.06); border-color: rgba(106,114,130,.25);  color: var(--text); }
 .backup-banner-wrap.danger { background: rgba(239,68,68,.07);  border-color: rgba(239,68,68,.25);  color: var(--text); }
 .backup-banner-wrap.never  { background: rgba(139,92,246,.07); border-color: rgba(139,92,246,.25); color: var(--text); }
 [data-theme="dark"] .backup-banner-wrap.ok     { background: rgba(16,185,129,.08);  border-color: rgba(16,185,129,.2); }
-[data-theme="dark"] .backup-banner-wrap.warn   { background: rgba(245,158,11,.08);  border-color: rgba(245,158,11,.2); }
+[data-theme="dark"] .backup-banner-wrap.warn   { background: rgba(106,114,130,.08);  border-color: rgba(106,114,130,.2); }
 [data-theme="dark"] .backup-banner-wrap.danger { background: rgba(239,68,68,.08);   border-color: rgba(239,68,68,.2); }
 [data-theme="dark"] .backup-banner-wrap.never  { background: rgba(139,92,246,.08);  border-color: rgba(139,92,246,.2); }
 
@@ -486,11 +509,11 @@ body {
   line-height: 1;
 }
 .backup-banner-wrap.ok     .backup-banner-icon { color: var(--green); }
-.backup-banner-wrap.warn   .backup-banner-icon { color: var(--yellow); }
+.backup-banner-wrap.warn   .backup-banner-icon { color: var(--text-muted); }
 .backup-banner-wrap.danger .backup-banner-icon { color: var(--red); }
 .backup-banner-wrap.never  .backup-banner-icon { color: var(--blue); }
 [data-theme="dark"] .backup-banner-wrap.ok     .backup-banner-icon { color: var(--green); }
-[data-theme="dark"] .backup-banner-wrap.warn   .backup-banner-icon { color: var(--yellow); }
+[data-theme="dark"] .backup-banner-wrap.warn   .backup-banner-icon { color: var(--text-muted); }
 [data-theme="dark"] .backup-banner-wrap.danger .backup-banner-icon { color: var(--red); }
 [data-theme="dark"] .backup-banner-wrap.never  .backup-banner-icon { color: var(--blue); }
 
@@ -569,11 +592,11 @@ body {
 }
 .backup-indicator-btn:hover { border-color: var(--btn-hover); color: var(--btn-hover); }
 .backup-indicator-btn.status-ok     { color: var(--green); border-color: var(--green-lt); background: var(--green-lt); }
-.backup-indicator-btn.status-warn   { color: var(--yellow); border-color: var(--yellow-lt); background: var(--yellow-lt); }
+.backup-indicator-btn.status-warn   { color: var(--text-muted); border-color: var(--surface2); background: var(--surface2); }
 .backup-indicator-btn.status-danger { color: var(--red); border-color: var(--red-lt); background: var(--red-lt); }
 .backup-indicator-btn.status-never  { color: var(--blue); border-color: var(--blue-lt); background: var(--blue-lt); }
 [data-theme="dark"] .backup-indicator-btn.status-ok     { color: var(--green); border-color: var(--green); background: var(--green-lt); }
-[data-theme="dark"] .backup-indicator-btn.status-warn   { color: var(--yellow); border-color: var(--yellow); background: var(--yellow-lt); }
+[data-theme="dark"] .backup-indicator-btn.status-warn   { color: var(--text-muted); border-color: var(--border2); background: var(--surface2); }
 [data-theme="dark"] .backup-indicator-btn.status-danger { color: var(--red); border-color: var(--red); background: var(--red-lt); }
 [data-theme="dark"] .backup-indicator-btn.status-never  { color: var(--blue); border-color: var(--blue); background: var(--blue-lt); }
 
@@ -722,8 +745,8 @@ body {
 }
 
 .chip-yellow {
-  background: var(--yellow-lt);
-  color: var(--yellow);
+  background: var(--surface2);
+  color: var(--text-muted);
 }
 
 .chip-blue {
@@ -1387,19 +1410,19 @@ select.form-input:disabled {
 .campos-vigentes{display:none}
 .campos-vigentes.show{display:contents}
 .tag-liquido{background:var(--green-lt);color:var(--green-dark);border-radius:var(--radius-sm);padding:8px 12px;font-size:14px;font-weight:700;display:inline-block;margin-top:2px;min-width:110px}
-.tag-aviso-taxa{background:var(--yellow-lt);border:1px solid var(--yellow-lt);border-radius:var(--radius-sm);padding:9px 12px;font-size:12px;color:var(--yellow-dark);display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.tag-aviso-taxa{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:9px 12px;font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:8px;margin-bottom:8px}
 .tag-aviso-taxa i{font-size:14px;flex-shrink:0}
 .chip-ar-atrasado{background:var(--red-lt);color:var(--red);border-radius:var(--radius-sm);padding:2px 8px;font-size:12px;font-weight:500;display:inline-block;text-align:center;white-space:nowrap}
 .chip-ar-pago{background:var(--green-lt);color:var(--green-dark);border-radius:var(--radius-sm);padding:2px 8px;font-size:12px;font-weight:500;display:inline-block;text-align:center;white-space:nowrap}
 .chip-ar-inad{background:var(--red-lt);color:var(--red-dark);border-radius:var(--radius-sm);padding:2px 8px;font-size:12px;font-weight:500;display:inline-block;text-align:center;white-space:nowrap}
-.chip-ar-pend{background:var(--yellow-lt);color:var(--yellow-dark);border-radius:var(--radius-sm);padding:2px 8px;font-size:12px;font-weight:500;display:inline-block;text-align:center;white-space:nowrap}
+.chip-ar-pend{background:var(--surface2);color:var(--text-muted);border-radius:var(--radius-sm);padding:2px 8px;font-size:12px;font-weight:500;display:inline-block;text-align:center;white-space:nowrap}
 .comissao-icon{width:52px;height:52px;border-radius:var(--radius-sm);background:linear-gradient(135deg,var(--purple),var(--purple-lt));display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .comissao-icon i{font-size:24px;color:var(--bg)}
 .comissao-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;margin-bottom:20px}
 .comissao-card-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px}
 .comissao-card-sub{font-size:14px;color:var(--text-muted);margin-bottom:18px;line-height:1.5}
 .taxa-atual-badge{display:inline-flex;align-items:center;gap:8px;background:var(--green-lt);color:var(--green-dark);border-radius:var(--radius-sm);padding:8px 16px;font-size:16px;font-weight:700;margin-bottom:16px}
-.taxa-nao-def{display:inline-flex;align-items:center;gap:8px;background:var(--yellow-lt);color:var(--yellow-dark);border-radius:var(--radius-sm);padding:8px 16px;font-size:14px;font-weight:600;margin-bottom:16px}
+.taxa-nao-def{display:inline-flex;align-items:center;gap:8px;background:var(--surface2);color:var(--text-muted);border-radius:var(--radius-sm);padding:8px 16px;font-size:14px;font-weight:600;margin-bottom:16px}
 .taxa-input-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:16px}
 .taxa-input-row input{width:110px}
 .taxa-info-box{background:var(--surface-alt);border-radius:var(--radius-sm);padding:14px 16px;font-size:14px;color:var(--text-muted);line-height:1.6}
@@ -1435,49 +1458,6 @@ select.form-input:disabled {
 #themeIconDark  { right: 6px; color: var(--muted);  }
 [data-theme="dark"] #themeIconLight { opacity: 0.3; }
 [data-theme="dark"] #themeIconDark  { opacity: 1; color: var(--bg); }
-
-:root{
-  /* Core Colors */
-  --bg:#f4f4f4;
-  --surface:#ffffff;
-  --surface2:#eeeeee;
-  --surface-alt:#f9f9f9;
-  --border:#e5e5e5;
-  --border2:#d4d4d4;
-
-  /* Brand Colors */
-  --accent:#fb923c;
-  --accent-lt:#fff4ec;
-  --accent-md:#ea6e0a;
-  --btn-hover:#ea6e0a;
-
-  /* Text Colors */
-  --text:#0f172a;
-  --text2:#334155;
-  --text-muted:#64748b;
-  --muted:#94a3b8;
-
-  /* Semantic Colors */
-  --green:#22c55e;
-  --green-lt:#dcfce7;
-  --green-border:#86efac;
-  --green-dark:#14532d;
-  --red:#ef4444;
-  --red-lt:#fee2e2;
-  --red-border:#fca5a5;
-  --red-dark:#7f1d1d;
-  --yellow:#f59e0b;
-  --yellow-lt:#fef3c7;
-  --yellow-border:#fcd34d;
-  --yellow-dark:#b45309;
-  /* Dark mode styles específicos (tokens principais já vêm do DESIGN_TOKENS_ZINC.css) */
-[data-theme="dark"] body{background:var(--bg);color:var(--text)}
-[data-theme="dark"] .kpi-icon{color:var(--text) !important}
-[data-theme="dark"] .form-input,[data-theme="dark"] select.form-input,[data-theme="dark"] input.form-input{background:var(--surface2);color:var(--text);border-color:var(--border2)}
-[data-theme="dark"] .form-input::placeholder{color:var(--muted)}
-[data-theme="dark"] .form-input:focus{border-color:var(--focus-color);}
-[data-theme="dark"] .modal-overlay{background:rgba(0,0,0,.8)}
-[data-theme="dark"] .modal{background:var(--surface);border:1px solid var(--border2)}
 
 /* ══════════════════════════════════════════
    SUMMARY BOX COMPONENT
@@ -1563,8 +1543,8 @@ select.form-input:disabled {
   color: var(--blue);
 }
 .kpi-icon-yellow {
-  background: var(--yellow-lt);
-  color: var(--yellow);
+  background: var(--surface2);
+  color: var(--text-muted);
 }
 .kpi-icon-accent {
   background: var(--accent-lt);
@@ -1609,16 +1589,16 @@ select.form-input:disabled {
 [data-theme="dark"] .chip-orange{background:var(--surface3);color:var(--orange)}
 [data-theme="dark"] .comissao-card,[data-theme="dark"] .taxa-info-box{background:var(--surface2);border-color:var(--border2)}
 [data-theme="dark"] .tag-liquido{background:var(--green-lt);color:var(--green)}
-[data-theme="dark"] .tag-aviso-taxa{background:var(--yellow-lt);border-color:var(--yellow-dark);color:var(--yellow)}
+[data-theme="dark"] .tag-aviso-taxa{background:var(--surface2);border-color:var(--border2);color:var(--text-muted)}
 [data-theme="dark"] .modal-reset-warning{background:var(--red-lt);border-color:var(--red-dark);color:var(--red)}
 [data-theme="dark"] .page-header,[data-theme="dark"] .section-head{border-bottom-color:var(--border)}
 [data-theme="dark"] .filter-bar{background:var(--surface2);border-color:var(--border)}
 [data-theme="dark"] .chip-ar-atrasado{background:var(--red-lt);color:var(--red);text-align:center;white-space:nowrap}
 [data-theme="dark"] .chip-ar-pago{background:var(--green-lt);color:var(--green);text-align:center;white-space:nowrap}
 [data-theme="dark"] .chip-ar-inad{background:var(--red-lt);color:var(--red-dark);text-align:center;white-space:nowrap}
-[data-theme="dark"] .chip-ar-pend{background:var(--yellow-lt);color:var(--yellow);text-align:center;white-space:nowrap}
+[data-theme="dark"] .chip-ar-pend{background:var(--surface2);color:var(--text-muted);text-align:center;white-space:nowrap}
 [data-theme="dark"] .taxa-atual-badge{background:var(--green-lt);color:var(--green)}
-[data-theme="dark"] .taxa-nao-def{background:var(--yellow-lt);color:var(--yellow)}
+[data-theme="dark"] .taxa-nao-def{background:var(--surface2);color:var(--text-muted)}
 [data-theme="dark"] .theme-toggle{background:var(--surface2);border-color:var(--border2)}
 
 /* ══════════════════════════════════════════
@@ -1883,12 +1863,12 @@ select.form-input:disabled {
 .login-err.show { display: flex; }
 .login-hint-panel {
   display: none; margin-top: 12px; padding: 12px 14px;
-  background: var(--yellow-lt); border: 1px solid var(--yellow-lt);
+  background: var(--surface2); border: 1px solid var(--border);
   border-radius: var(--radius-sm); font-size: 13px;
 }
 .login-hint-panel.show { display: block; }
 .login-hint-label {
-  font-weight: 700; color: var(--yellow); margin-bottom: 4px;
+  font-weight: 700; color: var(--text-muted); margin-bottom: 4px;
   display: flex; align-items: center; gap: 6px;
 }
 .login-footer {
@@ -2204,3 +2184,141 @@ tr.cli-group-header td { border-top: 2px solid var(--border2) !important; }
   background: var(--accent);
   color: var(--bg);
 }
+
+/* ══════════════════════════════════════════
+   UTILITY CLASSES - Tailwind-inspired
+   Adicionado sem quebrar código existente
+   ══════════════════════════════════════════ */
+
+/* SPACING - Padding */
+.p-0 { padding: 0; }
+.p-1 { padding: var(--space-xs); }
+.p-2 { padding: var(--space-sm); }
+.p-3 { padding: 12px; }
+.p-4 { padding: var(--space-md); }
+.p-5 { padding: 20px; }
+.p-6 { padding: var(--space-lg); }
+.p-7 { padding: 28px; }
+.p-8 { padding: var(--space-xl); }
+.px-2 { padding-left: var(--space-sm); padding-right: var(--space-sm); }
+.px-3 { padding-left: 12px; padding-right: 12px; }
+.px-4 { padding-left: var(--space-md); padding-right: var(--space-md); }
+.px-6 { padding-left: var(--space-lg); padding-right: var(--space-lg); }
+.px-7 { padding-left: 28px; padding-right: 28px; }
+.py-1 { padding-top: var(--space-xs); padding-bottom: var(--space-xs); }
+.py-2 { padding-top: var(--space-sm); padding-bottom: var(--space-sm); }
+.py-3 { padding-top: 12px; padding-bottom: 12px; }
+.py-4 { padding-top: var(--space-md); padding-bottom: var(--space-md); }
+.pt-2 { padding-top: var(--space-sm); }
+.pt-4 { padding-top: var(--space-md); }
+.pb-2 { padding-bottom: var(--space-sm); }
+.pb-4 { padding-bottom: var(--space-md); }
+.pl-4 { padding-left: var(--space-md); }
+.pr-4 { padding-right: var(--space-md); }
+
+/* SPACING - Margin */
+.m-0 { margin: 0; }
+.m-1 { margin: var(--space-xs); }
+.m-2 { margin: var(--space-sm); }
+.m-4 { margin: var(--space-md); }
+.m-auto { margin: auto; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+.mb-0 { margin-bottom: 0; }
+.mb-1 { margin-bottom: var(--space-xs); }
+.mb-2 { margin-bottom: var(--space-sm); }
+.mb-3 { margin-bottom: 12px; }
+.mb-4 { margin-bottom: var(--space-md); }
+.mb-5 { margin-bottom: 20px; }
+.mb-6 { margin-bottom: var(--space-lg); }
+.mb-8 { margin-bottom: var(--space-xl); }
+.mt-2 { margin-top: var(--space-sm); }
+.mt-4 { margin-top: var(--space-md); }
+.mt-6 { margin-top: var(--space-lg); }
+.ml-auto { margin-left: auto; }
+.mr-auto { margin-right: auto; }
+
+/* LAYOUT - Display */
+.block { display: block; }
+.inline { display: inline; }
+.inline-block { display: inline-block; }
+.hidden { display: none; }
+.flex { display: flex; }
+.inline-flex { display: inline-flex; }
+.grid { display: grid; }
+
+/* LAYOUT - Flex */
+.flex-col { flex-direction: column; }
+.flex-row { flex-direction: row; }
+.items-center { align-items: center; }
+.items-start { align-items: flex-start; }
+.items-end { align-items: flex-end; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.justify-end { justify-content: flex-end; }
+.gap-1 { gap: var(--space-xs); }
+.gap-2 { gap: var(--space-sm); }
+.gap-3 { gap: 12px; }
+.gap-4 { gap: var(--space-md); }
+.flex-1 { flex: 1; }
+.flex-shrink-0 { flex-shrink: 0; }
+
+/* LAYOUT - Position */
+.relative { position: relative; }
+.absolute { position: absolute; }
+.fixed { position: fixed; }
+.inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+
+/* LAYOUT - Sizing */
+.w-full { width: 100%; }
+.h-full { height: 100%; }
+.min-h-screen { min-height: 100vh; }
+.max-w-md { max-width: 420px; }
+.max-w-lg { max-width: 560px; }
+.max-w-xl { max-width: 680px; }
+
+/* TYPOGRAPHY - Size */
+.text-xs { font-size: 12px; }
+.text-sm { font-size: 14px; }
+.text-base { font-size: 16px; }
+.text-lg { font-size: 18px; }
+.text-xl { font-size: 20px; }
+.text-2xl { font-size: 24px; }
+
+/* TYPOGRAPHY - Weight */
+.font-normal { font-weight: 400; }
+.font-medium { font-weight: 500; }
+.font-semibold { font-weight: 600; }
+.font-bold { font-weight: 700; }
+.font-extrabold { font-weight: 800; }
+
+/* TYPOGRAPHY - Alignment */
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+
+/* TYPOGRAPHY - Color */
+.text-text { color: var(--text); }
+.text-text2 { color: var(--text2); }
+.text-muted { color: var(--text-muted); }
+.text-accent { color: var(--accent); }
+.text-red { color: var(--red); }
+.text-green { color: var(--green); }
+.text-yellow { color: var(--yellow); }
+
+/* BACKGROUND */
+.bg-surface { background: var(--surface); }
+.bg-surface2 { background: var(--surface2); }
+.bg-accent { background: var(--accent); }
+
+/* BORDERS */
+.rounded-none { border-radius: 0; }
+.rounded-sm { border-radius: var(--radius-xs); }
+.rounded { border-radius: var(--radius-sm); }
+.rounded-lg { border-radius: var(--radius); }
+.rounded-xl { border-radius: var(--radius-lg); }
+.rounded-full { border-radius: 9999px; }
+
+/* CURSOR */
+.cursor-pointer { cursor: pointer; }
+.cursor-default { cursor: default; }
+
