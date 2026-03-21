@@ -1,0 +1,226 @@
+/* ==========================================
+   DESIGN TOKENS - TEMA ZINC MINIMALISTA
+   Referência Completa para Desenvolvimento
+   ========================================== */
+
+/* 
+   PALETA ZINC - TAILWIND CSS
+   60% → #fafafa  (background zinc-50)
+   30% → #71717a  (accent zinc-600) 
+   10% → #18181b  (textos zinc-900)
+*/
+
+:root {
+  /* CORE ZINC PALETTE */
+  --zinc-50: #fafafa;
+  --zinc-100: #f4f4f5;
+  --zinc-200: #e4e4e7;
+  --zinc-300: #d4d4d8;
+  --zinc-400: #a1a1aa;
+  --zinc-500: #71717a;
+  --zinc-600: #52525b;
+  --zinc-700: #3f3f46;
+  --zinc-800: #27272a;
+  --zinc-900: #18181b;
+  --zinc-950: #09090b;
+
+  /* CORE COLORS - ZINC SYSTEM */
+  --bg: #fafafa;                    /* Background principal */
+  --bg-sidebar-nav: #f9fafb;         /* Background sidebar */
+  --surface: #ffffff;               /* Superfícies cards */
+  --surface2: #f9fafb;             /* Superfície secundária */
+  --surface-alt: #ffffff;            /* Superfície alternativa */
+  --border: #e4e4e7;               /* Bordas principais */
+  --border2: #d4d4d8;              /* Bordas secundárias */
+
+  /* BRAND COLORS - ZINC ACCENT */
+  --accent: #09090b;               /* Accent principal (zinc-950) */
+  --accent-lt: #f4f4f5;            /* Accent light (zinc-100) */
+  --accent-md: #52525b;             /* Accent medium (zinc-600) */
+  --accent-dark: #3f3f46;           /* Accent dark (zinc-700) */
+
+  /* BUTTON STATES */
+  --btn-hover: #52525b;             /* Hover state */
+
+  /* PRIMARY SYSTEM (ZINC) */
+  --primary-red: #71717a;          /* Primary zinc */
+  --primary-red-hover: #52525b;      /* Primary hover */
+
+  /* DANGER SYSTEM */
+  --danger-red: #ef4444;           /* Danger red */
+  --danger-red-hover: #dc2626;       /* Danger red hover */
+
+  /* FOCUS STATES */
+  --focus-color: #71717a;           /* Focus ring color */
+
+  /* TYPOGRAPHY COLORS */
+  --text: #18181b;                 /* Texto principal */
+  --text2: #27272a;                /* Texto secundário */
+  --text-muted: #52525b;            /* Texto mutado */
+  --muted: #a1a1aa;                /* Texto silenciado */
+
+  /* SEMANTIC COLORS - ZINC STYLE */
+  --green: #22c55e;
+  --green-lt: #f0fdf4;
+  --green-border: #86efac;
+  --green-dark: #166534;
+
+  --red: #ef4444;
+  --red-lt: #fef2f2;
+  --red-border: #fca5a5;
+  --red-dark: #991b1b;
+
+  --yellow: #eab308;
+  --yellow-lt: #fef9c3;
+  --yellow-border: #fde047;
+  --yellow-dark: #854d0e;
+
+  --orange: #f97316;
+  --orange-lt: #ffedd5;
+  --orange-border: #fdba74;
+  --orange-dark: #9a3412;
+
+  /* ADDITIONAL COLORS */
+  --blue: #3b82f6;
+  --blue-lt: #eff6ff;
+  --purple: #8b5cf6;
+  --purple-lt: #f3e8ff;
+  --cyan: #06b6d4;
+  --cyan-lt: #ecfeff;
+
+  /* SHADOWS - iOS STYLE */
+  --shadow: 0 1px 3px rgba(0,0,0,.04), 0 1px 2px rgba(0,0,0,.06);
+  --shadow-md: 0 4px 16px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.04);
+  --shadow-lg: 0 10px 40px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.08);
+  --shadow-card: 0 2px 8px rgba(0,0,0,.04), 0 1px 2px rgba(0,0,0,.06);
+
+  /* BORDER RADIUS */
+  --radius: 12px;
+  --radius-xs: 6px;
+  --radius-sm: 8px;
+  --radius-lg: 16px;
+  --radius-full: 50px;
+
+  /* TYPOGRAPHY */
+  --font: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --mono: 'Geist Mono', 'SF Mono', Monaco, monospace;
+
+  /* SPACING */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+}
+
+/* ==========================================
+   DARK MODE - ZINC THEME
+   ========================================== */
+
+[data-theme="dark"] {
+  /* Dark mode inverte a lógica */
+  --bg: #09090b;                    /* Background escuro */
+  --bg-sidebar-nav: #18181b;         /* Sidebar escuro */
+  --surface: #18181b;               /* Superfícies escuras */
+  --surface2: #27272a;             /* Superfície secundária escura */
+  --surface-alt: #18181b;            /* Superfície alternativa escura */
+  --border: #3f3f46;               /* Bordas escuras */
+  --border2: #52525b;              /* Bordas secundárias escuras */
+
+  /* Textos claros no dark mode */
+  --text: #fafafa;                 /* Texto principal claro */
+  --text2: #f4f4f5;                /* Texto secundário claro */
+  --text-muted: #a1a1aa;            /* Texto mutado claro */
+  --muted: #71717a;                /* Texto silenciado claro */
+
+  /* Accent adaptado para dark */
+  --accent: #fafafa;               /* Accent claro no dark */
+  --accent-lt: #27272a;            /* Accent light escuro */
+  --accent-md: #a1a1aa;             /* Accent medium escuro */
+  --accent-dark: #d4d4d8;           /* Accent dark escuro */
+
+  /* Botões adaptados */
+  --btn-hover: #71717a;             /* Hover state claro */
+  --primary-red: #a1a1aa;          /* Primary claro */
+  --primary-red-hover: #d4d4d8;      /* Primary hover claro */
+  --focus-color: #a1a1aa;           /* Focus claro */
+
+  /* Superfícies de botões */
+  --surface: #fafafa;               /* Botão background claro */
+  --surface2: #f4f4f5;             /* Botão hover claro */
+}
+
+/* ==========================================
+   USO PRÁTICO - EXEMPLOS
+   ========================================== */
+
+/* Exemplo de uso em componentes */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--bg);
+  border-radius: var(--radius-sm);
+  padding: var(--space-sm) var(--space-md);
+}
+
+.btn-primary:hover {
+  background: var(--btn-hover);
+}
+
+.text-primary {
+  color: var(--text);
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+/* Dropdown example */
+.dropdown {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-lg);
+  z-index: 1000;
+}
+
+.dropdown-item {
+  color: var(--text);
+  padding: var(--space-sm) var(--space-md);
+}
+
+.dropdown-item:hover {
+  background: var(--surface2);
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    /* Aplica dark mode automaticamente se não tiver tema explícito */
+  }
+}
+
+/* ==========================================
+   REGRAS DE USO - ZINC DESIGN SYSTEM
+   ========================================== */
+
+/* 
+   1. SEMPRE usar variáveis definidas acima
+   2. NUNCA usar cores hard-coded
+   3. Manter consistência 60-30-10 (bg-accent-text)
+   4. Usar --text para textos principais
+   5. Usar --text-muted para textos secundários
+   6. Usar --surface para fundos de cards
+   7. Usar --surface2 para hovers e estados
+   8. Usar --border para bordas principais
+   9. Usar --accent para elementos primários
+   10. Usar --shadow-lg para dropdowns e modais
+*/

@@ -1,84 +1,148 @@
-/* ── Geist em toda a interface ──────────────────── */
+/* ── Design Tokens Zinc Theme ──────────────────── */
+:root {
+  /* CORE ZINC PALETTE */
+  --zinc-50: #fafafa;
+  --zinc-100: #f4f4f5;
+  --zinc-200: #e4e4e7;
+  --zinc-300: #d4d4d8;
+  --zinc-400: #a1a1aa;
+  --zinc-500: #71717a;
+  --zinc-600: #52525b;
+  --zinc-700: #3f3f46;
+  --zinc-800: #27272a;
+  --zinc-900: #18181b;
+  --zinc-950: #09090b;
+
+  /* CORE COLORS - ZINC SYSTEM */
+  --bg: #fafafa;                    /* Background principal */
+  --bg-sidebar-nav: #f9fafb;         /* Background sidebar */
+  --surface: #ffffff;               /* Superfícies cards */
+  --surface2: #f9fafb;             /* Superfície secundária */
+  --surface-alt: #ffffff;            /* Superfície alternativa */
+  --border: #e4e4e7;               /* Bordas principais */
+  --border2: #d4d4d8;              /* Bordas secundárias */
+
+  /* BRAND COLORS - ZINC ACCENT */
+  --accent: #09090b;               /* Accent principal (zinc-950) */
+  --accent-lt: #f4f4f5;            /* Accent light (zinc-100) */
+  --accent-md: #52525b;             /* Accent medium (zinc-600) */
+  --accent-dark: #3f3f46;           /* Accent dark (zinc-700) */
+
+  /* BUTTON STATES */
+  --btn-hover: #52525b;             /* Hover state */
+
+  /* PRIMARY SYSTEM (ZINC) */
+  --primary-red: #71717a;          /* Primary zinc */
+  --primary-red-hover: #52525b;      /* Primary hover */
+
+  /* DANGER SYSTEM */
+  --danger-red: #ef4444;           /* Danger red */
+  --danger-red-hover: #dc2626;       /* Danger red hover */
+
+  /* FOCUS STATES */
+  --focus-color: #71717a;           /* Focus ring color */
+
+  /* TYPOGRAPHY COLORS */
+  --text: #18181b;                 /* Texto principal */
+  --text2: #27272a;                /* Texto secundário */
+  --text-muted: #52525b;            /* Texto mutado */
+  --muted: #a1a1aa;                /* Texto silenciado */
+
+  /* SEMANTIC COLORS - ZINC STYLE */
+  --green: #22c55e;
+  --green-lt: #f0fdf4;
+  --green-border: #86efac;
+  --green-dark: #166534;
+
+  --red: #ef4444;
+  --red-lt: #fef2f2;
+  --red-border: #fca5a5;
+  --red-dark: #991b1b;
+
+  --yellow: #eab308;
+  --yellow-lt: #fef9c3;
+  --yellow-border: #fde047;
+  --yellow-dark: #854d0e;
+
+  --orange: #f97316;
+  --orange-lt: #ffedd5;
+  --orange-border: #fdba74;
+  --orange-dark: #9a3412;
+
+  /* ADDITIONAL COLORS */
+  --blue: #3b82f6;
+  --blue-lt: #eff6ff;
+  --purple: #8b5cf6;
+  --purple-lt: #f3e8ff;
+  --cyan: #06b6d4;
+  --cyan-lt: #ecfeff;
+
+  /* SHADOWS - iOS STYLE */
+  --shadow: 0 1px 3px rgba(0,0,0,.04), 0 1px 2px rgba(0,0,0,.06);
+  --shadow-md: 0 4px 16px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.04);
+  --shadow-lg: 0 10px 40px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.08);
+  --shadow-card: 0 2px 8px rgba(0,0,0,.04), 0 1px 2px rgba(0,0,0,.06);
+
+  /* BORDER RADIUS */
+  --radius: 12px;
+  --radius-xs: 6px;
+  --radius-sm: 8px;
+  --radius-lg: 16px;
+  --radius-full: 50px;
+
+  /* TYPOGRAPHY */
+  --font: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --mono: 'Geist Mono', 'SF Mono', Monaco, monospace;
+
+  /* SPACING */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+}
+
+/* DARK MODE - ZINC THEME */
+[data-theme="dark"] {
+  /* Dark mode inverte a lógica */
+  --bg: #09090b;                    /* Background escuro */
+  --bg-sidebar-nav: #18181b;         /* Sidebar escuro */
+  --surface: #18181b;               /* Superfícies escuras */
+  --surface2: #27272a;             /* Superfície secundária escura */
+  --surface-alt: #18181b;            /* Superfície alternativa escura */
+  --border: #3f3f46;               /* Bordas escuras */
+  --border2: #52525b;              /* Bordas secundárias escuras */
+
+  /* Textos claros no dark mode */
+  --text: #fafafa;                 /* Texto principal claro */
+  --text2: #f4f4f5;                /* Texto secundário claro */
+  --text-muted: #a1a1aa;            /* Texto mutado claro */
+  --muted: #71717a;                /* Texto silenciado claro */
+
+  /* Accent adaptado para dark */
+  --accent: #fafafa;               /* Accent claro no dark */
+  --accent-lt: #27272a;            /* Accent light escuro */
+  --accent-md: #a1a1aa;             /* Accent medium escuro */
+  --accent-dark: #d4d4d8;           /* Accent dark escuro */
+
+  /* Botões adaptados */
+  --btn-hover: #71717a;             /* Hover state claro */
+  --primary-red: #a1a1aa;          /* Primary claro */
+  --primary-red-hover: #d4d4d8;      /* Primary hover claro */
+  --focus-color: #a1a1aa;           /* Focus claro */
+}
+
+/* ── Font Overrides ───────────────────────────────── */
 *, *::before, *::after { font-family: inherit; }
 html { font-family: var(--font); }
 input, select, textarea, button {
   font-family: var(--font);
 }
-/* Mantém Geist Mono apenas para valores numéricos financeiros */
+/* Mantém mono apenas para valores numéricos financeiros */
 .td-mono, .kpi-value, .prog-val {
   font-family: var(--mono);
-}
-
-/* ══════════════════════════════════════════
-   DESIGN TOKENS  — fiel ao modelo Finexy
-   Fundo branco/cinza claro, accent laranja
-   ══════════════════════════════════════════ */
-:root{
-  /* ── 60-30-10 Design Tokens ─────────────────────────────────
-     60% → #f4f4f4  (background / surfaces)
-     30% → #fb923c  (brand accent / interactive)
-     10% → #0f172a  (sidebar / dark surfaces / headings)
-  ──────────────────────────────────────────────────────────── */
-
-  /* Core Colors */
-  --bg:#f4f4f4;
-  --bg-sidebar-nav:#0f172a;
-  --surface:#ffffff;
-  --surface2:#eeeeee;
-  --surface-alt:#f9f9f9;
-  --border:#e5e5e5;
-  --border2:#d4d4d4;
-
-  /* Brand Colors — accent laranja (30%) */
-  --accent:#fb923c;
-  --accent-lt:#fff4ec;
-  --accent-md:#ea6e0a;
-  --accent-dark:#c2520a;
-
-  /* Button Hover State */
-  --btn-hover:#ea6e0a;
-
-  /* Primary Colors System (aliases para compatibilidade) */
-  --primary-red:#fb923c;
-  --primary-red-hover:#ea6e0a;
-  --danger-red:#ef4444;
-  --danger-red-hover:#dc2626;
-  --focus-color:#fb923c;
-
-  /* Text Colors — base escura (10%) */
-  --text:#0f172a;
-  --text2:#334155;
-  --text-muted:#64748b;
-  --muted:#94a3b8;
-
-  /* Semantic Colors */
-  --green:#22c55e;
-  --green-lt:#dcfce7;
-  --green-border:#86efac;
-  --green-dark:#14532d;
-  --red:#ef4444;
-  --red-lt:#fee2e2;
-  --red-border:#fca5a5;
-  --red-dark:#7f1d1d;
-  --yellow:#f59e0b;
-  --yellow-lt:#fef3c7;
-  --yellow-border:#fcd34d;
-  --blue:#3b82f6;
-  --blue-lt:#dbeafe;
-
-  /* Shadows & Radius */
-  --shadow:0 1px 3px rgba(15,23,42,.08),0 1px 2px rgba(15,23,42,.04);
-  --shadow-md:0 4px 12px rgba(15,23,42,.08);
-  --shadow-lg:0 8px 32px rgba(15,23,42,.12);
-  --radius:14px;
-  --radius-sm:8px;
-  --radius-lg:16px;
-  --radius-xs:4px;
-  --radius-full:50px;
-
-  /* Typography — mantida Geist */
-  --font:'Geist',sans-serif;
-  --mono:'Geist Mono',monospace;
 }
 
 *,
@@ -173,8 +237,8 @@ body {
   flex-shrink: 0;
 }
 .sidebar-logo-icon img { width: 18px; height: 18px; object-fit: contain; filter: invert(1); }
-.sidebar-logo-text { font-weight: 700; font-size: 14px; color: var(--bg); letter-spacing: -.3px; }
-.sidebar-logo-sub { font-size: 11px; color: rgba(255,255,255,0.7); margin-top: 1px; }
+.sidebar-logo-text { font-weight: 700; font-size: 14px; color: var(--text); letter-spacing: -.3px; }
+.sidebar-logo-sub { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
 
 /* ── Emissora selector inside sidebar ─────────────────────── */
 .sidebar-station-sel {
@@ -215,13 +279,13 @@ body {
   border-radius: var(--radius-sm);
   font-size: 13.5px;
   font-weight: 500;
-  color: rgba(255,255,255,0.8);
+  color: var(--text);
   transition: background .12s, color .12s;
   cursor: pointer;
 }
 .nav-item .nav-icon { font-size: 15px; width: 16px; text-align: center; flex-shrink: 0; color: inherit; transition: color .12s; }
-.nav-item:hover { background: rgba(255,255,255,0.1); color: var(--bg); }
-.nav-item:focus { background: rgba(255,255,255,0.1); color: var(--bg); }
+.nav-item:hover { background: var(--surface2); color: var(--text); }
+.nav-item:focus { background: var(--surface2); color: var(--text); }
 .nav-item.active { background: var(--accent); color: var(--bg); font-weight: 600; }
 
 /* ── Section label ──────────────────────────────────────── */
@@ -231,7 +295,7 @@ body {
   font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.6);
+  color: var(--text-muted);
 }
 
 /* ── Collapsible group ──────────────────────────────────── */
@@ -246,12 +310,12 @@ body {
   cursor: pointer;
   font-size: 13px;
   font-weight: 500;
-  color: rgba(255,255,255,0.8);
+  color: var(--text);
   transition: background .12s, color .12s;
   user-select: none;
 }
-.nav-group-trigger:hover { background: rgba(255,255,255,0.1); color: var(--bg); }
-.nav-group-trigger:focus { background: rgba(255,255,255,0.1); color: var(--bg); }
+.nav-group-trigger:hover { background: var(--surface2); color: var(--text); }
+.nav-group-trigger:focus { background: var(--surface2); color: var(--text); }
 .nav-group-trigger-left { display: flex; align-items: center; gap: 9px; }
 .nav-group-trigger .nav-icon { font-size: 15px; width: 16px; text-align: center; flex-shrink: 0; color: inherit; transition: color .12s; }
 
@@ -262,7 +326,7 @@ body {
   flex-shrink: 0;
 }
 .nav-group.open > .nav-group-trigger .nav-group-chevron { transform: rotate(90deg); }
-.nav-group.open > .nav-group-trigger { color: var(--bg); }
+.nav-group.open > .nav-group-trigger { color: var(--text); }
 
 /* sub-items container with clip animation */
 .nav-group-items {
@@ -283,13 +347,13 @@ body {
   cursor: pointer;
   font-size: 13px;
   font-weight: 400;
-  color: rgba(255,255,255,0.7);
+  color: var(--text-muted);
   transition: background .1s, color .1s;
   position: relative;
 }
 .nav-sub-item .nav-sub-icon { font-size: 14px; width: 14px; text-align: center; flex-shrink: 0; color: inherit; transition: color .12s; }
-.nav-sub-item:hover { background: rgba(255,255,255,0.1); color: var(--bg); }
-.nav-sub-item:focus { background: rgba(255,255,255,0.1); color: var(--bg); }
+.nav-sub-item:hover { background: var(--surface2); color: var(--text); }
+.nav-sub-item:focus { background: var(--surface2); color: var(--text); }
 .nav-sub-item.active { background: var(--accent); color: var(--bg); font-weight: 600; }
 
 /* color variants for specific icons (Entradas/Saídas) */
@@ -303,9 +367,9 @@ body {
 /* badge inside sub-item */
 .nav-badge {
   margin-left: auto;
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.2);
-  color: rgba(255,255,255,0.9);
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--text);
   font-size: 11px;
   font-family: var(--mono);
   font-weight: 700;
@@ -313,7 +377,7 @@ body {
   border-radius: var(--radius-full);
   line-height: 18px;
 }
-.nav-sub-item.active .nav-badge { background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.3); color: var(--bg); }
+.nav-sub-item.active .nav-badge { background: var(--accent); border-color: var(--accent); color: var(--bg); }
 
 /* radio-selector (keep compat for JS) */
 .radio-selector { display: none; }
@@ -1406,57 +1470,7 @@ select.form-input:disabled {
   --yellow-lt:#fef3c7;
   --yellow-border:#fcd34d;
   --yellow-dark:#b45309;
-  --blue:#3b82f6;
-  --blue-lt:#dbeafe;
-  --blue-dark:#1e3a5f;
-
-  /* Shadows */
-  --shadow:0 1px 4px rgba(15,23,42,.05);
-  --shadow-md:0 4px 20px rgba(15,23,42,.1);
-  --shadow-lg:0 8px 40px rgba(15,23,42,.15);
-}
-[data-theme="dark"]{
-  /* Core Colors */
-  --bg:#09090b;
-  --surface:#18181b;
-  --surface2:#3B3B58;
-  --surface-alt:#1c1c1f;
-  --border:#3B3B58;
-  --border2:#3f3f46;
-      
-  /* Brand Colors */
-  --accent:#fb923c;
-  --accent-lt:#431407;
-  --accent-md:#ea6e0a;
-  --accent-dark:#fdba74;
-  --btn-hover:#ea6e0a;
-      
-  /* Text Colors */
-  --text:#fafafa;
-  --text2:#b4b4b4;
-  --text-muted:#8e8e8e;
-  --muted:#8f8f8f;
-      
-  /* Semantic Colors */
-  --green:#4ade80;
-  --green-lt:#052e16;
-  --green-border:#065f46;
-  --green-dark:#064e3b;
-  --red:#f87171;
-  --red-lt:#450a0a;
-  --red-border:#7f1d1d;
-  --red-dark:#991b1b;
-  --yellow:#fbbf24;
-  --yellow-lt:#451a03;
-  --yellow-border:#713f12;
-  --blue:#60a5fa;
-  --blue-lt:#1e3a5f;
-      
-  /* Shadows */
-  --shadow:0 1px 4px rgba(0,0,0,.5);
-  --shadow-md:0 4px 20px rgba(0,0,0,.6);
-  --shadow-lg:0 8px 40px rgba(0,0,0,.7);
-}
+  /* Dark mode styles específicos (tokens principais já vêm do DESIGN_TOKENS_ZINC.css) */
 [data-theme="dark"] body{background:var(--bg);color:var(--text)}
 [data-theme="dark"] .kpi-icon{color:var(--text) !important}
 [data-theme="dark"] .form-input,[data-theme="dark"] select.form-input,[data-theme="dark"] input.form-input{background:var(--surface2);color:var(--text);border-color:var(--border2)}
