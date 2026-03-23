@@ -1,0 +1,1370 @@
+{
+  "version": 2,
+  "exportedAt": "2026-03-23T12:00:00.000Z",
+  "app": "RadioNet Financeiro",
+  "emissoras": [
+    {
+      "id": "petrolina-fm",
+      "nome": "Petrolina FM",
+      "freq": "98.7 FM",
+      "cidade": "Petrolina/PE",
+      "emoji": "📻"
+    },
+    {
+      "id": "sertao-am",
+      "nome": "Sertão AM",
+      "freq": "1080 AM",
+      "cidade": "Juazeiro/BA",
+      "emoji": "📻"
+    },
+    {
+      "id": "vale-do-sao-fm",
+      "nome": "Vale do São FM",
+      "freq": "104.3 FM",
+      "cidade": "Sobradinho/BA",
+      "emoji": "📻"
+    },
+    {
+      "id": "rajada-fm",
+      "nome": "Rajada FM",
+      "freq": "100.3 FM",
+      "cidade": "Rajada",
+      "emoji": "📻"
+    }
+  ],
+  "agentes": [
+    {
+      "id": "10001",
+      "nome": "João Silva",
+      "fone": "(87) 99999-0001",
+      "email": "joao@radio.com.br",
+      "obs": "Agente principal - região Petrolina"
+    },
+    {
+      "id": "10002",
+      "nome": "Maria Santos",
+      "fone": "(87) 99999-0002",
+      "email": "maria@radio.com.br",
+      "obs": "Especialista em grandes contas"
+    },
+    {
+      "id": "10003",
+      "nome": "Pedro Oliveira",
+      "fone": "(87) 99999-0003",
+      "email": "pedro@radio.com.br",
+      "obs": "Foco em pequenos e médios clientes"
+    },
+    {
+      "id": "10004",
+      "nome": "Ana Costa",
+      "fone": "(74) 99999-0004",
+      "email": "ana@radio.com.br",
+      "obs": "Agente regional - Bahia"
+    },
+    {
+      "id": "10005",
+      "nome": "Carlos Mendes",
+      "fone": "(87) 99999-0005",
+      "email": "carlos@radio.com.br",
+      "obs": "Novo agente em treinamento"
+    }
+  ],
+  "contasInvestimento": [
+    {
+      "id": 1,
+      "nome": "Banco do Brasil - Conta Investimento",
+      "tipo": "Banco",
+      "saldo": 15000.00,
+      "descricao": "Conta principal para investimentos"
+    },
+    {
+      "id": 2,
+      "nome": "Tesouro Direito - CDB 2026",
+      "tipo": "Renda Fixa",
+      "saldo": 25000.00,
+      "descricao": "CDB com vencimento em 2026"
+    },
+    {
+      "id": 3,
+      "nome": "Fundos de Ações - FI",
+      "tipo": "Renda Variável",
+      "saldo": 8500.00,
+      "descricao": "Fundos de investimento em ações"
+    },
+    {
+      "id": 4,
+      "nome": "Poupança Digital",
+      "tipo": "Banco",
+      "saldo": 5000.00,
+      "descricao": "Reserva de emergência"
+    },
+    {
+      "id": 5,
+      "nome": "LCI - Letra de Crédito Imobiliário",
+      "tipo": "Renda Fixa",
+      "saldo": 12000.00,
+      "descricao": "Isento de imposto de renda"
+    }
+  ],
+  "lancamentos": [
+    {
+      "id": 10010,
+      "radio": "petrolina-fm",
+      "tipo": "entrada",
+      "desc": "AGROVALE",
+      "cat": "Empresas Vigentes",
+      "mes": "Janeiro",
+      "ano": "2026",
+      "valor": 4866.92,
+      "liquido": 4380.23,
+      "taxaComissao": 10,
+      "pi": "PI-1409",
+      "agente": "10001",
+      "periodo": "Jan/2026 a Dez/2026",
+      "pago": "4380.23",
+      "aReceber": "",
+      "status": "Em dia",
+      "obs": "Cliente principal - renovação automática"
+    },
+    {
+      "id": 10011,
+      "radio": "petrolina-fm",
+      "tipo": "entrada",
+      "desc": "Supermercado Máximo",
+      "cat": "Empresas Vigentes",
+      "mes": "Janeiro",
+      "ano": "2026",
+      "valor": 3277.3,
+      "liquido": 2949.57,
+      "taxaComissao": 10,
+      "pi": "PI-1410",
+      "agente": "10002",
+      "periodo": "Jan/2026 a Dez/2026",
+      "pago": "2949.57",
+      "aReceber": "",
+      "status": "Em dia",
+      "obs": "Campanha de verão"
+    },
+    {
+      "id": 10012,
+      "radio": "petrolina-fm",
+      "tipo": "entrada",
+      "desc": "Atacadão do Sertão",
+      "cat": "Empresas Vigentes",
+      "mes": "Janeiro",
+      "ano": "2026",
+      "valor": 2722.5,
+      "liquido": 2450.25,
+      "taxaComissao": 10,
+      "pi": "PI-1411",
+      "agente": "10003",
+      "periodo": "Jan/2026 a Dez/2026",
+      "pago": "2450.25",
+      "aReceber": "",
+      "status": "Em dia",
+      "obs": "Promoção quinzenal"
+    },
+    {
+      "id": 10013,
+      "radio": "petrolina-fm",
+      "tipo": "entrada",
+      "desc": "Construtora Horizonte",
+      "cat": "Empresas Vigentes",
+      "mes": "Janeiro",
+      "ano": "2026",
+      "valor": 2238.87,
+      "liquido": 2014.98,
+      "taxaComissao": 10,
+      "pi": "PI-1412",
+      "agente": "10001",
+      "periodo": "Jan/2026 a Dez/2026",
+      "pago": "2014.98",
+      "aReceber": "",
+      "status": "Em dia",
+      "obs": "Lançamento de empreendimento"
+    },
+    {
+      "id": 10014,
+      "radio": "petrolina-fm",
+      "tipo": "entrada",
+      "desc": "Farmácia Saúde Total",
+      "cat": "Empresas Vigentes",
+      "mes": "Janeiro",
+      "ano": "2026",
+      "valor": 1725.65,
+      "liquido": 1553.09,
+      "taxaComissao": 10,
+      "pi": "PI-1413",
+      "agente": "10002",
+      "periodo": "Jan/2026 a Dez/2026",
+      "pago": "1553.09",
+      "aReceber": "",
+      "status": "Em dia",
+      "obs": "Campanha de produtos"
+    },
+    {
+      "id": 10015,
+      "radio": "petrolina-fm",
+      "tipo": "entrada",
+      "desc": "Auto Peças Nordeste",
+      "cat": "Empresas Vigentes",
+      "mes": "Janeiro",
+      "ano": "2026",
+      "valor": 1429.77,
+      "liquido": 1286.79,
+      "taxaComissao": 10,
+      "pi": "PI-1414",
+      "agente": "10003",
+      "periodo": "Jan/2026 a Dez/2026",
+      "pago": "1286.79",
+      "aReceber": "",
+      "status": "Em dia",
+      "obs": "Anúncios semanais"
+    },
+    {
+      "id": 10016,
+      "radio": "petrolina-fm",
+      "tipo": "entrada",
+      "desc": "Ótica Visão Sertão",
+      "cat": "Empresas Vigentes",
+      "mes": "Janeiro",
+      "ano": "2026",
+      "valor": 1166.24,
+      "liquido": 1049.62,
+      "taxaComissao": 10,
+      "pi": "PI-1415",
+      "agente": "10001",
+      "periodo": "Jan/2026 a Dez/2026",
+      "pago": "1049.62",
+      "aReceber": "",
+      "status": "Em dia",
+      "obs": "Promoção de óculos"
+    },
+    {
+      "id": 10017,
+      "radio": "petrolina-fm",
+      "tipo": "entrada",
+      "desc": "Colégio São Francisco",
+      "cat": "Empresas Vigentes",
+      "mes": "Janeiro",
+      "ano": "2026",
+      "valor": 990,
+      "liquido": 891,
+      "taxaComissao": 10,
+      "pi": "PI-1416",
+      "agente": "10002",
+      "periodo": "Jan/2026 a Dez/2026",
+      "pago": "891",
+      "aReceber": "",
+      "status": "Em dia",
+      "obs": "Matrículas abertas"
+    },
+    {
+      "id": 10018,
+      "radio": "petrolina-fm",
+      "tipo": "entrada",
+      "desc": "AGROVALE",
+      "cat": "Empresas Vigentes",
+      "mes": "Fevereiro",
+      "ano": "2026",
+      "valor": 4829.4,
+      "liquido": 4346.46,
+      "taxaComissao": 10,
+      "pi": "PI-1409",
+      "agente": "10001",
+      "periodo": "Jan/2026 a Dez/2026",
+      "pago": "4346.46",
+      "aReceber": "",
+      "status": "Em dia",
+      "obs": "Mensalidade fixa"
+    },
+    {
+      "id": 10019,
+      "radio": "petrolina-fm",
+      "tipo": "entrada",
+      "desc": "Supermercado Máximo",
+      "cat": "Empresas Vigentes",
+      "mes": "Fevereiro",
+      "ano": "2026",
+      "valor": 3174.25,
+      "liquido": 2856.83,
+      "taxaComissao": 10,
+      "pi": "PI-1410",
+      "agente": "10002",
+      "periodo": "Jan/2026 a Dez/2026",
+      "pago": "2856.83",
+      "aReceber": "",
+      "status": "Em dia",
+      "obs": "Continuidade campanha"
+    },
+    {
+      "id": 10020,
+      "radio": "petrolina-fm",
+      "tipo": "entrada",
+      "desc": "Atacadão do Sertão",
+      "cat": "Empresas Vigentes",
+      "mes": "Fevereiro",
+      "ano": "2026",
+      "valor": 2824.99,
+      "liquido": 2542.49,
+      "taxaComissao": 10,
+      "pi": "PI-1411",
+      "agente": "10003",
+      "periodo": "Jan/2026 a Dez/2026",
+      "pago": "2542.49",
+      "aReceber": "",
+      "status": "Em dia",
+      "obs": "Aumento de verba"
+    },
+    {
+      "id": 10021,
+      "radio": "petrolina-fm",
+      "tipo": "entrada",
+      "desc": "Construtora Horizonte",
+      "cat": "Empresas Vigentes",
+      "mes": "Fevereiro",
+      "ano": "2026",
+      "valor": 2256.94,
+      "liquido": 2031.25,
+      "taxaComissao": 10,
+      "pi": "PI-1412",
+      "agente": "10001",
+      "periodo": "Jan/2026 a Dez/2026",
+      "pago": "2031.25",
+      "aReceber": "",
+      "status": "Em dia",
+      "obs": "Segunda fase campanha"
+    },
+    {
+      "id": 10022,
+      "radio": "petrolina-fm",
+      "tipo": "entrada",
+      "desc": "Farmácia Saúde Total",
+      "cat": "Empresas Vigentes",
+      "mes": "Fevereiro",
+      "ano": "2026",
+      "valor": 1835.67,
+      "liquido": 1652.10,
+      "taxaComissao": 10,
+      "pi": "PI-1413",
+      "agente": "10002",
+      "periodo": "Jan/2026 a Dez/2026",
+      "pago": "1652.10",
+      "aReceber": "",
+      "status": "Em dia",
+      "obs": "Novos produtos"
+    },
+    {
+      "id": 10023,
+      "radio": "petrolina-fm",
+      "tipo": "entrada",
+      "desc": "Auto Peças Nordeste",
+      "cat": "Empresas Vigentes",
+      "mes": "Fevereiro",
+      "ano": "2026",
+      "valor": 1466.68,
+      "liquido": 1320.01,
+      "taxaComissao": 10,
+      "pi": "PI-1414",
+      "agente": "10003",
+      "periodo": "Jan/2026 a Dez/2026",
+      "pago": "1320.01",
+      "aReceber": "",
+      "status": "Em dia",
+      "obs": "Manutenção contrato"
+    },
+    {
+      "id": 10024,
+      "radio": "petrolina-fm",
+      "tipo": "entrada",
+      "desc": "Ótica Visão Sertão",
+      "cat": "Empresas Vigentes",
+      "mes": "Fevereiro",
+      "ano": "2026",
+      "valor": 1254.87,
+      "liquido": 1129.38,
+      "taxaComissao": 10,
+      "pi": "PI-1415",
+      "agente": "10001",
+      "periodo": "Jan/2026 a Dez/2026",
+      "pago": "1129.38",
+      "aReceber": "",
+      "status": "Em dia",
+      "obs": "Promoção inverno"
+    },
+    {
+      "id": 10025,
+      "radio": "petrolina-fm",
+      "tipo": "entrada",
+      "desc": "Colégio São Francisco",
+      "cat": "Empresas Vigentes",
+      "mes": "Fevereiro",
+      "ano": "2026",
+      "valor": 941.02,
+      "liquido": 846.92,
+      "taxaComissao": 10,
+      "pi": "PI-1416",
+      "agente": "10002",
+      "periodo": "Jan/2026 a Dez/2026",
+      "pago": "846.92",
+      "aReceber": "",
+      "status": "Em dia",
+      "obs": "Eventos culturais"
+    },
+    {
+      "id": 10026,
+      "radio": "petrolina-fm",
+      "tipo": "entrada",
+      "desc": "Loja de Móveis Sertão",
+      "cat": "Empresas Vigentes",
+      "mes": "Março",
+      "ano": "2026",
+      "valor": 2150.00,
+      "liquido": 1935.00,
+      "taxaComissao": 10,
+      "pi": "PI-1417",
+      "agente": "10004",
+      "periodo": "Mar/2026 a Fev/2027",
+      "pago": "1935.00",
+      "aReceber": "",
+      "status": "Em dia",
+      "obs": "Novo cliente"
+    },
+    {
+      "id": 10027,
+      "radio": "sertao-am",
+      "tipo": "entrada",
+      "desc": "Drogarias São Paulo",
+      "cat": "Empresas Vigentes",
+      "mes": "Março",
+      "ano": "2026",
+      "valor": 1850.00,
+      "liquido": 1665.00,
+      "taxaComissao": 10,
+      "pi": "PI-1418",
+      "agente": "10004",
+      "periodo": "Mar/2026 a Fev/2027",
+      "pago": "1665.00",
+      "aReceber": "",
+      "status": "Em dia",
+      "obs": "Expansão para Bahia"
+    },
+    {
+      "id": 10028,
+      "radio": "vale-do-sao-fm",
+      "tipo": "entrada",
+      "desc": "Restaurante Sabor Nordestino",
+      "cat": "Empresas Vigentes",
+      "mes": "Abril",
+      "ano": "2026",
+      "valor": 950.00,
+      "liquido": 855.00,
+      "taxaComissao": 10,
+      "pi": "PI-1419",
+      "agente": "10005",
+      "periodo": "Abr/2026 a Mar/2027",
+      "pago": "855.00",
+      "aReceber": "",
+      "status": "Em dia",
+      "obs": "Primeiro anúncio"
+    },
+    {
+      "id": 10029,
+      "radio": "rajada-fm",
+      "tipo": "entrada",
+      "desc": "Mercado Municipal",
+      "cat": "Empresas Vigentes",
+      "mes": "Maio",
+      "ano": "2026",
+      "valor": 750.00,
+      "liquido": 675.00,
+      "taxaComissao": 10,
+      "pi": "PI-1420",
+      "agente": "10005",
+      "periodo": "Mai/2026 a Abr/2027",
+      "pago": "675.00",
+      "aReceber": "",
+      "status": "Em dia",
+      "obs": "Cliente local"
+    },
+    {
+      "id": 10030,
+      "radio": "petrolina-fm",
+      "tipo": "entrada",
+      "desc": "Clínica Médida Vida",
+      "cat": "Empresas Vigentes",
+      "mes": "Junho",
+      "ano": "2026",
+      "valor": 3200.00,
+      "liquido": 2880.00,
+      "taxaComissao": 10,
+      "pi": "PI-1421",
+      "agente": "10001",
+      "periodo": "Jun/2026 a Mai/2027",
+      "pago": "",
+      "aReceber": "2880.00",
+      "status": "A Vencer",
+      "obs": "Plano de saúde"
+    },
+    {
+      "id": 10031,
+      "radio": "petrolina-fm",
+      "tipo": "entrada",
+      "desc": "Banco do Nordeste",
+      "cat": "Empresas Vigentes",
+      "mes": "Julho",
+      "ano": "2026",
+      "valor": 4500.00,
+      "liquido": 4050.00,
+      "taxaComissao": 10,
+      "pi": "PI-1422",
+      "agente": "10002",
+      "periodo": "Jul/2026 a Jun/2027",
+      "pago": "",
+      "aReceber": "4050.00",
+      "status": "A Vencer",
+      "obs": "Campanha institucional"
+    },
+    {
+      "id": 10032,
+      "radio": "petrolina-fm",
+      "tipo": "entrada",
+      "desc": "Posto Gasolina Brasil",
+      "cat": "Empresas Vigentes",
+      "mes": "Agosto",
+      "ano": "2026",
+      "valor": 2800.00,
+      "liquido": 2520.00,
+      "taxaComissao": 10,
+      "pi": "PI-1423",
+      "agente": "10003",
+      "periodo": "Ago/2026 a Jul/2027",
+      "pago": "",
+      "aReceber": "2520.00",
+      "status": "A Vencer",
+      "obs": "Promoção combustível"
+    },
+    {
+      "id": 10033,
+      "radio": "petrolina-fm",
+      "tipo": "entrada",
+      "desc": "Loja de Roupas Fashion",
+      "cat": "Empresas Vigentes",
+      "mes": "Setembro",
+      "ano": "2026",
+      "valor": 1650.00,
+      "liquido": 1485.00,
+      "taxaComissao": 10,
+      "pi": "PI-1424",
+      "agente": "10004",
+      "periodo": "Set/2026 a Ago/2027",
+      "pago": "",
+      "aReceber": "1485.00",
+      "status": "A Vencer",
+      "obs": "Coleção nova"
+    },
+    {
+      "id": 10034,
+      "radio": "sertao-am",
+      "tipo": "entrada",
+      "desc": "Sindicato dos Trabalhadores",
+      "cat": "Empresas Vigentes",
+      "mes": "Outubro",
+      "ano": "2026",
+      "valor": 1200.00,
+      "liquido": 1080.00,
+      "taxaComissao": 10,
+      "pi": "PI-1425",
+      "agente": "10004",
+      "periodo": "Out/2026 a Set/2027",
+      "pago": "",
+      "aReceber": "1080.00",
+      "status": "A Vencer",
+      "obs": "Campanha sindical"
+    },
+    {
+      "id": 10035,
+      "radio": "vale-do-sao-fm",
+      "tipo": "entrada",
+      "desc": "Prefeitura Municipal",
+      "cat": "Empresas Vigentes",
+      "mes": "Novembro",
+      "ano": "2026",
+      "valor": 3500.00,
+      "liquido": 3150.00,
+      "taxaComissao": 10,
+      "pi": "PI-1426",
+      "agente": "10005",
+      "periodo": "Nov/2026 a Out/2027",
+      "pago": "",
+      "aReceber": "3150.00",
+      "status": "A Vencer",
+      "obs": "Anúncios oficiais"
+    },
+    {
+      "id": 10036,
+      "radio": "rajada-fm",
+      "tipo": "entrada",
+      "desc": "Igreja Matriz",
+      "cat": "Empresas Vigentes",
+      "mes": "Dezembro",
+      "ano": "2026",
+      "valor": 800.00,
+      "liquido": 720.00,
+      "taxaComissao": 10,
+      "pi": "PI-1427",
+      "agente": "10005",
+      "periodo": "Dez/2026 a Nov/2027",
+      "pago": "",
+      "aReceber": "720.00",
+      "status": "A Vencer",
+      "obs": "Eventos religiosos"
+    },
+    {
+      "id": 10037,
+      "radio": "petrolina-fm",
+      "tipo": "entrada",
+      "desc": "Supermercado Central",
+      "cat": "Empresas Vigentes",
+      "mes": "Janeiro",
+      "ano": "2026",
+      "valor": 3500.00,
+      "liquido": 3150.00,
+      "taxaComissao": 10,
+      "pi": "PI-1428",
+      "agente": "10001",
+      "periodo": "Jan/2026 a Dez/2026",
+      "pago": "",
+      "aReceber": "3150.00",
+      "status": "Inadimplente",
+      "obs": "Pagamento em atraso 60 dias"
+    },
+    {
+      "id": 10038,
+      "radio": "petrolina-fm",
+      "tipo": "entrada",
+      "desc": "Restaurante Comida Boa",
+      "cat": "Empresas Vigentes",
+      "mes": "Fevereiro",
+      "ano": "2026",
+      "valor": 1800.00,
+      "liquido": 1620.00,
+      "taxaComissao": 10,
+      "pi": "PI-1429",
+      "agente": "10002",
+      "periodo": "Fev/2026 a Jan/2027",
+      "pago": "",
+      "aReceber": "1620.00",
+      "status": "Inadimplente",
+      "obs": "Contato não responde"
+    },
+    {
+      "id": 10039,
+      "radio": "sertao-am",
+      "tipo": "entrada",
+      "desc": "Gráfica Rápida",
+      "cat": "Empresas Vigentes",
+      "mes": "Março",
+      "ano": "2026",
+      "valor": 900.00,
+      "liquido": 810.00,
+      "taxaComissao": 10,
+      "pi": "PI-1430",
+      "agente": "10004",
+      "periodo": "Mar/2026 a Fev/2027",
+      "pago": "",
+      "aReceber": "810.00",
+      "status": "Inadimplente",
+      "obs": "Problemas financeiros"
+    },
+    {
+      "id": 10040,
+      "radio": "petrolina-fm",
+      "tipo": "entrada",
+      "desc": "Jornal O Sertão",
+      "cat": "Permutas",
+      "mes": "Janeiro",
+      "ano": "2026",
+      "valor": 600,
+      "liquido": 600,
+      "taxaComissao": 0,
+      "pi": "",
+      "agente": "",
+      "periodo": "",
+      "pago": "600.0",
+      "aReceber": "",
+      "status": "Permuta",
+      "obs": "Permuta com jornal local"
+    },
+    {
+      "id": 10041,
+      "radio": "petrolina-fm",
+      "tipo": "entrada",
+      "desc": "TV Sertão",
+      "cat": "Permutas",
+      "mes": "Fevereiro",
+      "ano": "2026",
+      "valor": 800,
+      "liquido": 800,
+      "taxaComissao": 0,
+      "pi": "",
+      "agente": "",
+      "periodo": "",
+      "pago": "800.0",
+      "aReceber": "",
+      "status": "Permuta",
+      "obs": "Permuta com TV regional"
+    },
+    {
+      "id": 10042,
+      "radio": "sertao-am",
+      "tipo": "entrada",
+      "desc": "Distribuidora Água Pura",
+      "cat": "Permutas",
+      "mes": "Abril",
+      "ano": "2026",
+      "valor": 400,
+      "liquido": 400,
+      "taxaComissao": 0,
+      "pi": "",
+      "agente": "",
+      "periodo": "",
+      "pago": "400.0",
+      "aReceber": "",
+      "status": "Permuta",
+      "obs": "Permuta com água mineral"
+    },
+    {
+      "id": 10043,
+      "radio": "vale-do-sao-fm",
+      "tipo": "entrada",
+      "desc": "Portal de Notícias",
+      "cat": "Permutas",
+      "mes": "Maio",
+      "ano": "2026",
+      "valor": 300,
+      "liquido": 300,
+      "taxaComissao": 0,
+      "pi": "",
+      "agente": "",
+      "periodo": "",
+      "pago": "300.0",
+      "aReceber": "",
+      "status": "Permuta",
+      "obs": "Permuta com site de notícias"
+    },
+    {
+      "id": 10044,
+      "radio": "petrolina-fm",
+      "tipo": "despesa",
+      "desc": "Aluguel Transmissor",
+      "cat": "Infraestrutura",
+      "mes": "Janeiro",
+      "ano": "2026",
+      "valor": 1860.43,
+      "liquido": 1860.43,
+      "taxaComissao": 0,
+      "pi": "",
+      "agente": "",
+      "periodo": "",
+      "pago": "1860.43",
+      "aReceber": "",
+      "status": "Pago",
+      "obs": "Aluguel mensal do transmissor"
+    },
+    {
+      "id": 10045,
+      "radio": "petrolina-fm",
+      "tipo": "despesa",
+      "desc": "Folha de Pagamento",
+      "cat": "Pessoal",
+      "mes": "Janeiro",
+      "ano": "2026",
+      "valor": 8275.23,
+      "liquido": 8275.23,
+      "taxaComissao": 0,
+      "pi": "",
+      "agente": "",
+      "periodo": "",
+      "pago": "8275.23",
+      "aReceber": "",
+      "status": "Pago",
+      "obs": "Salários funcionários"
+    },
+    {
+      "id": 10046,
+      "radio": "petrolina-fm",
+      "tipo": "despesa",
+      "desc": "ECAD (Direitos Autorais)",
+      "cat": "Obrigações",
+      "mes": "Janeiro",
+      "ano": "2026",
+      "valor": 1250.00,
+      "liquido": 1250.00,
+      "taxaComissao": 0,
+      "pi": "",
+      "agente": "",
+      "periodo": "",
+      "pago": "1250.00",
+      "aReceber": "",
+      "status": "Pago",
+      "obs": "Direitos autorais musicais"
+    },
+    {
+      "id": 10047,
+      "radio": "petrolina-fm",
+      "tipo": "despesa",
+      "desc": "Energia Elétrica",
+      "cat": "Infraestrutura",
+      "mes": "Janeiro",
+      "ano": "2026",
+      "valor": 1250.00,
+      "liquido": 1250.00,
+      "taxaComissao": 0,
+      "pi": "",
+      "agente": "",
+      "periodo": "",
+      "pago": "1250.00",
+      "aReceber": "",
+      "status": "Pago",
+      "obs": "Conta de luz estúdio"
+    },
+    {
+      "id": 10048,
+      "radio": "petrolina-fm",
+      "tipo": "despesa",
+      "desc": "Internet e Telefonia",
+      "cat": "Administrativo",
+      "mes": "Janeiro",
+      "ano": "2026",
+      "valor": 450.00,
+      "liquido": 450.00,
+      "taxaComissao": 0,
+      "pi": "",
+      "agente": "",
+      "periodo": "",
+      "pago": "450.00",
+      "aReceber": "",
+      "status": "Pago",
+      "obs": "Links dedicados"
+    },
+    {
+      "id": 10049,
+      "radio": "petrolina-fm",
+      "tipo": "despesa",
+      "desc": "Material de Escritório",
+      "cat": "Administrativo",
+      "mes": "Janeiro",
+      "ano": "2026",
+      "valor": 320.00,
+      "liquido": 320.00,
+      "taxaComissao": 0,
+      "pi": "",
+      "agente": "",
+      "periodo": "",
+      "pago": "320.00",
+      "aReceber": "",
+      "status": "Pago",
+      "obs": "Suprimentos diversos"
+    },
+    {
+      "id": 10050,
+      "radio": "sertao-am",
+      "tipo": "despesa",
+      "desc": "Aluguel Transmissor AM",
+      "cat": "Infraestrutura",
+      "mes": "Janeiro",
+      "ano": "2026",
+      "valor": 980.00,
+      "liquido": 980.00,
+      "taxaComissao": 0,
+      "pi": "",
+      "agente": "",
+      "periodo": "",
+      "pago": "980.00",
+      "aReceber": "",
+      "status": "Pago",
+      "obs": "Aluguel torre AM"
+    },
+    {
+      "id": 10051,
+      "radio": "sertao-am",
+      "tipo": "despesa",
+      "desc": "Folha de Pagamento AM",
+      "cat": "Pessoal",
+      "mes": "Janeiro",
+      "ano": "2026",
+      "valor": 4250.00,
+      "liquido": 4250.00,
+      "taxaComissao": 0,
+      "pi": "",
+      "agente": "",
+      "periodo": "",
+      "pago": "4250.00",
+      "aReceber": "",
+      "status": "Pago",
+      "obs": "Equipe AM reduzida"
+    },
+    {
+      "id": 10052,
+      "radio": "vale-do-sao-fm",
+      "tipo": "despesa",
+      "desc": "Manutenção Equipamentos",
+      "cat": "Infraestrutura",
+      "mes": "Janeiro",
+      "ano": "2026",
+      "valor": 750.00,
+      "liquido": 750.00,
+      "taxaComissao": 0,
+      "pi": "",
+      "agente": "",
+      "periodo": "",
+      "pago": "750.00",
+      "aReceber": "",
+      "status": "Pago",
+      "obs": "Manutenção preventiva"
+    },
+    {
+      "id": 10053,
+      "radio": "petrolina-fm",
+      "tipo": "despesa",
+      "desc": "Imposto de Renda",
+      "cat": "Obrigações",
+      "mes": "Fevereiro",
+      "ano": "2026",
+      "valor": 2400.00,
+      "liquido": 2400.00,
+      "taxaComissao": 0,
+      "pi": "",
+      "agente": "",
+      "periodo": "",
+      "pago": "",
+      "aReceber": "2400.00",
+      "status": "A Pagar",
+      "obs": "IRPJ mensal"
+    },
+    {
+      "id": 10054,
+      "radio": "petrolina-fm",
+      "tipo": "despesa",
+      "desc": "ISSQN Municipal",
+      "cat": "Obrigações",
+      "mes": "Fevereiro",
+      "ano": "2026",
+      "valor": 850.00,
+      "liquido": 850.00,
+      "taxaComissao": 0,
+      "pi": "",
+      "agente": "",
+      "periodo": "",
+      "pago": "",
+      "aReceber": "850.00",
+      "status": "A Pagar",
+      "obs": "Imposto municipal"
+    },
+    {
+      "id": 10055,
+      "radio": "petrolina-fm",
+      "tipo": "despesa",
+      "desc": "Marketing e Publicidade",
+      "cat": "Administrativo",
+      "mes": "Fevereiro",
+      "ano": "2026",
+      "valor": 1200.00,
+      "liquido": 1200.00,
+      "taxaComissao": 0,
+      "pi": "",
+      "agente": "",
+      "periodo": "",
+      "pago": "",
+      "aReceber": "1200.00",
+      "status": "A Pagar",
+      "obs": "Campanhas institucionais"
+    },
+    {
+      "id": 10056,
+      "radio": "petrolina-fm",
+      "tipo": "despesa",
+      "desc": "Seguro Empresarial",
+      "cat": "Administrativo",
+      "mes": "Março",
+      "ano": "2026",
+      "valor": 650.00,
+      "liquido": 650.00,
+      "taxaComissao": 0,
+      "pi": "",
+      "agente": "",
+      "periodo": "",
+      "pago": "",
+      "aReceber": "650.00",
+      "status": "A Pagar",
+      "obs": "Seguro patrimonial"
+    },
+    {
+      "id": 10057,
+      "radio": "sertao-am",
+      "tipo": "despesa",
+      "desc": "Taxa de Licenciamento",
+      "cat": "Obrigações",
+      "mes": "Março",
+      "ano": "2026",
+      "valor": 320.00,
+      "liquido": 320.00,
+      "taxaComissao": 0,
+      "pi": "",
+      "agente": "",
+      "periodo": "",
+      "pago": "",
+      "aReceber": "320.00",
+      "status": "A Pagar",
+      "obs": "Anuidade ANATEL"
+    },
+    {
+      "id": 10058,
+      "radio": "vale-do-sao-fm",
+      "tipo": "despesa",
+      "desc": "Software Licenciamento",
+      "cat": "Administrativo",
+      "mes": "Abril",
+      "ano": "2026",
+      "valor": 480.00,
+      "liquido": 480.00,
+      "taxaComissao": 0,
+      "pi": "",
+      "agente": "",
+      "periodo": "",
+      "pago": "",
+      "aReceber": "480.00",
+      "status": "A Pagar",
+      "obs": "Licenças anuais"
+    },
+    {
+      "id": 10059,
+      "radio": "rajada-fm",
+      "tipo": "despesa",
+      "desc": "Taxa de Funcionamento",
+      "cat": "Obrigações",
+      "mes": "Maio",
+      "ano": "2026",
+      "valor": 280.00,
+      "liquido": 280.00,
+      "taxaComissao": 0,
+      "pi": "",
+      "agente": "",
+      "periodo": "",
+      "pago": "",
+      "aReceber": "280.00",
+      "status": "A Pagar",
+      "obs": "Alvará municipal"
+    }
+  ],
+  "infraestrutura": [
+    {
+      "id": 1,
+      "nome": "Transmissor FM Principal",
+      "tipo": "Equipamento",
+      "localizacao": "Torre Central - Petrolina FM",
+      "status": "Operacional",
+      "dataInstalacao": "2023-01-15",
+      "valor": 45000.00,
+      "manutencaoPreventiva": "2026-03-15",
+      "observacoes": "Transmissor de 10kW, última manutenção em dezembro/2025"
+    },
+    {
+      "id": 2,
+      "nome": "Torre de Transmissão",
+      "tipo": "Estrutura",
+      "localizacao": "Sede Petrolina FM",
+      "status": "Operacional",
+      "dataInstalacao": "2022-06-20",
+      "valor": 120000.00,
+      "manutencaoPreventiva": "2026-06-20",
+      "observacoes": "Torre metálica de 80 metros, inspecionada trimestralmente"
+    },
+    {
+      "id": 3,
+      "nome": "Estúdio Principal",
+      "tipo": "Instalação",
+      "localizacao": "Sede Petrolina FM",
+      "status": "Operacional",
+      "dataInstalacao": "2022-08-10",
+      "valor": 35000.00,
+      "manutencaoPreventiva": "2026-08-10",
+      "observacoes": "Estúdio com equipamentos digitais, cabos e isolamento acústico"
+    },
+    {
+      "id": 4,
+      "nome": "Sistema de Refrigeração",
+      "tipo": "Equipamento",
+      "localizacao": "Sala de Transmissão - Sertão AM",
+      "status": "Manutenção",
+      "dataInstalacao": "2021-03-25",
+      "valor": 8500.00,
+      "manutencaoPreventiva": "2026-02-25",
+      "observacoes": "Ar condicionado precisando de recarga de gás"
+    },
+    {
+      "id": 5,
+      "nome": "Servidores Streaming",
+      "tipo": "Equipamento",
+      "localizacao": "Data Center - Vale do São FM",
+      "status": "Operacional",
+      "dataInstalacao": "2023-09-12",
+      "valor": 25000.00,
+      "manutencaoPreventiva": "2026-09-12",
+      "observacoes": "Servidores dedicados para streaming online"
+    },
+    {
+      "id": 6,
+      "nome": "Gerador de Energia",
+      "tipo": "Equipamento",
+      "localizacao": "Todas as emissoras",
+      "status": "Operacional",
+      "dataInstalacao": "2020-05-30",
+      "valor": 15000.00,
+      "manutencaoPreventiva": "2026-05-30",
+      "observacoes": "Gerador diesel 50kVA para emergências"
+    },
+    {
+      "id": 7,
+      "nome": "Antena Transmissão FM",
+      "tipo": "Equipamento",
+      "localizacao": "Torre Central - Petrolina FM",
+      "status": "Operacional",
+      "dataInstalacao": "2023-01-15",
+      "valor": 12000.00,
+      "manutencaoPreventiva": "2026-12-15",
+      "observacoes": "Antena dipolo de 4 bay, frequência 98.7 MHz"
+    },
+    {
+      "id": 8,
+      "nome": "Sistema de Áudio Digital",
+      "tipo": "Equipamento",
+      "localizacao": "Estúdio Principal - Petrolina FM",
+      "status": "Operacional",
+      "dataInstalacao": "2023-06-20",
+      "valor": 18000.00,
+      "manutencaoPreventiva": "2026-06-20",
+      "observacoes": "Console digital 32 canais, processadores de áudio"
+    }
+  ],
+  "pagamentosDespesasFixas": {
+    "despesa_fixa_10_1_2026": {
+      "dataPagamento": "2026-01-10T10:30:00.000Z",
+      "valorPago": 3500.00,
+      "formaPagamento": "Transferência Bancária"
+    },
+    "despesa_fixa_15_1_2026": {
+      "dataPagamento": "2026-01-15T14:20:00.000Z",
+      "valorPago": 800.00,
+      "formaPagamento": "Débito Automático"
+    },
+    "despesa_fixa_20_1_2026": {
+      "dataPagamento": "2026-01-20T09:15:00.000Z",
+      "valorPago": 450.00,
+      "formaPagamento": "Boleto"
+    },
+    "despesa_fixa_10_2_2026": {
+      "dataPagamento": "2026-02-10T11:00:00.000Z",
+      "valorPago": 3500.00,
+      "formaPagamento": "Transferência Bancária"
+    },
+    "despesa_fixa_15_2_2026": {
+      "dataPagamento": "2026-02-15T15:30:00.000Z",
+      "valorPago": 800.00,
+      "formaPagamento": "Débito Automático"
+    },
+    "despesa_fixa_20_2_2026": {
+      "dataPagamento": "2026-02-20T08:45:00.000Z",
+      "valorPago": 450.00,
+      "formaPagamento": "Boleto"
+    },
+    "despesa_fixa_10_3_2026": {
+      "dataPagamento": "2026-03-10T12:00:00.000Z",
+      "valorPago": 3500.00,
+      "formaPagamento": "Transferência Bancária"
+    },
+    "despesa_fixa_15_3_2026": {
+      "dataPagamento": "2026-03-15T16:00:00.000Z",
+      "valorPago": 800.00,
+      "formaPagamento": "Débito Automático"
+    },
+    "despesa_fixa_20_3_2026": {
+      "dataPagamento": "2026-03-20T10:00:00.000Z",
+      "valorPago": 450.00,
+      "formaPagamento": "Boleto"
+    }
+  },
+  "nextId": 10060,
+  "resumosRadios": [
+    {
+      "radio": "petrolina-fm",
+      "nome": "Petrolina FM",
+      "totaisGerais": {
+        "entradas": {
+          "bruto": 48500.00,
+          "liquido": 43650.00
+        },
+        "despesas": {
+          "bruto": 22435.66
+        },
+        "saldo": 21214.34
+      },
+      "totaisMensais": {
+        "entradas": {
+          "Janeiro/2026": {
+            "bruto": 23630.25,
+            "liquido": 22021.18
+          },
+          "Fevereiro/2026": {
+            "bruto": 11769.75,
+            "liquido": 10078.82
+          },
+          "Março/2026": {
+            "bruto": 2150.00,
+            "liquido": 1935.00
+          }
+        },
+        "despesas": {
+          "Janeiro/2026": {
+            "bruto": 12405.66
+          },
+          "Fevereiro/2026": {
+            "bruto": 0.00
+          },
+          "Março/2026": {
+            "bruto": 10030.00
+          }
+        },
+        "saldo": {
+          "Janeiro/2026": 11224.59,
+          "Fevereiro/2026": 11769.75,
+          "Março/2026": -8095.00
+        }
+      }
+    },
+    {
+      "radio": "sertao-am",
+      "nome": "Sertão AM",
+      "totaisGerais": {
+        "entradas": {
+          "bruto": 3950.00,
+          "liquido": 3555.00
+        },
+        "despesas": {
+          "bruto": 5550.00
+        },
+        "saldo": -1995.00
+      },
+      "totaisMensais": {
+        "entradas": {
+          "Março/2026": {
+            "bruto": 1850.00,
+            "liquido": 1665.00
+          },
+          "Abril/2026": {
+            "bruto": 400.00,
+            "liquido": 400.00
+          },
+          "Outubro/2026": {
+            "bruto": 1200.00,
+            "liquido": 1080.00
+          },
+          "Março/2026": {
+            "bruto": 900.00,
+            "liquido": 810.00
+          }
+        },
+        "despesas": {
+          "Janeiro/2026": {
+            "bruto": 5230.00
+          },
+          "Maio/2026": {
+            "bruto": 320.00
+          }
+        },
+        "saldo": {
+          "Janeiro/2026": -5230.00,
+          "Março/2026": -3380.00,
+          "Abril/2026": -2980.00,
+          "Maio/2026": -3300.00,
+          "Outubro/2026": -2220.00
+        }
+      }
+    },
+    {
+      "radio": "vale-do-sao-fm",
+      "nome": "Vale do São FM",
+      "totaisGerais": {
+        "entradas": {
+          "bruto": 1250.00,
+          "liquido": 1155.00
+        },
+        "despesas": {
+          "bruto": 2280.00
+        },
+        "saldo": -1125.00
+      },
+      "totaisMensais": {
+        "entradas": {
+          "Abril/2026": {
+            "bruto": 950.00,
+            "liquido": 855.00
+          },
+          "Maio/2026": {
+            "bruto": 300.00,
+            "liquido": 300.00
+          }
+        },
+        "despesas": {
+          "Janeiro/2026": {
+            "bruto": 750.00
+          },
+          "Abril/2026": {
+            "bruto": 480.00
+          }
+        },
+        "saldo": {
+          "Janeiro/2026": -750.00,
+          "Abril/2026": 375.00,
+          "Maio/2026": 75.00
+        }
+      }
+    },
+    {
+      "radio": "rajada-fm",
+      "nome": "Rajada FM",
+      "totaisGerais": {
+        "entradas": {
+          "bruto": 1550.00,
+          "liquido": 1395.00
+        },
+        "despesas": {
+          "bruto": 280.00
+        },
+        "saldo": 1115.00
+      },
+      "totaisMensais": {
+        "entradas": {
+          "Maio/2026": {
+            "bruto": 750.00,
+            "liquido": 675.00
+          },
+          "Dezembro/2026": {
+            "bruto": 800.00,
+            "liquido": 720.00
+          }
+        },
+        "despesas": {
+          "Maio/2026": {
+            "bruto": 280.00
+          }
+        },
+        "saldo": {
+          "Maio/2026": 395.00,
+          "Dezembro/2026": 1115.00
+        }
+      }
+    }
+  ]
+}
