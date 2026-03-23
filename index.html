@@ -5101,10 +5101,26 @@ function populateAllSelects() {
     //  VENDAS
     // ═══════════════════════════════════════════════
     function renderVendas() {
-      const radioF = document.getElementById('fVenRadio').value || null;
-      const mes = document.getElementById('fVenMes').value || '';
-      const ano = document.getElementById('fVenAno').value || state.filtroAno;
-      const busca = document.getElementById('fVenBusca').value.toLowerCase();
+      // Verifica se os elementos existem antes de tentar acessar
+      const fVenRadio = document.getElementById('fVenRadio');
+      const fVenMes = document.getElementById('fVenMes');
+      const fVenAno = document.getElementById('fVenAno');
+      const fVenBusca = document.getElementById('fVenBusca');
+      const venKpiGrid = document.getElementById('venKpiGrid');
+      const venCount = document.getElementById('venCount');
+      const venTbody = document.getElementById('venTbody');
+      const venEmpty = document.getElementById('venEmpty');
+      
+      // Se algum elemento essencial não existir, não continua
+      if (!fVenRadio || !fVenMes || !fVenAno || !fVenBusca || !venKpiGrid || !venCount || !venTbody || !venEmpty) {
+        console.log('Elementos de vendas não encontrados, pulando renderVendas');
+        return;
+      }
+      
+      const radioF = fVenRadio.value || null;
+      const mes = fVenMes.value || '';
+      const ano = fVenAno.value || state.filtroAno;
+      const busca = fVenBusca.value.toLowerCase();
 
       // Filtra lançamentos do tipo entrada (vendas) - apenas Empresas Vigentes
       let vendas = getLancamentos({ tipo: 'entrada', radio: radioF, ano }).filter(l => {
@@ -5120,7 +5136,7 @@ function populateAllSelects() {
       const totalLiquido = vendas.reduce((s, l) => s + (l.liquido || l.valor), 0);
       const totalVendas = vendas.length;
 
-      document.getElementById('venKpiGrid').innerHTML = `
+      venKpiGrid.innerHTML = `
         <div class="kpi-card">
           <div class="kpi-top">
             <div class="kpi-label">Total de Vendas</div>
@@ -5187,7 +5203,7 @@ function populateAllSelects() {
       });
 
       const all = Object.values(cliMap);
-      document.getElementById('venCount').textContent = `(${all.length} empresas)`;
+      venCount.textContent = `(${all.length} empresas)`;
 
       // Tabela
       const rows = all.map(c => {
@@ -5211,16 +5227,14 @@ function populateAllSelects() {
         `;
       }).join('');
 
-      const tbody = document.getElementById('venTbody');
-      const empty = document.getElementById('venEmpty');
       if (rows) {
-        tbody.innerHTML = rows;
-        tbody.style.display = '';
-        empty.style.display = 'none';
+        venTbody.innerHTML = rows;
+        venTbody.style.display = '';
+        venEmpty.style.display = 'none';
       } else {
-        tbody.innerHTML = '';
-        tbody.style.display = 'none';
-        empty.style.display = '';
+        venTbody.innerHTML = '';
+        venTbody.style.display = 'none';
+        venEmpty.style.display = '';
       }
     }
 
