@@ -4725,11 +4725,24 @@ function populateAllSelects() {
     //  CLIENTES
     // ═══════════════════════════════════════════════
     function renderClientes() {
-      const radioF = document.getElementById('fCliRadio').value || null;
-      const status = document.getElementById('fCliStatus').value;
-      const cat    = document.getElementById('fCliCat')?.value || '';
-      const agente = document.getElementById('fCliAgente')?.value || '';
-      const busca  = document.getElementById('fCliBusca').value.toLowerCase();
+      // Verifica se os elementos existem antes de tentar acessar
+      const fCliRadio = document.getElementById('fCliRadio');
+      const fCliStatus = document.getElementById('fCliStatus');
+      const fCliCat = document.getElementById('fCliCat');
+      const fCliAgente = document.getElementById('fCliAgente');
+      const fCliBusca = document.getElementById('fCliBusca');
+      
+      // Se algum elemento essencial não existir, não continua
+      if (!fCliRadio || !fCliStatus || !fCliCat || !fCliAgente || !fCliBusca) {
+        console.log('Elementos de filtro de clientes não encontrados, pulando renderClientes');
+        return;
+      }
+      
+      const radioF = fCliRadio.value || null;
+      const status = fCliStatus.value;
+      const cat    = fCliCat.value || '';
+      const agente = fCliAgente.value || '';
+      const busca  = fCliBusca.value.toLowerCase();
 
       const ent = getLancamentos({ tipo: 'entrada', radio: radioF, ano: state.filtroAno });
       const cliMap = {};
@@ -8174,34 +8187,87 @@ function populateAllSelects() {
     }
 
     function confirmarResetDados() {
-      localStorage.removeItem(LS_KEY);
-      localStorage.removeItem(LS_DIRTY_KEY);
-      localStorage.removeItem(LS_CONFIG_KEY);
-      localStorage.removeItem(LS_LOGS);
+      console.log('Iniciando confirmarResetDados');
       
-      initData();
-      // Reseta o filtro de ano para o ano corrente
-      const anoAtual = String(new Date().getFullYear());
-      state.filtroAno   = anoAtual;
-      state.filtroRadio = '__all__';
-      const anoEl = document.getElementById('anoFiltro');
-      if (anoEl) anoEl.value = anoAtual;
-      const radioEl = document.getElementById('sidebarRadioSel');
-      if (radioEl) radioEl.value = '__all__';
-      // Marca todas as páginas como dirty
-      markDirty('dashboard','entradas','despesas','empresas','fluxo','emissoras','agentes');
-      // Re-popula selects e re-renderiza tudo
-      populateAllSelects();
-      renderDashboard();
-      renderEntradas();
-      renderDespesas();
-      renderClientes();
-      renderFluxo();
-      renderEmissoras();
-      renderAgentes();
-      // Volta para o dashboard
-      showPage('dashboard', document.querySelector('[onclick*=\'dashboard\']'));
-      showToast('Todos os dados foram resetados.', 'ok');
+      try {
+        // Primeiro verifica se há dados para apagar
+        const dadosExistentes = localStorage.getItem(LS_KEY);
+        console.log('Dados existentes:', dadosExistentes ? 'SIM' : 'NÃO');
+        
+        if (!dadosExistentes) {
+          // Não há dados para apagar - exibe modal de erro
+          console.log('Exibindo modal de "sem dados"');
+          const modalSemDados = document.getElementById('modalNoData');
+          if (modalSemDados) {
+            modalSemDados.style.display = 'flex';
+            modalSemDados.style.zIndex = '9999';
+          }
+          return;
+        }
+        
+        // Remove todos os dados
+        console.log('Removendo dados do localStorage...');
+        localStorage.removeItem(LS_KEY);
+        localStorage.removeItem(LS_DIRTY_KEY);
+        localStorage.removeItem(LS_CONFIG_KEY);
+        localStorage.removeItem(LS_LOGS);
+        
+        // Verifica se os dados foram realmente apagados
+        const dadosAindaExistem = localStorage.getItem(LS_KEY);
+        console.log('Dados ainda existem após remoção:', dadosAindaExistem ? 'SIM' : 'NÃO');
+        
+        if (!dadosAindaExistem) {
+          console.log('Dados apagados com sucesso, reiniciando sistema...');
+          
+          // Reinicia o sistema
+          initData();
+          const anoAtual = String(new Date().getFullYear());
+          state.filtroAno = anoAtual;
+          state.filtroRadio = '__all__';
+          
+          // Atualiza os filtros na UI
+          const anoEl = document.getElementById('anoFiltro');
+          if (anoEl) anoEl.value = anoAtual;
+          const radioEl = document.getElementById('sidebarRadioSel');
+          if (radioEl) radioEl.value = '__all__';
+          
+          // Marca páginas como dirty e re-renderiza apenas o essencial
+          markDirty('dashboard','entradas','despesas','empresas','fluxo','emissoras','agentes');
+          populateAllSelects();
+          
+          // Renderiza apenas o dashboard (página atual)
+          try {
+            renderDashboard();
+          } catch(e) {
+            console.warn('Erro ao renderizar dashboard:', e);
+          }
+          
+          // Volta para o dashboard
+          showPage('dashboard', document.querySelector('[onclick*=\'dashboard\']'));
+          
+          console.log('Sistema reiniciado, mostrando modal de sucesso...');
+          
+          // Mostra modal de sucesso
+          const modalSucesso = document.getElementById('modalResetSuccess');
+          console.log('Modal encontrado:', modalSucesso ? 'SIM' : 'NÃO');
+          
+          if (modalSucesso) {
+            modalSucesso.style.display = 'flex';
+            modalSucesso.style.zIndex = '9999';
+            console.log('Modal de sucesso exibido!');
+          } else {
+            console.error('Modal de sucesso não encontrado!');
+            alert('Sucesso: Dados apagados, mas modal não encontrado.');
+          }
+          
+        } else {
+          alert('Erro: Os dados não foram completamente apagados. Tente novamente.');
+        }
+        
+      } catch (erro) {
+        console.error('Erro ao resetar dados:', erro);
+        alert('Ocorreu um erro ao apagar os dados. Tente novamente.\n\nErro: ' + erro.message);
+      }
     }
 
     /* ── Info de armazenamento ── */
@@ -9836,6 +9902,38 @@ function populateAllSelects() {
       </div>
     </div>
   </div>
+
+<!-- MODAL FEEDBACK RESET -->
+<div class="modal-overlay" id="modalResetSuccess">
+  <div class="modal" style="max-width:400px">
+    <div class="modal-body" style="padding:32px 28px;text-align:center">
+      <div style="display:flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:50%;background:var(--green-lt);border:2px solid var(--green);margin:0 auto 20px">
+        <i class="ph ph-check" style="font-size:32px;color:var(--green)"></i>
+      </div>
+      <div style="font-weight:800;font-size:18px;margin-bottom:8px;color:var(--text)">DADOS APAGADOS COM SUCESSO</div>
+      <div style="font-size:14px;color:var(--text-muted);margin-bottom:24px;line-height:1.5">Todos os dados foram removidos do sistema.</div>
+      <button class="btn" style="width:100%;background:var(--green);color:var(--bg);border-color:var(--green)" onclick="closeModal('modalResetSuccess')">
+        OK
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL SEM DADOS -->
+<div class="modal-overlay" id="modalNoData">
+  <div class="modal" style="max-width:400px">
+    <div class="modal-body" style="padding:32px 28px;text-align:center">
+      <div style="display:flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:50%;background:var(--red-lt);border:2px solid var(--red);margin:0 auto 20px">
+        <i class="ph ph-info" style="font-size:32px;color:var(--red)"></i>
+      </div>
+      <div style="font-weight:800;font-size:18px;margin-bottom:8px;color:var(--text)">NÃO HÁ DADOS PARA APAGAR</div>
+      <div style="font-size:14px;color:var(--text-muted);margin-bottom:24px;line-height:1.5">O sistema já está vazio. Não há dados para remover.</div>
+      <button class="btn" style="width:100%;background:var(--red);color:var(--bg);border-color:var(--red)" onclick="closeModal('modalNoData')">
+        OK
+      </button>
+    </div>
+  </div>
+</div>
 
 <!-- MODAL ALERTA BACKUP -->
 <div class="modal-overlay" id="modalBackupAlert">
