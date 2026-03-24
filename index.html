@@ -451,7 +451,7 @@
           <div class="card-head">
             <div class="card-title">Top Empresas</div>
           </div>
-          <div id="topClientesDiv"></div>
+          <div id="topEmpresasDiv"></div>
         </div>
       </div>
 
@@ -664,7 +664,7 @@
           <table>
             <thead>
               <tr>
-                <th>Cliente / Descrição</th>
+                <th>Empresa / Descrição</th>
                 <th>Emissora</th>
                 <th>Categoria</th>
                 <th>Mês</th>
@@ -833,7 +833,7 @@
           <table>
             <thead>
               <tr>
-                <th>Cliente</th>
+                <th>Empresa</th>
                 <th>Emissora</th>
                 <th>Agente</th>
                 <th>Mês</th>
@@ -943,7 +943,7 @@
                 <!-- Linha Início -->
                 <div style="display:flex;align-items:center;gap:8px">
                   <span style="font-size:12px;font-weight:600;color:var(--text-muted);width:48px;flex-shrink:0">Início:</span>
-                  <input class="form-input" id="cliPeriodoIniDiaForm" type="number" min="1" max="31" placeholder="Dia" style="width:64px;text-align:center">
+                  <input class="form-input" id="cliPeriodoIniDiaForm" type="number" min="1" max="31" placeholder="Dia" style="width: 72px; text-align:start">
                   <select class="form-input" id="cliPeriodoIniMesForm" style="flex:1;max-width:380px">
                     <option value="">Mês</option>
                     <option value="01">Janeiro</option><option value="02">Fevereiro</option><option value="03">Março</option>
@@ -951,12 +951,12 @@
                     <option value="07">Julho</option><option value="08">Agosto</option><option value="09">Setembro</option>
                     <option value="10">Outubro</option><option value="11">Novembro</option><option value="12">Dezembro</option>
                   </select>
-                  <input class="form-input" id="cliPeriodoIniAnoForm" type="number" min="2000" max="2100" placeholder="Ano" style="width:80px;text-align:center">
+                  <input class="form-input" id="cliPeriodoIniAnoForm" type="number" min="2000" max="2100" placeholder="Ano" style="width:80px;">
                 </div>
                 <!-- Linha Fim -->
                 <div style="display:flex;align-items:center;gap:8px">
                   <span style="font-size:12px;font-weight:600;color:var(--text-muted);width:48px;flex-shrink:0">Fim:</span>
-                  <input class="form-input" id="cliPeriodoFimDiaForm" type="number" min="1" max="31" placeholder="Dia" style="width:64px;text-align:center">
+                  <input class="form-input" id="cliPeriodoFimDiaForm" type="number" min="1" max="31" placeholder="Dia" style="width:72px;text-align:start">
                   <select class="form-input" id="cliPeriodoFimMesForm" style="flex:1;max-width:380px">
                     <option value="">Mês</option>
                     <option value="01">Janeiro</option><option value="02">Fevereiro</option><option value="03">Março</option>
@@ -964,7 +964,7 @@
                     <option value="07">Julho</option><option value="08">Agosto</option><option value="09">Setembro</option>
                     <option value="10">Outubro</option><option value="11">Novembro</option><option value="12">Dezembro</option>
                   </select>
-                  <input class="form-input" id="cliPeriodoFimAnoForm" type="number" min="2000" max="2100" placeholder="Ano" style="width:80px;text-align:center">
+                  <input class="form-input" id="cliPeriodoFimAnoForm" type="number" min="2000" max="2100" placeholder="Ano" style="width:80px;">
                 </div>
               </div>
               <input type="hidden" id="cliPeriodoForm">
@@ -1556,10 +1556,10 @@
 
           <!-- Abas de Navegação -->
           <div style="display:flex;gap:8px;margin-bottom:20px;border-bottom:1px solid var(--border);padding-bottom:12px">
-            <button id="segTabSenha" class="seg-tab active" onclick="switchSegTab('senha')" style="flex:1;padding:8px 12px;background:var(--red);color:var(--bg);border:none;border-radius:var(--radius-sm);font-size:12px;font-weight:600;cursor:pointer;transition:all .2s">
+            <button id="segTabSenha" class="seg-tab active" onclick="switchSegTab('senha')" style="flex:1;padding:8px 12px;background: var(--gray-600);color: var(--bg);border:0.5px solid var(--gray-400);border-radius:var(--radius-sm);font-size:12px;font-weight:400;cursor:pointer;transition:all .2s">
               <i class="ph ph-key" style="margin-right:4px"></i> Senha
             </button>
-            <button id="segTabLogs" class="seg-tab" onclick="switchSegTab('logs')" style="flex:1;padding:8px 12px;background:var(--surface-alt);color:var(--text2);border:none;border-radius:var(--radius-sm);font-size:12px;font-weight:600;cursor:pointer;transition:all .2s">
+            <button id="segTabLogs" class="seg-tab" onclick="switchSegTab('logs')" style="flex:1;padding:8px 12px;background:var(--gray-50);color:var(--gray-600);border:0.5px solid var(--gray-400); border-radius:var(--radius-sm); font-size:12px;font-weight:400;cursor:pointer;transition:all .2s">
               <i class="ph ph-scroll" style="margin-right:4px"></i> Logs
             </button>
           </div>
@@ -1778,13 +1778,13 @@
             <section class="help-section" data-keywords="empresa empresa vigente contrato pagamento inadimplência">
               <h3 style="font-size:18px;font-weight:700;color:var(--text);margin:24px 0 16px 0;display:flex;align-items:center">
                 <i class="ph ph-users" style="margin-right:8px;color:var(--accent)"></i>
-                Gestão de Clientes
+                Gestão de Empresas
               </h3>
               
               <div class="help-grid" style="display:flex;flex-direction:column;gap:16px;margin-bottom:24px;width:100%">
                 <div class="help-card" style="padding:16px;background:var(--surface2);border-radius:var(--radius-sm);width:100%">
                   <h4 style="font-size:15px;font-weight:600;color:var(--text);margin-bottom:8px">
-                    <i class="ph ph-user-plus" style="margin-right:6px"></i>Cadastro de Clientes
+                    <i class="ph ph-user-plus" style="margin-right:6px"></i>Cadastro de Empresas
                   </h4>
                   <p style="font-size:13px;color:var(--text2);margin:0;line-height:1.5">
                     <strong>Informações necessárias:</strong><br>
@@ -2562,7 +2562,7 @@
           <select class="form-input" id="lancRadio"></select>
         </div>
         <div class="form-row">
-          <label class="form-label">Descrição / Cliente *</label>
+          <label class="form-label">Descrição / Empresa *</label>
           <input class="form-input" id="lancDesc" placeholder="Ex: AGROVALE, NEO ENERGIA...">
         </div>
         <div class="form-grid-2">
@@ -2771,12 +2771,12 @@
   </div>
 
   <!-- ══════════════════════════════════════════
-     MODAL: DETALHES CLIENTE TERCEIRIZADO
+     MODAL: DETALHES EMPRESA TERCEIRIZADA
      ══════════════════════════════════════════ -->
   <div class="modal-overlay" id="modalDetalhesTerceirizado" role="dialog" aria-modal="true" aria-labelledby="modalDetalhesTerceirizado-title">
     <div class="modal" style="max-width:680px">
       <div class="modal-head">
-        <div class="modal-title" id="modalDetalhesTerceirizado-title">Detalhes do Cliente</div>
+        <div class="modal-title" id="modalDetalhesTerceirizado-title">Detalhes da Empresa</div>
         <button class="modal-close" onclick="closeModal('modalDetalhesTerceirizado')" aria-label="Fechar">
           <i class="ph ph-x" aria-hidden="true"></i>
         </button>
@@ -3131,10 +3131,10 @@
 
           <!-- Abas de Navegação -->
           <div style="display:flex;gap:8px;margin-bottom:20px;border-bottom:1px solid var(--border);padding-bottom:12px">
-            <button id="segTabSenha" class="seg-tab active" onclick="switchSegTab('senha')" style="flex:1;padding:8px 12px;background:var(--red);color:var(--bg);border:none;border-radius:var(--radius-sm);font-size:12px;font-weight:600;cursor:pointer;transition:all .2s">
+            <button id="segTabSenha" class="seg-tab active" onclick="switchSegTab('senha')" style="flex:1;padding:8px 12px;background:var(--gray-600);color:var(--bg);border:none;border-radius:var(--radius-sm);font-size:12px;font-weight:600;cursor:pointer;transition:all .2s">
               <i class="ph ph-key" style="margin-right:4px"></i> Senha
             </button>
-            <button id="segTabLogs" class="seg-tab" onclick="switchSegTab('logs')" style="flex:1;padding:8px 12px;background:var(--surface-alt);color:var(--text2);border:none;border-radius:var(--radius-sm);font-size:12px;font-weight:600;cursor:pointer;transition:all .2s">
+            <button id="segTabLogs" class="seg-tab" onclick="switchSegTab('logs')" style="flex:1;padding:8px 12px;background:var(--gray-50);color:var(--gray-600);border:none;border-radius:var(--radius-sm);font-size:12px;font-weight:600;cursor:pointer;transition:all .2s">
               <i class="ph ph-scroll" style="margin-right:4px"></i> Logs
             </button>
           </div>
@@ -3281,7 +3281,7 @@
     function getActivePage(){ const a=document.querySelector('.page.active'); return a ? a.id.replace('page-','') : 'dashboard'; }
     function _renderActivePage(){
       const p=getActivePage(); if (!isDirty(p)) return;
-      ({dashboard:renderDashboard,entradas:renderEntradas,despesas:renderDespesas,empresas:renderClientes,fluxo:renderFluxo,emissoras:renderEmissoras}[p]||function(){})();
+      ({dashboard:renderDashboard,entradas:renderEntradas,despesas:renderDespesas,empresas:renderEmpresas,fluxo:renderFluxo,emissoras:renderEmissoras}[p]||function(){})();
       markClean(p);
     }
 // ═══════════════════════════════════════════════
@@ -3575,11 +3575,11 @@
       }
       
       if (isDirty(id)) {
-        const map={dashboard:renderDashboard,entradas:renderEntradas,despesas:renderDespesas,empresas:renderClientes,fluxo:renderFluxo,emissoras:renderEmissoras,agentes:renderAgentes,personalizacao:renderConfiguracoes,terceirizados:renderTerceirizados,vendas:renderVendas,infraestrutura:renderInfraestrutura,gestaoUsuario:renderGestaoUsuario,'contas-investimento':renderContasInvestimento};
+        const map={dashboard:renderDashboard,entradas:renderEntradas,despesas:renderDespesas,empresas:renderEmpresas,fluxo:renderFluxo,emissoras:renderEmissoras,agentes:renderAgentes,personalizacao:renderConfiguracoes,terceirizados:renderTerceirizados,vendas:renderVendas,infraestrutura:renderInfraestrutura,gestaoUsuario:renderGestaoUsuario,'contas-investimento':renderContasInvestimento};
         if (map[id]) { map[id](); markClean(id); }
       } else {
         // Renderizar páginas na primeira carga mesmo se não estiverem dirty
-        const map={dashboard:renderDashboard,entradas:renderEntradas,despesas:renderDespesas,empresas:renderClientes,fluxo:renderFluxo,emissoras:renderEmissoras,agentes:renderAgentes,personalizacao:renderConfiguracoes,terceirizados:renderTerceirizados,vendas:renderVendas,infraestrutura:renderInfraestrutura,gestaoUsuario:renderGestaoUsuario,'contas-investimento':renderContasInvestimento};
+        const map={dashboard:renderDashboard,entradas:renderEntradas,despesas:renderDespesas,empresas:renderEmpresas,fluxo:renderFluxo,emissoras:renderEmissoras,agentes:renderAgentes,personalizacao:renderConfiguracoes,terceirizados:renderTerceirizados,vendas:renderVendas,infraestrutura:renderInfraestrutura,gestaoUsuario:renderGestaoUsuario,'contas-investimento':renderContasInvestimento};
         if (map[id]) { map[id](); }
       }
       addLog('NAVIGATION', `Navegou para página: ${id}`);
@@ -4099,7 +4099,7 @@ function populateAllSelects() {
       document.getElementById('chartRadioFilter').innerHTML = `<option value="__all__">Todas as emissoras</option>` + opts;
 
       // Pages
-      ['fEntRadio', 'fDesRadio', 'fFluxoRadio', 'fCliRadio'].forEach(id => {
+      ['fEntRadio', 'fDesRadio', 'fFluxoRadio', 'fEmpresaRadio'].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.innerHTML = optEmpty + opts;
       });
@@ -4146,11 +4146,11 @@ function populateAllSelects() {
       const _agOpts = (state.agentes||[]).map(a => `<option value="${a.id}">${a.nome}</option>`).join('');
       
       // Filtro de agentes na página de empresas
-      const selFCliAg = document.getElementById('fCliAgente');
-      if (selFCliAg) {
-        const cur = selFCliAg.value;
-        selFCliAg.innerHTML = '<option value="">Todos os agentes</option>' + _agOpts;
-        selFCliAg.value = cur;
+      const selFEmpresaAg = document.getElementById('fEmpresaAgente');
+      if (selFEmpresaAg) {
+        const cur = selFEmpresaAg.value;
+        selFEmpresaAg.innerHTML = '<option value="">Todos os agentes</option>' + _agOpts;
+        selFEmpresaAg.value = cur;
       }
       
       // Select de agente no modal de Lançamento
@@ -4261,7 +4261,7 @@ function populateAllSelects() {
       entradas.forEach(l => { cliMap[l.desc] = (cliMap[l.desc] || 0) + l.valor; });
       const top = Object.entries(cliMap).sort((a, b) => b[1] - a[1]).slice(0, 6);
       const maxV = top[0]?.[1] || 1;
-      document.getElementById('topClientesDiv').innerHTML = top.length ? top.map(([n, v]) => `
+      document.getElementById('topEmpresasDiv').innerHTML = top.length ? top.map(([n, v]) => `
     <div class="prog-row">
       <div class="prog-head"><span class="prog-name">${n}</span><span class="prog-val">${fmt(v)}</span></div>
       <div class="prog-bar"><div class="prog-fill" style="width:${(v / maxV * 100).toFixed(0)}%"></div></div>
@@ -4726,27 +4726,27 @@ function populateAllSelects() {
     }
 
     // ═══════════════════════════════════════════════
-    //  CLIENTES
+    //  EMPRESAS
     // ═══════════════════════════════════════════════
-    function renderClientes() {
+    function renderEmpresas() {
       // Verifica se os elementos existem antes de tentar acessar
-      const fCliRadio = document.getElementById('fCliRadio');
-      const fCliStatus = document.getElementById('fCliStatus');
-      const fCliCat = document.getElementById('fCliCat');
-      const fCliAgente = document.getElementById('fCliAgente');
-      const fCliBusca = document.getElementById('fCliBusca');
+      const fEmpresaRadio = document.getElementById('fEmpresaRadio');
+      const fEmpresaStatus = document.getElementById('fEmpresaStatus');
+      const fEmpresaCat = document.getElementById('fEmpresaCat');
+      const fEmpresaAgente = document.getElementById('fEmpresaAgente');
+      const fEmpresaBusca = document.getElementById('fEmpresaBusca');
       
       // Se algum elemento essencial não existir, não continua
-      if (!fCliRadio || !fCliStatus || !fCliCat || !fCliAgente || !fCliBusca) {
-        console.log('Elementos de filtro de clientes não encontrados, pulando renderClientes');
+      if (!fEmpresaRadio || !fEmpresaStatus || !fEmpresaCat || !fEmpresaAgente || !fEmpresaBusca) {
+        console.log('Elementos de filtro de empresas não encontrados, pulando renderEmpresas');
         return;
       }
       
-      const radioF = fCliRadio.value || null;
-      const status = fCliStatus.value;
-      const cat    = fCliCat.value || '';
-      const agente = fCliAgente.value || '';
-      const busca  = fCliBusca.value.toLowerCase();
+      const radioF = fEmpresaRadio.value || null;
+      const status = fEmpresaStatus.value;
+      const cat    = fEmpresaCat.value || '';
+      const agente = fEmpresaAgente.value || '';
+      const busca  = fEmpresaBusca.value.toLowerCase();
 
       const ent = getLancamentos({ tipo: 'entrada', radio: radioF, ano: state.filtroAno });
       const cliMap = {};
@@ -4837,7 +4837,7 @@ function populateAllSelects() {
       const totalBruto = ent.reduce((s, l) => s + l.valor, 0);
       const totalLiquido = ent.reduce((s, l) => s + (l.liquido || l.valor), 0);
       const totalComissao = ent.reduce((s, l) => s + ((l.valor - (l.liquido || l.valor)) || 0), 0);
-      const qtdClientes = new Set(ent.map(l => l.desc)).size;
+      const qtdEmpresas = new Set(ent.map(l => l.desc)).size;
 
       // Renderizar KPIs
       document.getElementById('terKpiGrid').innerHTML = `
@@ -4867,11 +4867,11 @@ function populateAllSelects() {
         </div>
         <div class="kpi-card">
           <div class="kpi-top">
-            <div class="kpi-label">Clientes</div>
+            <div class="kpi-label">Empresas</div>
             <div class="kpi-icon" style="background:var(--accent-lt);color:var(--accent)"><i class="ph ph-users-three"></i></div>
           </div>
-          <div class="kpi-value">${qtdClientes}</div>
-          <div class="kpi-prev">Clientes únicos</div>
+          <div class="kpi-value">${qtdEmpresas}</div>
+          <div class="kpi-prev">Empresas únicas</div>
         </div>
       `;
 
@@ -5147,7 +5147,7 @@ function populateAllSelects() {
             <div class="kpi-icon" style="background:var(--accent-lt);color:var(--accent)"><i class="ph ph-users-three"></i></div>
           </div>
           <div class="kpi-value">${totalVendas}</div>
-          <div class="kpi-prev">Clientes</div>
+          <div class="kpi-prev">Empresas</div>
         </div>
         <div class="kpi-card">
           <div class="kpi-top">
@@ -5288,7 +5288,7 @@ function populateAllSelects() {
     <div class="card" style="margin-bottom:16px">
       <div class="card-head"><div class="card-title">Entradas do Período <span style="font-size:12px;color:var(--muted);font-weight:400">(${ent.length})</span></div></div>
       <div class="tbl-wrap"><table>
-        <thead><tr><th>Cliente</th><th>Emissora</th><th>Tipo</th><th>Mês</th><th>Valor</th><th>Status</th></tr></thead>
+        <thead><tr><th>Empresa</th><th>Emissora</th><th>Tipo</th><th>Mês</th><th>Valor</th><th>Status</th></tr></thead>
         <tbody>${ent.map(l => `<tr><td class="td-name" style="${state.config.capsLock?'text-transform:uppercase;letter-spacing:.4px':'text-transform:none'}">${l.desc}</td><td style="font-size:12px;color:var(--muted)">${getRadioNome(l.radio)}</td><td><span class="chip chip-orange">${l.cat}</span></td><td class="td-mono">${l.mes}</td><td class="td-mono" style="color:var(--green);font-weight:700">${fmt(l.valor)}</td><td>${statusChip(l.status)}</td></tr>`).join('')}</tbody>
       </table></div>
     </div>`: ''}
@@ -5400,7 +5400,7 @@ function populateAllSelects() {
         <table>
             <thead>
                 <tr>
-                    <th>Cliente</th>
+                    <th>Empresa</th>
                     <th>Emissora</th>
                     <th>Tipo</th>
                     <th>Mês</th>
@@ -7111,7 +7111,7 @@ function populateAllSelects() {
         total += lancs.length;
       }
 
-      // ── CLIENTES ÚNICOS ──────────────────────────────────────
+      // ── EMPRESAS ÚNICAS ──────────────────────────────────────
       const cliMap = {};
       state.lancamentos.filter(l => l.tipo === 'entrada').forEach(l => {
         const k = l.radio + '|' + l.desc;
@@ -7119,12 +7119,12 @@ function populateAllSelects() {
         cliMap[k].total += l.valor;
         cliMap[k].meses++;
       });
-      const clis = Object.values(cliMap)
+      const emps = Object.values(cliMap)
         .filter(c => c.nome.toLowerCase().includes(q) || c.cat?.toLowerCase().includes(q))
         .slice(0, MAX);
-      if (clis.length) {
-        html += `<div class="sr-section-title"><i class="ph ph-users-three"></i> Clientes</div>`;
-        clis.forEach(c => {
+      if (emps.length) {
+        html += `<div class="sr-section-title"><i class="ph ph-users-three"></i> Empresas</div>`;
+        emps.forEach(c => {
           html += `<div class="sr-item" onclick="globalSearchGoto('empresas','${encodeURIComponent(c.nome)}')">
             <div class="sr-item-icon" style="background:var(--accent-lt);color:var(--accent)">
               <i class="ph ph-user"></i>
@@ -7136,7 +7136,7 @@ function populateAllSelects() {
             <div class="sr-item-val" style="color:var(--green)">${fmtShort(c.total)}</div>
           </div>`;
         });
-        total += clis.length;
+        total += emps.length;
       }
 
       // ── AGENTES ──────────────────────────────────────────────
@@ -7198,9 +7198,9 @@ function populateAllSelects() {
         if (!q) return;
         document.getElementById('fEntBusca').value = q;
         document.getElementById('fDesBusca').value = q;
-        document.getElementById('fCliBusca').value = q;
+        document.getElementById('fEmpresaBusca').value = q;
         document.getElementById('searchDropdown').innerHTML = '';
-        renderEntradas(); renderDespesas(); renderClientes();
+        renderEntradas(); renderDespesas(); renderEmpresas();
         showPage('entradas', document.querySelector('[onclick*=\'entradas\']'));
       }
       if (e.key === 'Escape') {
@@ -7235,8 +7235,8 @@ function populateAllSelects() {
         showPage(page, document.querySelector(`[onclick*="${page}"]`));
       } else if (tipo === 'empresas') {
         const nome = decodeURIComponent(ref);
-        document.getElementById('fCliBusca').value = nome;
-        renderClientes();
+        document.getElementById('fEmpresaBusca').value = nome;
+        renderEmpresas();
         showPage('empresas', document.querySelector('[onclick*=\'empresas\']'));
       } else if (tipo === 'agentes') {
         showPage('agentes', document.querySelector('[onclick*=\'agentes\']'));
@@ -7778,7 +7778,7 @@ function populateAllSelects() {
     function getAllDataForSearch() {
       const data = [];
       
-      // ── CLIENTES ÚNICOS (mesma lógica da busca principal) ──────────────────────
+      // ── EMPRESAS ÚNICAS (mesma lógica da busca principal) ──────────────────────
       const cliMap = {};
       state.lancamentos.filter(l => l.tipo === 'entrada').forEach(l => {
         const k = l.radio + '|' + l.desc;
@@ -7949,8 +7949,8 @@ function populateAllSelects() {
         }
         showPage(page, document.querySelector(`[onclick*="${page}"]`));
       } else if (type === 'empresa') {
-        document.getElementById('fCliBusca').value = id; // id já é o nome do empresa
-        renderClientes();
+        document.getElementById('fEmpresaBusca').value = id; // id já é o nome do empresa
+        renderEmpresas();
         showPage('empresas', document.querySelector('[onclick*=\'empresas\']'));
       } else if (type === 'agente') {
         showPage('agentes', document.querySelector('[onclick*=\'agentes\']'));
@@ -8570,7 +8570,7 @@ function populateAllSelects() {
         <div class="tbl-wrap" style="max-height:340px;overflow-y:auto">
           <table>
             <thead><tr>
-              <th>Cliente</th><th>Emissora</th><th>Categoria</th>
+              <th>Empresa</th><th>Emissora</th><th>Categoria</th>
               <th>Período</th><th>Valor/Mês</th><th>Taxa</th>
               <th>Comissão</th><th>Líquido</th><th>Status</th>
             </tr></thead>
@@ -8596,7 +8596,7 @@ function populateAllSelects() {
       saveConfig();
       // Força re-render imediato com novo estado
       renderEntradas();
-      renderClientes();
+      renderEmpresas();
       showToast(val ? 'Caixa alta ativada ✓' : 'Caixa alta desativada', 'ok');
     }
     
@@ -9528,7 +9528,7 @@ function populateAllSelects() {
     }
 
     // Atualiza indicador depois do carregamento
-    (function(){['fEntBusca','fDesBusca','fCliBusca'].forEach(function(id){var el=document.getElementById(id);if(!el||!el.oninput)return;var orig=el.oninput;el.oninput=debounce(orig,280);});})();
+    (function(){['fEntBusca','fDesBusca','fEmpresaBusca'].forEach(function(id){var el=document.getElementById(id);if(!el||!el.oninput)return;var orig=el.oninput;el.oninput=debounce(orig,280);});})();
     setTimeout(() => { updateSaveIndicator(hadSavedData ? 'saved' : 'saved'); }, 300);
     
     // Carregar nome do usuário na topbar
@@ -9613,11 +9613,11 @@ function populateAllSelects() {
   </div>
   <script>
   function _empresasUnicos(){
-      const radioF  = document.getElementById('fCliRadio')?.value || null;
-      const status  = document.getElementById('fCliStatus')?.value || '';
-      const cat     = document.getElementById('fCliCat')?.value || '';
-      const agente  = document.getElementById('fCliAgente')?.value || '';
-      const busca   = (document.getElementById('fCliBusca')?.value || '').toLowerCase();
+      const radioF  = document.getElementById('fEmpresaRadio')?.value || null;
+      const status  = document.getElementById('fEmpresaStatus')?.value || '';
+      const cat     = document.getElementById('fEmpresaCat')?.value || '';
+      const agente  = document.getElementById('fEmpresaAgente')?.value || '';
+      const busca   = (document.getElementById('fEmpresaBusca')?.value || '').toLowerCase();
       const ent     = getLancamentos({ tipo: 'entrada', radio: radioF, ano: state.filtroAno });
       const cliMap  = {};
       ent.forEach(l => {
@@ -9725,7 +9725,7 @@ function populateAllSelects() {
     }
 
     // Funções para o formulário de cadastro direto
-    function limparFormCliente() {
+    function limparFormEmpresa() {
       document.getElementById('formCadastroCliente').reset();
       document.getElementById('cliTaxaHintForm').innerHTML = '';
     }
@@ -9876,7 +9876,7 @@ function populateAllSelects() {
       markDirty('dashboard','entradas','empresas','agentes');
       populateAllSelects();
       closeModal('modalCliente');
-      renderClientes();
+      renderEmpresas();
       renderDashboard();
     }
 
@@ -9898,7 +9898,7 @@ function populateAllSelects() {
         saveToStorageDebounced();
         markDirty('dashboard','entradas','empresas');
         populateAllSelects();
-        renderClientes(); renderDashboard();
+        renderEmpresas(); renderDashboard();
         closeModal('modalConfirmDelete'); showToast('Empresa removida','ok');
       };
       openModal('modalConfirmDelete');
@@ -10201,10 +10201,10 @@ function populateAllSelects() {
       populateAllSelects();
       const selLancAg = document.getElementById('lancAgente');
       const selCliAg = document.getElementById('cliAgente');
-      const selFCliAg = document.getElementById('fCliAgente');
+      const selFEmpresaAg = document.getElementById('fEmpresaAgente');
       assert(selLancAg !== null, 'lancAgente select should exist');
       assert(selCliAg !== null, 'cliAgente select should exist');
-      assert(selFCliAg !== null, 'fCliAgente select should exist');
+      assert(selFEmpresaAg !== null, 'fEmpresaAgente select should exist');
       populateAllSelects._sig = initialSig;
     });
     
@@ -10316,17 +10316,17 @@ function populateAllSelects() {
     const logsContent = document.getElementById('segContentLogs');
 
     if (tab === 'senha') {
-      senhaTab.style.background = 'var(--accent)';
+      senhaTab.style.background = 'var(--gray-600)';
       senhaTab.style.color = 'var(--bg)';
-      logsTab.style.background = 'var(--surface-alt)';
-      logsTab.style.color = 'var(--text2)';
+      logsTab.style.background = 'var(--gray-50)';
+      logsTab.style.color = 'var(--gray-600)';
       senhaContent.style.display = 'block';
       logsContent.style.display = 'none';
     } else {
-      logsTab.style.background = 'var(--accent)';
+      logsTab.style.background = 'var(--gray-600)';
       logsTab.style.color = 'var(--bg)';
-      senhaTab.style.background = 'var(--surface-alt)';
-      senhaTab.style.color = 'var(--text2)';
+      senhaTab.style.background = 'var(--gray-50)';
+      senhaTab.style.color = 'var(--gray-600)';
       senhaContent.style.display = 'none';
       logsContent.style.display = 'block';
       refreshLogs();

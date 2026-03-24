@@ -298,7 +298,7 @@ body {
   align-items: center;
   gap: 9px;
   padding: 10px 16px;
-  margin: 0 8px;
+  margin: 8px 8px;
   border-radius: var(--radius-sm);
   font-size: 13.5px;
   font-weight: 500;
@@ -307,9 +307,9 @@ body {
   cursor: pointer;
 }
 .nav-item .nav-icon { font-size: 15px; width: 16px; text-align: center; flex-shrink: 0; color: inherit; transition: color .12s; }
-.nav-item:hover { background: var(--surface2); color: var(--text); }
+.nav-item:hover { background: var(--gray-300); color: var(--text); }
 .nav-item:focus { background: var(--surface2); color: var(--text); }
-.nav-item.active { background: var(--accent); color: var(--bg); font-weight: 600; }
+.nav-item.active { background: var(--gray-700); color: var(--bg); font-weight: 600; }
 
 /* ── Section label ──────────────────────────────────────── */
 .nav-section-label {
@@ -337,8 +337,8 @@ body {
   transition: background .12s, color .12s;
   user-select: none;
 }
-.nav-group-trigger:hover { background: var(--surface2); color: var(--text); }
-.nav-group-trigger:focus { background: var(--surface2); color: var(--text); }
+.nav-group-trigger:hover { background: var(--gray-300); color: var(--text); }
+.nav-group-trigger:focus { background: var(--gray-400); color: var(--text); }
 .nav-group-trigger-left { display: flex; align-items: center; gap: 9px; }
 .nav-group-trigger .nav-icon { font-size: 15px; width: 16px; text-align: center; flex-shrink: 0; color: inherit; transition: color .12s; }
 
@@ -364,8 +364,8 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 10px 6px 28px;
-  margin: 1px 0;
+  padding: 8px 10px 8px 28px;
+  margin: 8px 0;
   border-radius: var(--radius-sm);
   cursor: pointer;
   font-size: 13px;
@@ -375,9 +375,9 @@ body {
   position: relative;
 }
 .nav-sub-item .nav-sub-icon { font-size: 14px; width: 14px; text-align: center; flex-shrink: 0; color: inherit; transition: color .12s; }
-.nav-sub-item:hover { background: var(--surface2); color: var(--text); }
-.nav-sub-item:focus { background: var(--surface2); color: var(--text); }
-.nav-sub-item.active { background: var(--accent); color: var(--bg); font-weight: 600; }
+.nav-sub-item:hover { background: var(--gray-300); color: var(--text); }
+.nav-sub-item:focus { background: var(--gray-600); color: var(--text); }
+.nav-sub-item.active { background: var(--gray-700); color: var(--bg); font-weight: 600; margin-bottom: 8px;}
 
 /* color variants for specific icons (Entradas/Saídas) */
 .nav-sub-icon.green { color: var(--green); }
@@ -426,8 +426,8 @@ body {
 .year-sel:hover{border-color:var(--btn-hover);}
 
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:16px 32px;border-radius:8px;border:none;cursor:pointer;font-family:var(--font);font-size:14px;font-weight:600;transition:all .18s;white-space:nowrap;}
-.btn-primary{background:var(--accent);color:var(--bg);}
-.btn-primary:hover{background:var(--btn-hover);color:var(--bg);}
+.btn-primary{background:var(--gray-700);color:var(--gray-50);}
+.btn-primary:hover{background:var(--gray-600);color:var(--gray-50);}
 .btn-ghost{background:var(--surface2);color:var(--text2);border:1.5px solid var(--border);}
 .btn-ghost:hover{background:var(--btn-hover);border-color:var(--btn-hover);color:var(--bg);}
 .btn-ghost.btn-logout:hover{background:var(--red-lt);border-color:var(--red);color:var(--red);}
@@ -436,8 +436,8 @@ body {
 .btn-remove:hover{background:var(--red-lt);color:var(--red);border-color:var(--red-border);}
 
 /* Botões de exportar e limpar com cores invertidas no hover */
-.btn-export{background:var(--accent);color:var(--bg);border:1.5px solid var(--border);}
-.btn-export:hover{background:var(--btn-hover);color:var(--bg);border-color:var(--btn-hover);}
+.btn-export{background:var(--gray-700);color:var(--gray-50);border:1.5px solid var(--border);}
+.btn-export:hover{background:var(--gray-600);color:var(--bg);}
 
 .btn-clear{background:var(--accent);color:var(--bg);border:1.5px solid var(--border);}
 .btn-clear:hover{background:var(--btn-hover);color:var(--bg);border-color:var(--btn-hover);}
@@ -2183,7 +2183,7 @@ tr.cli-group-header td { border-top: 2px solid var(--border2) !important; }
   color: var(--bg);
 }
 [data-theme="dark"] .nav-item.active {
-  background: var(--accent);
+  background: var(--gray-700);
   color: var(--bg);
 }
 
