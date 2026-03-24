@@ -439,8 +439,8 @@ body {
 .btn-export{background:var(--gray-700);color:var(--gray-50);border:1.5px solid var(--border);}
 .btn-export:hover{background:var(--gray-600);color:var(--bg);}
 
-.btn-clear{background:var(--accent);color:var(--bg);border:1.5px solid var(--border);}
-.btn-clear:hover{background:var(--btn-hover);color:var(--bg);border-color:var(--btn-hover);}
+.btn-clear{background:var(--danger-hover);color:var(--gray-50);border:1.5px solid var(--border); margin-top:12px;}
+.btn-clear:hover{background:var(--danger-red);color:var(--bg);}
 [data-theme="dark"] .btn-remove{background:var(--surface2);color:var(--text2);border:1.5px solid var(--border2);}
 [data-theme="dark"] .btn-remove:hover{background:rgba(220,38,38,.15);color:var(--red);border-color:rgba(220,38,38,.4);}
 
