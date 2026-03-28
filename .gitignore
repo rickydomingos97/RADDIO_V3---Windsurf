@@ -1,0 +1,50 @@
+# Arquivos e diretórios ignorados pelo Git
+# Configurações específicas do projeto RADDIO_V3
+
+# Design Systems
+DESIGN_TOKENS_GRAY.css
+DESIGN_TOKENS_ZINC.css
+
+# Documentação de Refatoração
+PlanoDeRefatoração.md
+SYSTEM_DOCUMENTATION.md
+
+# Arquivos de Backup e Dados de Teste
+radionet_backup_2026-03-01_enriquecido.json
+test_data_corrigido.json
+test_data_corrigido_expandido.json
+
+# Configurações do Windsurf
+windsurfrules.md
+
+# Diretórios temporários e cache
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node modules (se houver)
+node_modules/
+
+# Arquivos de ambiente
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+
+# Dependências do sistema
+.DS_Store
+Thumbs.db
+
+# Arquivos de build
+dist/
+build/
+coverage/
+
+# Arquivos temporários
+tmp/
+temp/
+*.tmp
